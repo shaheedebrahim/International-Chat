@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+
+    <title>Debbie's Chat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="css/emoji.css" rel="stylesheet">
+ 
+    <link href='https://fonts.googleapis.com/css?family=Didact Gothic' rel='stylesheet'>
+   
+  </head>
+  <body>
+    
+    <div class="container">
+        <header><h2>Tagalog Chat Room</h2></header>
+      <div class="col-md-9 col-lg-9 col-sm-9 ">
+        <div class = "headerInfo">You are <p id="userNick"></p></div>
+        
+       
+        <div class="chat-box flexbox-container">
+        <ul id="messages" class = "aligner-item--bottom">
+        <li  class="me">
+          <img  src ="img/bit.png"/>
+          <p>Dum bum bi dam</p> 
+        </li>
+        <li class="you">
+          <img src ="img/about.jpg"/>
+          <p data-toggle="tooltip" title="Translation (French): &#013;&#010;&#013;&#010;Comment allez-vous?" >How are you?
+          </p>
+        </li>
+        <li class="you"><img src ="img/about.jpg"/>
+         <p><span>Bob</span> abcdefghijkasfddddddddddddddddddddddddddddddddddddddddddasdnbearberbreberbeber</p></li>
+        <li class="me"><img src ="img/bit.png"/><p>abcdefghijkasfddddddddddddddddddddddddddddddddddddddddddasdnbearberbreberbeberafdssssssssssssssssssssssssssss</p>
+        </li>
+        <li class="me"><img src ="img/bit.png"/><p>I am okay</p>
+        </li>
+        </ul>
+        </div> 
+      </div>
+
+      <div class="col-md-3 col-sm-3 col-lg-3" > 
+          <div  class = "headerInfo">Online Users</div>
+        <div class="chat-box flexbox-container" >
+          <ul id = "userList" class ="aligner-item--bottom" >
+            <li><img class="profile" src = "img/bit.png"><p>Bob</p></li>
+
+          </ul>
+        </div>
+          
+      </div> 
+      
+
+     
+      <form>
+      <div class="row">
+        
+          <div class="col-lg-12">
+           <div class="input-group input-group-lg" id="chat-box-send">
+             <input type="text" class="form-control input-lg" id="m"  data-emojiable="true" data-emoji-input="unicode" 
+             placeholder="Type your message here!" >
+             <span class="input-group-btn">
+               <button class="btn btn-primary btn-lg" style="width:100%;background-color:rgb(36, 169, 187)" type="submit">Send</button>
+             </span>
+             
+           </div><!-- /input-group -->
+         </div><!-- /.col-lg-6 -->
+       </div><!-- /.row -->
+     
+      </div>
+    </form>
+      <h1>&nbsp</h1>
+
+    <script
+       src="https://code.jquery.com/jquery-3.1.1.min.js"
+       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+       crossorigin="anonymous"></script>
+       <script src="socket.io/socket.io.js"></script>
+       <script src="client.js"></script>
+    <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/jquery.emojiarea.js"></script>
+  <script src="js/emoji-picker.js"></script>
+
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+  <script>
+
+    
+    $(function() {
+      // Initializes and creates emoji set from sprite sheet
+      $('[data-toggle="tooltip"]').tooltip(); 
+      //  $('#chat-box-send').picker({
+      //    items:[
+      //   { type: 'heart', icon: '♥' }, { type: 'spades', icon: '♠' },
+      //   { type: 'clubs', icon: '♣' }, { type: 'diamonds', icon: '♦' },
+      //   { type: 'star', icon: '★' }, { type: 'smile', icon: '☺' },
+      //   { type: 'sun', icon: '☼' }, {type: 'song', icon: '♫' }],
+      //   mustAccept:true,
+      //   placement:'bottomRight',
+      //   showFooter:true,
+      //   itemProperty: 'icon',
+   
+      //  }).data('picker').show();
+      window.emojiPicker = new EmojiPicker({
+        emojiable_selector: '[data-emojiable=true]',
+        assetsPath: 'img/',
+        popupButtonClasses: 'fa fa-smile-o'
+      });
+      // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+      // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+      // It can be called as many times as necessary; previously converted input fields will not be converted again
+      window.emojiPicker.discover();
+     //$("#send").click(function(){$('#m').text("");});
+     
+     //data-emoji-input="unicode" 
+     
+  });
+
+
+   
+    
+  </script>
+ 
+
+  </body>
+</html>
