@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css"/>
+
+
+
+	<script>
+
+		$(document).ready(function(){
+		    $("#createAcc").click(function(){
+		        $("body").load("createAccount.html");
+		    });
+		});
+	</script>
+
+</head>
+
+<body>
+        <!-- Login Header -->
+        <div class="loginHeader">
+            Sign In
+        </div>
+
+        <br>
+
+		<div class="omb_login">
+
+			<div class="row omb_row-sm-offset-3 omb_socialButtons">
+				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					<a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+                        <span class="hidden-xs hidden-sm">Facebook</span>
+						<i class="fa fa-facebook visible-xs visible-sm"></i>
+					</a>
+				</div>
+				<!--<div class="col-xs-4 col-sm-2">-->
+					<!--<a href="#" class="btn btn-lg btn-block omb_btn-twitter">-->
+                        <!--<span class="hidden-xs hidden-sm">Twitter</span>-->
+						<!--<i class="fa fa-twitter visible-xs visible-sm"></i>-->
+					<!--</a>-->
+				<!--</div>-->
+				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					<a href="#" class="btn btn-lg btn-block omb_btn-google">
+                        <span class="hidden-xs hidden-sm">Google</span>
+						<i class="fa fa-google visible-xs visible-sm"></i>
+					</a>
+				</div>
+			</div>
+
+            <br>
+
+			<div class="row omb_row-sm-offset-3">
+				<div class="col-xs-12 col-sm-6">
+					<form class="omb_loginForm" action="" autocomplete="off" method="POST">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user fa-fw" style="font-size:24px;"></i></span>
+							<input required type="text" class="form-control" name="username" placeholder="Email">
+						</div>
+						<span class="help-block"></span>
+
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-fw" style="font-size:24px;"></i></span>
+							<input required type="password" class="form-control" name="password" placeholder="Password">
+						</div>
+
+                        <div class="row">
+                            <span class="help-block col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                                Password error
+                            </span>
+                            <label class="checkbox col-xs-12 col-sm-5 col-md-4 col-lg-3" style="font-weight: normal; margin-top: 3px !important;">
+                                <input type="checkbox" value="remember-me" style="margin-left: 100px !important;">
+                                    Remember Me
+                            </label>
+                        </div>
+
+
+                        <button type="submit" id="login" class="btn responsiveFont"
+                                style="font-weight: bold; background-image:
+                                    linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+                                width: 50%; margin-left: 25%">
+                            Login
+                        </button>
+					</form>
+				</div>
+			</div>
+			<div class="row omb_row-sm-offset-3">
+                <div class="col-xs-3 col-sm-3 ">
+                    <p class="omb_forgotPwd">
+                        <a id="createAcc" style="width:auto;" href="#">Create Account</a>
+                    </p>
+                </div>
+				<div class="col-xs-offset-4 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 col-xs-3 col-sm-3">
+					<p class="omb_forgotPwd">
+						<a href="#">Forgot password?</a>
+					</p>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

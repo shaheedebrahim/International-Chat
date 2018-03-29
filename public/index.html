@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+		    $("button").click(function(){
+		        $("body").load("signIn.html");
+		    });
+		});
+	</script>
+</head>
+<body>
+	<div id="initialLogin" class="container loginContainer panel panel-default responsiveTransition">
+
+		<div class="row">
+			
+			<!-- Login Header -->
+			<div class="col loginHeader">
+				Welcome to the International Chat
+			</div>
+			
+			<!-- Login Body -->
+			<div class="col responsiveFont">
+				<div class="col panel-body">
+					Purpose: 
+					<br> . . .
+					<br>
+					<br>
+					<br>
+				</div>
+				
+				<div class="col panel-body">
+					Type /help for useful commands.
+				</div>
+			</div>
+			
+			<!-- Login Bottom/Button -->
+			<div class="col buttonContainer">
+					<button>
+						Got it!
+					</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
