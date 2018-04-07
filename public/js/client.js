@@ -59,8 +59,18 @@ $(function() {
 	// Log in button-click
 	$('#login_Button').click(function(e){
 		e.preventDefault();
+		var usernameVal = $("#loginUsername").val();
+		var passwordVal = $("#loginPassword").val();
+		socket.emit("loginClicked", {username: usernameVal, password: passwordVal});
+	});
+
+	socket.on("allowLogin",function(){
 		loginScreen.hide();
 		window.location="../chat.html";
+	});
+
+	socket.on("accountNotFound", function(){
+		$("#loginErrorField").text("Account Not Found! Check if caps lock is on");
 	});
 	
 	// Create account hypertext-click
@@ -128,6 +138,17 @@ $(function() {
 	next_Language.click(function(e){
 	
 		if($('#languageCheckboxes input:checked').length > 0){
+
+			var selected = [];
+			//https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
+			$('#languageCheckboxes input:checked').each(function() {
+				selected.push($(this).attr('name'));
+			});
+
+			var username = $('#username').val();
+			socket.emit("selectedLanguages", {languages:selected, username:username});
+
+			console.log(selected);
 	
 			e.preventDefault();
 			createAccount_Language.hide();	
@@ -269,11 +290,6 @@ $(function() {
         pwRequirements.show();
 	};
 	
-	$("#login_Button").click(function(e){
-		var usernameVal = $("#loginUsername").val();
-		var passwordVal = $("#loginPassword").val();
-		socket.emit("loginClicked", {username: usernameVal, password: passwordVal});
-	});
 	
 	// $.validator.setDefaults( {
 			// submitHandler: function () {
@@ -290,14 +306,22 @@ $(function() {
 			// def action
 		}, */
 	
+
+	socket.on("createAccountSuccess", function(){
+		createAccount_SignUp.hide();
+		createAccount_Language.show();
+	});
+
+	socket.on("usernameNotUnique", function(){
+		$("#username-error").text("Your username is not unique please try again");
+		$("#username-error").css('color', '#FF0000');
+	});
+	
 	createAccount_Form.validate( {		
 		submitHandler: function(form) {
-			createAccount_SignUp.hide();
-			createAccount_Language.show();
 			
 			var usernameVal = $("#username").val();
 			var passwordVal = $("#pw1").val();
-			console.log(usernameVal);
 			socket.emit('createAccount', {username: usernameVal, password: passwordVal});
 		},
 		rules: {
