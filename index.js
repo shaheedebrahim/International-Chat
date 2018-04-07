@@ -24,3 +24,27 @@ http.listen( port, function () {
 });
 
 app.use(express.static(__dirname + '/public'));
+
+io.on('connection', function(socket){
+    socket.on('createAccount', function(msg){
+        var sql = "INSERT INTO Account (Username, Password) VALUES ('"+msg['username']+"', '"+msg['password']+"')";
+        con.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log("1 record inserted, createaccount");
+          });
+    });
+
+    socket.on('loginClicked', function(msg){
+        var sql = "SELECT * FROM Account WHERE Username='"+msg['username']+"' AND Password='"+msg['password']+"'";
+        con.query(sql, function(err, result){
+            if (err) throw err;
+            else{
+                if (result === undefined || result.length == 0){
+                    console.log("ACCOUNT WAS NOT FOUND");
+                }else{
+                    console.log("ACCOUNT WAS FOUND");
+                }
+            }
+        });
+    })
+});

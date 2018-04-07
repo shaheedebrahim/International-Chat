@@ -87,15 +87,18 @@ $(function() {
             return this.value === "";
 		});
 
+
+
 		// Check if all the pw req conditions are met
 		var pwReqCompleted = JSON.stringify(pwReqs) === '[1,1,1,1,1]';
 		
 		// continue to Next if it's a valid user info
 		if(!empty.length && pwReqCompleted) {
-						
+			
 			createAccount_SignUp.hide();
 			createAccount_Language.show();		
 		}
+
 	});
 	
 	// NO LONGER NEEDED 
@@ -264,7 +267,13 @@ $(function() {
         pwRequirements.style.left = position.left + 300 + 'px';
         // pwRequirements.style.display = "inline";
         pwRequirements.show();
-    };
+	};
+	
+	$("#login_Button").click(function(e){
+		var usernameVal = $("#loginUsername").val();
+		var passwordVal = $("#loginPassword").val();
+		socket.emit("loginClicked", {username: usernameVal, password: passwordVal});
+	});
 	
 	// $.validator.setDefaults( {
 			// submitHandler: function () {
@@ -285,6 +294,11 @@ $(function() {
 		submitHandler: function(form) {
 			createAccount_SignUp.hide();
 			createAccount_Language.show();
+			
+			var usernameVal = $("#username").val();
+			var passwordVal = $("#pw1").val();
+			console.log(usernameVal);
+			socket.emit('createAccount', {username: usernameVal, password: passwordVal});
 		},
 		rules: {
 			email: {
