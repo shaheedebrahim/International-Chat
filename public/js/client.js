@@ -9,6 +9,7 @@ $(function() {
 	var createAccount_Language = $('#createAccount_Language');
 	var createAccount_Profile = $('#createAccount_Profile');
 	var pwRequirements = $('#pswd_info');
+	var dashboard = $('#dashboard');
 	
 	// Buttons / Clickables
 	var gotIt_Button = $('#gotIt_Button');
@@ -20,6 +21,15 @@ $(function() {
 	var back_Language = $('#back_Language');
 	var back_Profile = $('#back_Profile');
 	var finish_Profile = $('#finish_Profile');
+
+	// Dashboard Buttons
+	var select_chatroom = $('#select_chatroom');
+	var create_group = $('#create_group');
+	var join_group = $('#join_group');
+	var match_language = $('#match_language');
+	var profile_settings = $('#profile_settings');
+	var known_languages = $('#known_languages');
+	var translation_language = $('#translation_language');
 	
 	// Others
 	var pw1 = $('#pw1');
@@ -66,7 +76,9 @@ $(function() {
 
 	socket.on("allowLogin",function(){
 		loginScreen.hide();
-		window.location="../chat.html";
+		loginScreen.css("filter", "blur(5px)");
+		dashboard.show();
+		//window.location="../chat.html";
 	});
 
 	socket.on("accountNotFound", function(){
@@ -200,6 +212,7 @@ $(function() {
 		createAccount_SignUp.hide();
 		createAccount_Language.hide();
 		createAccount_Profile.hide();
+		dashboard.hide();
 	};
 	
 

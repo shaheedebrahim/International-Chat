@@ -444,3 +444,44 @@
 		transform: translate(-50%, -50%);
 		
 	}*/
+
+	/* Dashboard Container*/
+	.dashboard_button{
+		background-color: #ccc;
+		/* shadows and rounded borders */
+		-moz-border-radius: 20px;
+		-webkit-border-radius: 20px;
+		border-radius: 20px;
+		-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+	}
+	.dashboard_main-center{
+		margin-top: 30px;
+		margin: 0 auto;
+		max-width: 700px;
+		padding: 10px 40px;
+		background:#ccc;
+		color: #0;
+		text-shadow: none;
+		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+		-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+		box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+
+	}
+
+	/* Profile Container*/
+	#profile_box{
+
+		margin-top: 30px;
+		margin: 0 auto;
+		max-width: 300px;
+		padding: 10px 40px;
+		background:#0cf;
+		color: #0;
+		text-shadow: none;
+		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+		-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+		box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+	}
