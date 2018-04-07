@@ -8,6 +8,7 @@
 	var createAccount_SignUp = $('#createAccount_SignUp');
 	var createAccount_Language = $('#createAccount_Language');
 	var createAccount_Profile = $('#createAccount_Profile');
+	var createAccount_PickImage = $('#createAccount_PickImage');
 	var pwRequirements = $('#pswd_info');
 	
 	// Buttons / Clickables
@@ -20,6 +21,11 @@
 	var back_Language = $('#back_Language');
 	var back_Profile = $('#back_Profile');
 	var finish_Profile = $('#finish_Profile');
+	var save_DisplayName = $('#save_DisplayName');
+	var change_ProfileImage = $('#change_ProfileImage');
+	var cancel_ImagePicker = $('#cancel_ImagePicker');
+	var done_ImagePicker = $('#done_ImagePicker');
+	
 	
 	// Others
 	var pw1 = $('#pw1');
@@ -28,20 +34,8 @@
 	var createAccount_Form = $('#createAccount_Form');
 	
 
-	// ========================================================
-    
-	
-	// =========== //
-	// Initial Run //
-	// =========== // =========================================
-	
-	$(function (){
-        		
-		// Hide all pages except home
-		hideAll();
-			
-		
-    });
+	// initial run
+	// $(function ()
 	
 	// ========= //
 	// Functions //
@@ -52,14 +46,17 @@
 		e.preventDefault();
 		initialLogin.hide();
 		loginScreen.show();
+		
+		// test purposes
+		// createAccount_Profile.show();
 	});
 	
 	// Log in button-click
-	<!-- $('#login_Button').click(function(e){ -->
-		<!-- e.preventDefault(); -->
-		<!-- initialLogin.hide(); -->
-		<!-- loginScreen.show(); -->
-	<!-- }); -->
+	login_Button.click(function(e){
+		e.preventDefault();
+		initialLogin.hide();
+		loginScreen.show();
+	});
 	
 	// Create account hypertext-click
 	createAccount_Button.click(function(e){
@@ -75,6 +72,7 @@
 		$('#loginScreen').css("filter", "none");
 		createAccount_SignUp.hide();
 		createAccount_Language.hide();
+		createAccount_Profile.hide();
 	});
 	
 	// Next_Signup CreateAccount button-click
@@ -120,15 +118,24 @@
 	
 	// Next_Language CreateAccount button-click
 	next_Language.click(function(e){
-	
+		
 		if($('#languageCheckboxes input:checked').length > 0){
-	
+			//errorCheckbox.innerHTML = ("");
 			e.preventDefault();
 			createAccount_Language.hide();	
 			createAccount_Profile.show();
+		} else {
+			errorCheckbox.innerHTML = ("Please select at least 1!");
 		}
 	});
 	
+	$("#languageCheckboxes :input").change(function() {
+		if(this.checked) {
+			errorCheckbox.innerHTML = ("");
+		} else if(!this.checked && $('#languageCheckboxes input:checked').length == 0) {
+			errorCheckbox.innerHTML = ("Please select at least 1!");
+		}
+	});
 	
 	
 	// Back_Language CreateAccount button-click
@@ -161,19 +168,65 @@
 		createAccount_Profile.hide();
 		createAccount_Language.show();		
 	});	
+	
+	// Change_ProfileImage CreateAccount button-click
+	change_ProfileImage.click(function(e){
+		e.preventDefault();
+		createAccount_Profile.hide();
+		createAccount_PickImage.show();		
+	});	
+	
+	// 0 for default
+	// shows the number of the picked profile image
+	var pickedImage = 0;
+	
+	$("#imagePicker :button").click(function() {
+		
+		/* if( */
+		var selectedImage = parseInt(this.id.toString().match(/\d+/)[0]);
+		
+		// indicate selected
+		if (pickedImage == 0){
+			$(this).find("img").css({"border": "4px solid green"});
+			pickedImage = selectedImage;
+			previousImage = $(this);
+			// remove if already selected
+		} else if (pickedImage == selectedImage) {
+			$(this).find("img").css({"border": "none"});
+			pickedImage = 0;
+			// change currently selected indication if different
+		} else if (pickedImage != selectedImage) {			
+			$("#imagePicker :button").find("img").css({"border": "none"});
+			$(this).find("img").css({"border": "4px solid green"});
+			pickedImage = selectedImage;
+		}
+			
+	});
+	
+	
+	// Change_ProfileImage CreateAccount button-click
+	cancel_ImagePicker.click(function(e){
+		e.preventDefault();
+		createAccount_PickImage.hide();		
+		createAccount_Profile.show();
+	});	
+	
+	// Change_ProfileImage CreateAccount button-click
+	done_ImagePicker.click(function(e){
+		e.preventDefault();
+		createAccount_PickImage.hide();		
+		createAccount_Profile.show();	
+		var changedImage = "profileImages/p" + pickedImage + ".png";
+		console.log(changedImage);
+		$("#defaultImage").attr("src",changedImage);	
+	});	
+	
+	
 
 	// ========================================================
+
 	
 	
-	
-	
-    // Bring out the home screen
-    function hideAll(){
-		loginScreen.hide();
-		createAccount_SignUp.hide();
-		createAccount_Language.hide();
-		createAccount_Profile.hide();
-	};
 	
 
 	/* PW Requirements */
@@ -310,7 +363,7 @@
 			},
 			pw1: {
 				required: "Please provide a password",
-				minlength: "Your password must be at least 8 characters long --Will add more rules --"
+				minlength: "Your password must be at least 8 characters long, including at least one Capital, one Number and one Special Character"
 			},
 			pw2: {
 				required: "Please provide a password",

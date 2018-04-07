@@ -17,9 +17,9 @@
 
 <body>
 
-<!--------------->
-<!-- Home Page ------------------------------------------------------------------------------------->
-<!--------------->
+<!-- ----------- -->
+<!-- Home Page   ------------------------------------------------------------------------------------->
+<!-- ----------- -->
 
 <!-- Container -->
 <div class="container-fluid">
@@ -68,7 +68,7 @@
 
 
     <!-- Sign In Container #2-->
-	<div id="loginScreen" class="container loginContainer panel panel-default responsiveTransition">
+	<div id="loginScreen" class="hideBeginning container loginContainer panel panel-default responsiveTransition">
 
             <!-- Login Header -->
             <div class="loginHeader">
@@ -157,7 +157,7 @@
 
     <!-- Create Account Container/Form -->
 
-    <div class="container responsiveTransition" id="createAccount_SignUp" style="position: relative">
+    <div class="container responsiveTransition hideBeginning" id="createAccount_SignUp" style="position: relative">
         <div class="row main">
             <div class="main-login_Button main-center">
                 <div class="row">
@@ -185,7 +185,7 @@
                         <label for="username" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Username</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-users fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-user fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" autocomplete="new-username"/>
                             </div>
                         </div>
@@ -206,12 +206,14 @@
                         <div class="cols-sm-10">
                             <div class="input-group" id="pwTextbox2">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-                                <input type="password" class="form-control" name="pw2" id="pw2"  placeholder="Confirm your Password" autocomplete="new-password"/>
+                                <input type="password" class="form-control" name="pw2" id="pw2" placeholder="Confirm your Password" autocomplete="new-password"/>
                             </div>
                         </div>
 					</div>
 						
-						<button id="next_SignUp" class=" btn btn-primary btn-lg btn-block login_Button-button">Next</button>
+					<button id="next_SignUp" class=" btn btn-primary btn-lg btn-block login_Button-button">
+						Next
+					</button>
 					
 
                     <!-- </div> -->
@@ -223,7 +225,7 @@
 
     <!-- Select Language Container/Form -->
 
-    <div class="container responsiveTransition" id="createAccount_Language" style="position: relative">
+    <div class="container responsiveTransition hideBeginning" id="createAccount_Language" style="position: relative">
         <div class="row main">
             <div class="main-login_Button main-center">
                 <div class="row">
@@ -231,7 +233,8 @@
                         <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
                     </div>
                     <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-                        <h5 style="text-align: center"> <strong> What languages do you know? </strong> <br> Please select at least 1!</h5>
+                        <h5 style="text-align: center"> <strong> What languages do you know? </strong> </h5>
+						
                     </div>
                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
                         <a href="#" class="close" style="font-size:24px;">&times;</a>
@@ -261,27 +264,28 @@
 							<input id="checkbox_Korean" required type="checkbox"> 한국어
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<input id="checkbox_Turkish" required type="checkbox"> Türkçe
+						</div>
+						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<input id="checkbox_Philippines" required type="checkbox"> Pilipinas
+						</div>
+						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<input id="checkbox_Afrikaans" required type="checkbox"> Afrikaans
+						</div> 						
+						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
 							<input id="checkbox_German" required type="checkbox"> Deutsch
 						</div>
-						<!-- <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
+						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<input id="checkbox_Portuguese" required type="checkbox"> Português
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
+							<input id="checkbox_Arabic" required type="checkbox"> عربى
 						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
-						</div> 
 						
-						</div>-->
 					</form>
                 </div>
+				
+				<h5 style="color: red" id="errorCheckbox"> </h5>
 
 				<div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -302,29 +306,135 @@
 	
 	<!-- Upload Picture Container/Form -->
 
-    <div class="container responsiveTransition" id="createAccount_Profile" style="position: relative">
+    <div class="container responsiveTransition hideBeginning" id="createAccount_Profile" style="position: relative">
         <div class="row main">
-            <div class="main-login_Button main-center">
+            <div class="main-login_Button main-center" style="max-width: 60%">
                 <div class="row">
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
-                    </div>
-                    <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-                        <h5 style="text-align: center"> <strong> Upload a picture </strong> </h5>
-                    </div>
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px; margin-left: 15px">
                         <a href="#" class="close" style="font-size:24px;">&times;</a>
                     </div>
                 </div>
-                    <br>
                 
-
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<img id="defaultImage" src="profileImages/p1.png" alt="Default Profile Image" class="responsiveImage">
+						
+							<button id="change_ProfileImage" class="profileButtonChangeImage btn btn-primary btn-lg btn-block login_Button-button" >
+								Change Image
+							</button>
+					</div>
+					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+						
+					
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">
+								Display Name
+							</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="displayName" id="displayName"  placeholder="Enter your Display Name" autocomplete="dont-complete-lol"/>
+								</div>
+							</div>
+							<button id="save_DisplayName" class="profileButtonChangeDisplay btn btn-primary btn-lg btn-block login_Button-button" >
+								Save
+							</button>
+						</div>
+					</div>	
+									
+				</div>
+				
+				
+				<br>
+				<br>
+	
+	
 				<div class="row">
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <button type="submit" id="back_Profile" class=" btn btn-primary btn-lg btn-block login_Button-button">Back</button>
                     </div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                         <button type="submit" id="finish_Profile" class=" btn btn-primary btn-lg btn-block login_Button-button">Next</button>
+                         <button type="submit" id="finish_Profile" class=" btn btn-primary btn-lg btn-block login_Button-button">Finish</button>
+                    </div>
+                </div>
+				
+				
+               
+				 
+
+            </div>
+        </div>
+    </div>
+	
+	<!-- Pick a Picture Container/Form -->
+	
+	 <div class="container responsiveTransition hideBeginning" id="createAccount_PickImage" style="position: relative">
+        <div class="row main">
+            <div class="main-login_Button main-center" style="max-width: 60%">
+                <div class="row">
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <h5 style="text-align: center"> <strong> Pick a profile image </strong> </h5>						
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+                        <a href="#" class="close" style="font-size:24px;">&times;</a>
+                    </div>
+                </div>
+                
+				<div class="row" id="imagePicker">
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<button id="profileImage1" class="transparentButton">
+							<img src="profileImages/p1.png" alt="Default Profile Image" class="responsiveImage">
+						</button>
+						<h1> </h1>
+						<button id="profileImage5" class="transparentButton">
+							<img src="profileImages/p5.png" alt="Default Profile Image" class="responsiveImage">
+						</button>						
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<button id="profileImage2" class="transparentButton">
+							<img src="profileImages/p2.png" alt="Default Profile Image" class="responsiveImage">
+						</button>
+						<h1> </h1>
+						<button id="profileImage6" class="transparentButton">
+							<img src="profileImages/p6.png" alt="Default Profile Image" class="responsiveImage">
+						</button>						
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<button id="profileImage3" class="transparentButton">
+							<img src="profileImages/p3.png" alt="Default Profile Image" class="responsiveImage">
+						</button>
+						<h1> </h1>
+						<button id="profileImage7" class="transparentButton">
+							<img src="profileImages/p7.png" alt="Default Profile Image" class="responsiveImage">
+						</button>						
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<button id="profileImage4" class="transparentButton">
+							<img src="profileImages/p4.png" alt="Default Profile Image" class="responsiveImage">
+						</button>
+						<h1> </h1>
+						<button id="profileImage8" class="transparentButton">
+							<img src="profileImages/p8.png" alt="Default Profile Image" class="responsiveImage">
+						</button>						
+					</div>
+					
+					
+					
+					
+				</div>
+				
+				
+				<br>
+				<br>
+	
+	
+				<div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <button type="submit" id="cancel_ImagePicker" class=" btn btn-primary btn-lg btn-block login_Button-button">Cancel</button>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                         <button type="submit" id="done_ImagePicker" class=" btn btn-primary btn-lg btn-block login_Button-button">Done</button>
                     </div>
                 </div>
 				
@@ -338,7 +448,7 @@
 
 
     <!-- Password Requirements -->
-    <div class="col-md-4 responsiveTransition">
+    <div id="pwRequirements" class="col-md-4 responsiveTransition hideBeginning">
         <div class="aro-pswd_info">
             <div id="pswd_info">
                 <h4>Password must be requirements</h4>
@@ -365,9 +475,7 @@
 <!-- Container End -->
 </div>
 
-<!--------->
-<!-- JS  ------------------------------------------------------------------------------------->
-<!--------->
+	<!-------------------- JS Files --------------------> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>	
 	<script src="js/index_JQ.js"></script>
