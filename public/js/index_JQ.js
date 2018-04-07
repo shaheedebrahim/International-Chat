@@ -1,7 +1,7 @@
 	// ========= //
 	// Variables //
 	// ========= // ===========================================
-	
+$(function() {
 	// Screens / Containers
 	var initialLogin = $('#initialLogin');
 	var loginScreen = $('#loginScreen');
@@ -26,6 +26,8 @@
 	var pw2= $('#pw2');
 	var pwReqs = [0, 0, 0, 0, 0];
 	var createAccount_Form = $('#createAccount_Form');
+
+	var socket = io();
 	
 
 	// ========================================================
@@ -55,11 +57,11 @@
 	});
 	
 	// Log in button-click
-	<!-- $('#login_Button').click(function(e){ -->
-		<!-- e.preventDefault(); -->
-		<!-- initialLogin.hide(); -->
-		<!-- loginScreen.show(); -->
-	<!-- }); -->
+	$('#login_Button').click(function(e){
+		e.preventDefault();
+		initialLogin.hide();
+		loginScreen.show();
+	});
 	
 	// Create account hypertext-click
 	createAccount_Button.click(function(e){
@@ -83,13 +85,14 @@
 		// check if all the forms are filled
 		var empty = $(this).parent().find("input").filter(function() {
             return this.value === "";
-        });
-		
+		});
+
 		// Check if all the pw req conditions are met
 		var pwReqCompleted = JSON.stringify(pwReqs) === '[1,1,1,1,1]';
 		
 		// continue to Next if it's a valid user info
-		if(!empty.length && pwReqCompleted) {			
+		if(!empty.length && pwReqCompleted) {
+						
 			createAccount_SignUp.hide();
 			createAccount_Language.show();		
 		}
@@ -350,3 +353,4 @@
 			$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
 		}
 	});
+});
