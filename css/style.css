@@ -396,7 +396,9 @@
 	}
 	
 	.buttonContainer{
-		color: white;
+		color: white;		
+		/* font-weight: bold; */
+		font-size: 2vmin;
 		background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
 		background-size: 200% auto;
 		width: 50%; 
@@ -406,10 +408,12 @@
 		transition: 0.5s;
 		text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 		box-shadow: 0 0 5px #eee;
+		border-color: white;
 	}
 	
 	.buttonContainer:hover {
 		background-position: right center; /* change the direction of the change here */
+		color: black;
 	}
 	
 	

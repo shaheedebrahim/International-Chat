@@ -57,16 +57,14 @@
 			</div>
 			
 			<!-- Login Bottom/Button -->
-			<div class="col">
-				 <form action="">
-					<button id="gotIt_Button" class="responsiveFont buttonContainer">
-						Got it!
-					</button>
-				</form>
-			</div>
+			<button id="gotIt_Button" class="buttonContainer" style="width: 20%; margin-left: 40%;">
+				<p style="margin: 2%;"> Got It! </p>
+			</button>
 		
 		</div>	
-	</div> <!-- Initial + Sign In/Up Container END-->
+		
+	<!-- Initial + Sign In/Up Container END-->
+	</div> 
 
 
     <!-- Sign In Container #2-->
@@ -88,6 +86,7 @@
 							<i class="fa fa-facebook visible-xs visible-sm"></i>
 						</a>
 					</div>
+					<!-- Twitter -->
 					<!--<div class="col-xs-4 col-sm-2">-->
 						<!--<a href="#" class="btn btn-lg btn-block omb_btn-twitter">-->
                             <!--<span class="hidden-xs hidden-sm">Twitter</span>-->
@@ -109,7 +108,7 @@
 						<form class="omb_loginForm" action="" autocomplete="off" method="POST">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa-fw" style="font-size:24px;"></i></span>
-								<input required type="text" class="form-control" name="username" placeholder="Email">
+								<input required type="text" class="form-control" name="username" placeholder="Username">
 							</div>
 							<span class="help-block"></span>
 
@@ -129,8 +128,8 @@
                             </div>
 
 
-                            <button type="submit" id="login_Button" class="responsiveFont buttonContainer">
-                                Login
+                            <button type="submit" id="login_Button" class="buttonContainer">
+                                <p style="margin: 2%;"> Login </p>
                             </button>
 						</form>
 					</div>
@@ -170,54 +169,52 @@
                     </div>
                 </div>
 
-                <form class="" method="post" action="#">
+                <form class="" id="createAccount_Form" method="post" action="">
 
-
-
-                    <form class="form-group">
+                    <div class="form-group">
                         <label for="email" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Your Email</label>
                         <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-envelope fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-                                <input required type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email"/> <!--  oninvalid="this.setCustomValidity('Please Enter valid email')" oninput="setCustomValidity('')"/> -->
-                            </div>
-                        </div>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
+								<input type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email" autocomplete="new-email"/> 
+							</div>
+                        </div>						
+					</div>
 
-                        <br>
-
+					<div class="form-group">
                         <label for="username" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Username</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-users fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-                                <input required type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+                                <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" autocomplete="new-username"/>
                             </div>
                         </div>
+                    </div>
 
-                        <br>
-
+					<div class="form-group">
                         <label for="password" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Password</label>
                         <div class="cols-sm-10">
                             <div class="input-group" id="pwTextbox1">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-                                <input required type="password" class="form-control" name="password" id="pw1"  placeholder="Enter your Password"/>
+                                <input type="password" class="form-control" name="pw1" id="pw1"  placeholder="Enter your Password" autocomplete="new-password"/>
                             </div>
                         </div>
-
-                        <br>
-
+					</div>
+					
+                    <div class="form-group">
                         <label for="confirm" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Confirm Password</label>
                         <div class="cols-sm-10">
                             <div class="input-group" id="pwTextbox2">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-                                <input required type="password" class="form-control" name="confirm" id="pw2"  placeholder="Confirm your Password"/>
+                                <input type="password" class="form-control" name="pw2" id="pw2"  placeholder="Confirm your Password" autocomplete="new-password"/>
                             </div>
                         </div>
+					</div>
 						
-						<br>
+						<button id="next_SignUp" class=" btn btn-primary btn-lg btn-block login_Button-button">Next</button>
+					
 
-                        <button id="next_SignUp" class=" btn btn-primary btn-lg btn-block login_Button-button">Next</button>
-
-                    </form>
+                    <!-- </div> -->
                 </form>
             </div>
         </div>
@@ -240,60 +237,49 @@
                         <a href="#" class="close" style="font-size:24px;">&times;</a>
                     </div>
                 </div>
-                    <br>
                 <div class="row">
 					<form name = "languageCheckboxes" id="languageCheckboxes">
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+						<!-- Fix the visual bug -->
+						<div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_English" required type="checkbox"> English
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_Spanish" required type="checkbox"> Español
+						</div>
+						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4"> 
+							<input id="checkbox_French" required type="checkbox"> Français
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_Chinese" required type="checkbox"> 中文
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_Japanese" required type="checkbox"> 日本語
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_Korean" required type="checkbox"> 한국어
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_German" required type="checkbox"> Deutsch
+						</div>
+						<!-- <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<input id="checkbox_" required type="checkbox"> English
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_" required type="checkbox"> English
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_" required type="checkbox"> English
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
+							<input id="checkbox_" required type="checkbox"> English
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input required type="checkbox"> English
-						</div>
+							<input id="checkbox_" required type="checkbox"> English
+						</div> 
+						
+						</div>-->
 					</form>
                 </div>
 
