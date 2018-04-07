@@ -59,8 +59,8 @@ $(function() {
 	// Log in button-click
 	$('#login_Button').click(function(e){
 		e.preventDefault();
-		initialLogin.hide();
-		loginScreen.show();
+		loginScreen.hide();
+		window.location="../chat.html";
 	});
 	
 	// Create account hypertext-click
