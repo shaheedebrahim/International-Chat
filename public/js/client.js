@@ -69,7 +69,7 @@ $(function() {
 		e.preventDefault();
 		initialLogin.hide();
 		//loginScreen.show();
-		joinGroup.show();
+		dashboard.show();
 	});
 
 	// Log in button-click
@@ -78,6 +78,11 @@ $(function() {
 		var usernameVal = $("#loginUsername").val();
 		var passwordVal = $("#loginPassword").val();
 		socket.emit("loginClicked", {username: usernameVal, password: passwordVal});
+	});
+
+	$('#select_chatroom').click(function(e){
+		dashboard.css("filter", "blur(5px)");
+		selectLanguage.show();
 	});
 
 	socket.on("allowLogin",function(){
