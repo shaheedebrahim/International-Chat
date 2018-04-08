@@ -6,7 +6,7 @@ var clientCount = 0;
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: 'localhost', 
+    host: 'localhost',
     user: 'root',
     database: 'internationalChat'
 
@@ -32,18 +32,18 @@ app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function(socket){
     reSendActiveList(io);
-       
+
     socket.on('init', function(){
         io.to(socket.id).emit('wel',msgStore);
         var nick = "User"+clientCount++;
-        if (socket.id in mapping){  
+        if (socket.id in mapping){
             console.log("already exists");} else{
             mapping[socket.id] = nick;
             io.to(socket.id).emit('nick', nick);
         }
         reSendActiveList(io);
     });
-            
+
     socket.on('chat', function( msg){
         msgCount++;
         var time = new Date();
@@ -55,7 +55,7 @@ io.on('connection', function(socket){
             msgStore.shift();
         }
     });
-    
+
     socket.on('nick', function(nick){
         if (Object.values(mapping).includes(nick))
         {
@@ -68,11 +68,11 @@ io.on('connection', function(socket){
         }
         reSendActiveList(io);
     });
-       
+
     socket.on('disconnect', function (socket) {
         reSendActiveList(io);
     });
-    
+
     socket.on('rec', function (nick) {
         var sameNick  = nick.split("=")[1];
         if( Object.values(mapping).includes(sameNick))
@@ -84,11 +84,11 @@ io.on('connection', function(socket){
         io.to(socket.id).emit('wel',msgStore);
         reSendActiveList(io);
     });
-        
+
     socket.on('nickcolor', function (color) {
         colors[socket.id] = color;
     });
-    
+
     function reSendActiveList(io){
         let c = io.clients().sockets;
         let activeClients = [];
@@ -155,5 +155,3 @@ io.on('connection', function(socket){
         });
     });
 });
- 
-
