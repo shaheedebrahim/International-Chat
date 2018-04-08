@@ -230,7 +230,7 @@ io.on('connection', function(socket){
                 
                 if (rows.length !== 0){
                     result = rows[0].Users;
-                   
+                   if (result==null){result="";}
                     sqlJoinUpdate = "UPDATE chatrooms SET Users = '"+result+msg.user+",' where id="+msg.groupCode+";";
                     con.query(sqlJoinUpdate, function(err,rows){ if (err) throw err;
                     socket.emit('joinGroup',1);

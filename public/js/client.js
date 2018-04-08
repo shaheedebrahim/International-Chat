@@ -123,8 +123,7 @@ $(function() {
 
 	//finish join group
 	$('#finishJoinGroup').click(function(e){
-		var groupCode = $('#groupCode').val();
-		
+		var groupCode = $('#groupCode_Input').val();	
 		socket.emit('joinGroup', {user:userId, groupCode:groupCode});
 
 	});
@@ -138,7 +137,7 @@ $(function() {
 
 	//finish creating group
 	$('#finishCreateGroup').click(function(e){
-		//var groupName = $('#groupName').val();
+		var groupName = $('#groupName').val();
 		//console.log("groupname " + groupName);
 		socket.emit('createGroup',{chatRoomName:groupName, user:userId} );
 		createGroup.hide();
