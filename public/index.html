@@ -440,6 +440,54 @@
        </div>
      </div>
 
+     
+        <!-- Language Select Form for default room selection -->
+
+    <div class="container responsiveTransition" id="selectDefaultRoom" style="position: relative">
+        <div class="row main">
+            <div class="main-login main-center">
+            <div class="row">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
+                </div>
+                <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+                <h5 style="text-align: center"> <strong> Select a chat room to join: </strong> </h5>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+                <a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
+                </div>
+                <div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                </div>
+                <form name="roomCheckboxes" id="roomCheckboxes">
+                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <input id="englishRoom" required type="checkbox" name="lang[1][]" data-id="1"> English
+                    </div>
+                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <input id="spanishRoom" required type="checkbox" name="lang[1][]" data-id="2"> Español
+                    </div>
+                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <input id="frenchRoom" required type="checkbox" name="lang[1][]" data-id="3"> Français
+                    </div>
+                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <input id="chineseRoom" required type="checkbox" name="lang[1][]" data-id="4"> 中文
+                    </div>
+                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <input id="japaneseRoom" required type="checkbox" name="lang[1][]" data-id="5"> 日本語
+                    </div>
+                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <input id="koreanRoom" required type="checkbox" name="lang[1][]" data-id="6"> 한국어
+                    </div>
+                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <input id="germanRoom" required type="checkbox" name="lang[1][]" data-id="7"> Deutsch
+                    </div>
+                </form>
+            </div>
+            <button type="submit" id="finishDefaultRoom" class=" btn btn-primary btn-lg btn-block login-button">Join Room!</button>
+    
+            </div>
+        </div>
+        </div>
+
      <!-- Load Screen -->
 
      <div class="container" id="loadingScreen" style="position: relative">

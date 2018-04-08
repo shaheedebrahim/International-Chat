@@ -33,6 +33,9 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', function(socket){
     reSendActiveList(io);
 
+    var username = "empty";
+    var chatRoomCode = "";
+
     socket.on('init', function(){
         io.to(socket.id).emit('wel',msgStore);
         var nick = "User"+clientCount++;
@@ -49,6 +52,7 @@ io.on('connection', function(socket){
         var time = new Date();
         var chatUsr = mapping[socket.id];
         var msgObj = {time_id:time, body:msg,clientId:chatUsr,color:colors[socket.id]};
+        io.to('room'+chatRoomCode).emit('chat', msgObj);
         io.emit('chat',msgObj );
         msgStore.push(msgObj);
         if (msgCount>=201){
@@ -139,6 +143,33 @@ io.on('connection', function(socket){
         });
     });
 
+    socket.on('requestDefaultRoom', function(room){
+        var sql = "SELECT * FROM ChatRooms WHERE id='"+room[0]+"'";
+        con.query(sql, function(err, result){
+            if (err) throw err;
+            else{
+                chatRoomCode = room[0];
+                socket.join("room"+chatRoomCode);
+                socket.emit("joinRoomSuccess", {username:username, chatHistory:result[0]['chatHistory'], roomName:result[0]['Name']});
+                
+                // Need a timeout so that we can wait for the page to load
+                if (result[0]['Users'].length !== 0){
+                    setTimeout(function(){
+                        var sqlUsers = "SELECT * FROM Account WHERE id IN ("+result[0]['Users']+")";
+                        con.query(sqlUsers, function(err2, result2){
+                            listOfUsers = [];
+                            for (user of result2){
+                                listOfUsers.push(user['Username']);
+                            }
+                            socket.emit("userList", listOfUsers);
+                            io.to('room'+chatRoomCode).emit("userList", listOfUsers)
+                        });
+                    }, 500);
+                }
+            }
+        });
+    });
+
     socket.on('loginClicked', function(msg){
         var sql = "SELECT * FROM Account WHERE Username='"+msg['username']+"' AND Password='"+msg['password']+"'";
         con.query(sql, function(err, result){
@@ -149,6 +180,7 @@ io.on('connection', function(socket){
                     socket.emit("accountNotFound");
                 }else{
                     console.log("ACCOUNT WAS FOUND");
+                    username = result[0]['Username'];
                     socket.emit("allowLogin")
                 }
             }

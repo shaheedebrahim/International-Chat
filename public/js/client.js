@@ -15,6 +15,7 @@ $(function() {
 	var createGroup = $('#createGroup');
 	var joinGroup = $('#joinGroup');
 	var selectLanguage = $('#selectLanguage');
+	var selectDefaultRoom = $('#selectDefaultRoom');
 
 	// Buttons / Clickables
 	var gotIt_Button = $('#gotIt_Button');
@@ -27,6 +28,7 @@ $(function() {
 	var back_Language = $('#back_Language');
 	var back_Profile = $('#back_Profile');
 	var finish_Profile = $('#finish_Profile');
+	var finishDefaultRoom = $('#finishDefaultRoom');
 
 	// Dashboard Buttons
 	var select_chatroom = $('#select_chatroom');
@@ -62,7 +64,7 @@ $(function() {
 		hideAll();
 
 
-    });
+	});
 
 	// ========= //
 	// Functions //
@@ -89,7 +91,28 @@ $(function() {
 	//select chatroom
 	$('#select_chatroom').click(function(e){
 		dashboard.css("filter", "blur(5px)");
-		selectLanguage.show();
+		selectDefaultRoom.show();
+	});
+
+	//Finish default room selection
+	$('#finishDefaultRoom').click(function(e){
+		selectDefaultRoom.hide();
+		var selected = [];
+		
+		//https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
+		$('#roomCheckboxes input:checked').each(function() {
+			selected.push($(this).attr('data-id'));
+		});
+
+		socket.emit("requestDefaultRoom", selected);
+	});
+
+	socket.on('joinRoomSuccess', function(msg){
+		console.log(msg);
+		$('body').load('chat.html', null, function(){
+			$('#roomName').text(msg['roomName']);
+			$('#userNick').text(msg['username']);
+		});
 	});
 
 	//join group
@@ -285,6 +308,7 @@ $(function() {
 			loadingScreen.hide();
 			joinGroup.hide();
 			selectLanguage.hide();
+			selectDefaultRoom.hide();
 	};
 
 
@@ -498,5 +522,68 @@ socket.on("createAccountSuccess", function(){
 		return index * 80;
 	},
 	});
+
+	/** Chat Functionality **/
+
+	var userNickSt=  $('#userNick').value;
+    var color= "";
+   
+    $('form').submit(function(){
+        var message = $('#m').val();
+        var mess_args = message.split(" ");
+        if (mess_args.length==2 && mess_args[0]=="/nick")
+        {
+            socket.emit('nick', mess_args[1]);
+        }
+        else if (mess_args.length==2 && mess_args[0]=="/nickcolor") {
+            console.log("nick color invoked");
+            socket.emit('nickcolor', mess_args[1]);
+            color = mess_args[1];
+        }
+        else{
+            socket.emit('chat',message );
+        }
+        $('#m').val('');
+    
+        return false;
+    });
+    socket.on('chat', function(msg){
+        doChat(msg);
+     });
+    
+    socket.on('wel', function(wel){
+        for ( var i=0; i< wel.length;i++)
+        {   doChat(wel[i]);   }
+    });
+    socket.on('userList', function(list){
+        $('#userList').empty();
+        for ( var i=0; i< list.length;i++)
+        {
+             $('#userList').prepend($('<li>')
+				.append($('<img>').attr("src", "img/bit.png").addClass("profile"))
+				.append($('<p>').text(list[i]))
+            );
+        }
+         
+    });
+    function doChat(msg){
+        var time = new Date(msg.time_id);
+        var body = msg.body;
+        var toPutIn = $('<li>');
+        var divMessage = document.createElement("div");
+           
+        
+         if (userNickSt==msg.clientId){
+            $(toPutIn).addClass("me");
+            $(toPutIn).append($('<img>').attr("src", "img/about.jpg"));
+            $(toPutIn).append($('<p>').text(msg.body));   
+          }
+          else{ 
+            $(toPutIn).addClass("you");
+           //   $('li div img').attr("src", "../img/bit.png");
+            }
+         $('#messages').prepend(toPutIn);
+        $('#messages').stop().animate({scrollTop:($('#messages')[0].scrollHeight)},500);
+    }
 
 });
