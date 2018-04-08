@@ -21,12 +21,12 @@ $(function() {
 	var login_Button = $('#login_Button');
 	var createAccount_Button = $('#createAcc');
 	var close = $('.close');
+	var closeToDash = $('.closeToDash');
 	var next_SignUp = $('#next_SignUp');
 	var next_Language = $('#next_Language');
 	var back_Language = $('#back_Language');
 	var back_Profile = $('#back_Profile');
 	var finish_Profile = $('#finish_Profile');
-	var finishCreateGroup = $('#finishCreateGroup');
 
 	// Dashboard Buttons
 	var select_chatroom = $('#select_chatroom');
@@ -36,6 +36,10 @@ $(function() {
 	var profile_settings = $('#profile_settings');
 	var known_languages = $('#known_languages');
 	var translation_language = $('#translation_language');
+	var finishCreateGroup = $('#finishCreateGroup');
+	var finishJoinGroup = $('#finishJoinGroup');
+	var finishMatchLanguage = $('#finishMatchLanguage');
+
 	// Others
 	var pw1 = $('#pw1');
 	var pw2= $('#pw2');
@@ -68,8 +72,8 @@ $(function() {
 	gotIt_Button.click(function(e){
 		e.preventDefault();
 		initialLogin.hide();
-		//loginScreen.show();
-		dashboard.show();
+		loginScreen.show();
+		//dashboard.show();
 	});
 
 	// Log in button-click
@@ -80,10 +84,63 @@ $(function() {
 		socket.emit("loginClicked", {username: usernameVal, password: passwordVal});
 	});
 
+	//------ dashboard buttons -------
+
+	//select chatroom
 	$('#select_chatroom').click(function(e){
 		dashboard.css("filter", "blur(5px)");
 		selectLanguage.show();
 	});
+
+	//join group
+	$('#join_group').click(function(e){
+		dashboard.css("filter", "blur(5px)");
+		joinGroup.show();
+	});
+
+	//finish join group
+	$('#finishJoinGroup').click(function(e){
+		joinGroup.hide();
+		loadingScreen.show();
+	});
+
+	//create group
+	$('#create_group').click(function(e){
+		dashboard.css("filter", "blur(5px)");
+		createGroup.show();
+	});
+
+	//finish creating group
+	$('finishCreateGroup').click(function(e){
+			createGroup.hide();
+			loadingScreen.show();
+	});
+
+	//match language
+	$('#match_language').click(function(e){
+		dashboard.css("filter", "blur(5px)");
+		selectLanguage.show();
+	});
+
+	//finish join group
+	$('#finishMatchLanguage').click(function(e){
+		selectLanguage.hide();
+		loadingScreen.show();
+	});
+
+	// Exit button-click to Dashboard
+	closeToDash.click(function(e){
+		e.preventDefault();
+		$(this).data('clicked', true);
+		$('#dashboard').css("filter", "none");
+		createGroup.hide();
+		joinGroup.hide();
+		selectLanguage.hide();
+		loadingScreen.hide();
+	});
+
+	//---end of dashboard buttons-----
+
 
 	socket.on("allowLogin",function(){
 		loginScreen.hide();
@@ -131,13 +188,6 @@ $(function() {
 			createAccount_SignUp.hide();
 			createAccount_Language.show();
 		}
-
-	});
-
-	// Next_Signup CreateAccount button-click
-	finishCreateGroup.click(function(e){
-			createGroup.hide();
-			loadingScreen.show();
 
 	});
 
