@@ -47,7 +47,7 @@ $(function() {
 	var pw2= $('#pw2');
 	var pwReqs = [0, 0, 0, 0, 0];
 	var createAccount_Form = $('#createAccount_Form');
-
+	var userId = 0;
 	var socket = io();
 
 
@@ -123,21 +123,30 @@ $(function() {
 
 	//finish join group
 	$('#finishJoinGroup').click(function(e){
-		joinGroup.hide();
-		loadingScreen.show();
+		var groupCode = $('#groupCode').val();
+		
+		socket.emit('joinGroup', {user:userId, groupCode:groupCode});
+
 	});
 
 	//create group
 	$('#create_group').click(function(e){
 		dashboard.css("filter", "blur(5px)");
 		createGroup.show();
+		//$('#finishCreateGroupError').hide();
 	});
 
 	//finish creating group
-	$('finishCreateGroup').click(function(e){
-			createGroup.hide();
-			loadingScreen.show();
+	$('#finishCreateGroup').click(function(e){
+		//var groupName = $('#groupName').val();
+		//console.log("groupname " + groupName);
+		socket.emit('createGroup',{chatRoomName:groupName, user:userId} );
+		createGroup.hide();
+		loadingScreen.show();
+		//dashboard.show();	
+			
 	});
+	
 
 	//match language
 	$('#match_language').click(function(e){
@@ -165,15 +174,33 @@ $(function() {
 	//---end of dashboard buttons-----
 
 
-	socket.on("allowLogin",function(){
+	socket.on("allowLogin",function(id){
 		loginScreen.hide();
 		loginScreen.css("filter", "blur(5px)");
 		dashboard.show();
+		userId = id;
 		//window.location="../chat.html";
 	});
 
 	socket.on("accountNotFound", function(){
 		$("#loginErrorField").text("Account Not Found! Check if caps lock is on");
+	});
+	socket.on('createGroup', function(msg){
+		if (msg!=1){	
+			$('#finishCreateGroupError').show();
+		}
+		createGroup.hide();
+		loadingScreen.show();
+		dashboard.show();
+	
+	});
+	socket.on('joinGroup', function(msg){
+		if (msg!=1){	
+			console.log("failToJoin");
+		}
+		joinGroup.hide();
+		loadingScreen.show();
+	
 	});
 
 	// Create account hypertext-click

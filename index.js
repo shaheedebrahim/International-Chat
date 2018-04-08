@@ -8,6 +8,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
+    password:'root',
     database: 'internationalChat'
 
 });
@@ -144,14 +145,17 @@ io.on('connection', function(socket){
     });
 
     socket.on('requestDefaultRoom', function(room){
-        var sql = "SELECT * FROM ChatRooms WHERE id='"+room[0]+"'";
+       var sql = "SELECT * FROM ChatRooms WHERE id='"+room[0]+"'";
+       // var sql = "SELECT * FROM ChatRooms WHERE id=12";
+        console.log(room[0]);
         con.query(sql, function(err, result){
             if (err) throw err;
             else{
                 chatRoomCode = room[0];
                 socket.join("room"+chatRoomCode);
-                socket.emit("joinRoomSuccess", {username:username, chatHistory:result[0]['chatHistory'], roomName:result[0]['Name']});
-                
+               socket.emit("joinRoomSuccess", {username:username, chatHistory:result[0]['chatHistory'], roomName:result[0]['Name']});
+                //socket.emit("joinRoomSuccess", {username:username, chatHistory:"hello", roomName:"English"});
+           
                 // Need a timeout so that we can wait for the page to load
                 if (result[0]['Users'].length !== 0){
                     setTimeout(function(){
@@ -181,9 +185,69 @@ io.on('connection', function(socket){
                 }else{
                     console.log("ACCOUNT WAS FOUND");
                     username = result[0]['Username'];
-                    socket.emit("allowLogin")
+                    socket.emit("allowLogin", result[0].id)
                 }
             }
-        });
+        }); 
     });
+    socket.on('langLookUp', function(msg){
+        var langPeopleArray = [];
+        var sqlLangKnown = "SELECT * from Account where LanguagesKnown like '%3%';";//+msg['languageDesire'];
+        con.query(sqlLangKnown, function(err, rows){
+            if (err) throw err;
+            else{
+                for (var i in rows) {
+                    console.log(rows[i].id, rows[i].Username);
+                    langPeopleArray.push({id:rows[i].id, username: rows[i].Username});
+                }
+               
+            }      
+        }); 
+    });
+    socket.on('createGroup', function(msg){
+     
+        var sqlcreateGroup = "INSERT INTO chatrooms (Name, Users)  VALUES ('"+ msg.chatRoomName+ "','"+msg.user+"');";
+        con.query(sqlcreateGroup, function(err){
+            if (err) {throw err; console.log(err);}
+            else{
+                socket.emit('createGroup', 1);
+            }
+        }); 
+
+    });
+
+    
+    socket.on('joinGroup', function(msg){
+      
+        var result = "";
+        console.log("groupCode ",msg.groupCode,msg.user);
+        var sqljoinUpdate = "";
+        var sqljoinGrp = "SELECT  * from chatrooms where id="+msg.groupCode;
+        con.query(sqljoinGrp, function(err, rows){
+           console.log("rows",rows);
+            if (err) throw err;
+            else{
+                
+                if (rows.length !== 0){
+                    result = rows[0].Users;
+                   
+                    sqlJoinUpdate = "UPDATE chatrooms SET Users = '"+result+msg.user+",' where id="+msg.groupCode+";";
+                    con.query(sqlJoinUpdate, function(err,rows){ if (err) throw err;
+                    socket.emit('joinGroup',1);
+                });
+                    console.log(sqlJoinUpdate);
+                }
+                else{
+                    console.log("doesnt exist");
+                }
+                
+            }      
+        }); 
+     
+      
+    });
+    
+
+  
+   
 });

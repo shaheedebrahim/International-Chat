@@ -13,27 +13,30 @@ $(function() {
     var socket = io();
     var userNickSt=  $('#userNick').value;
     var color= "";
+
+    //socket.emit('joinGroup', {user:1,groupCode:13});
     if (document.cookie=="" ){socket.emit('init'); }
     else{socket.emit('rec', document.cookie); }
    
     $('form').submit(function(){
-        var message = $('#m').val();
-        var mess_args = message.split(" ");
-        if (mess_args.length==2 && mess_args[0]=="/nick")
-        {
-            socket.emit('nick', mess_args[1]);
-        }
-        else if (mess_args.length==2 && mess_args[0]=="/nickcolor") {
-            console.log("nick color invoked");
-            socket.emit('nickcolor', mess_args[1]);
-            color = mess_args[1];
-        }
-        else{
-            socket.emit('chat',message );
-        }
-        $('#m').val('');
-    
-        return false;
+
+    var message = $('#m').val();
+    var mess_args = message.split(" ");
+    if (mess_args.length==2 && mess_args[0]=="/nick")
+    {
+        socket.emit('nick', mess_args[1]);
+    }
+    else if (mess_args.length==2 && mess_args[0]=="/nickcolor") {
+        console.log("nick color invoked");
+        socket.emit('nickcolor', mess_args[1]);
+        color = mess_args[1];
+    }
+    else{
+        socket.emit('chat',message );
+    }
+    $('#messageSendArea').text('');
+   
+	return false;
     });
     socket.on('chat', function(msg){
         doChat(msg);
@@ -102,11 +105,14 @@ $(function() {
           }
           else{ 
             $(toPutIn).addClass("you");
+            $(toPutIn).append($('<img>').attr("src", "img/bit.png"));
+            $(toPutIn).append($('<p>').text(msg.body));   
            //   $('li div img').attr("src", "../img/bit.png");
             }
          $('#messages').prepend(toPutIn);
         $('#messages').stop().animate({scrollTop:($('#messages')[0].scrollHeight)},500);
     }
 
+  
     
 });
