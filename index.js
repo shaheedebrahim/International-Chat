@@ -184,7 +184,7 @@ io.on('connection', function(socket){
                 }else{
                     console.log("ACCOUNT WAS FOUND");
                     username = result[0]['Username'];
-                    socket.emit("allowLogin", result[0].id)
+                    socket.emit("allowLogin", {id:result[0].id, username:username});
                 }
             }
         }); 

@@ -48,6 +48,7 @@ $(function() {
 	var pwReqs = [0, 0, 0, 0, 0];
 	var createAccount_Form = $('#createAccount_Form');
 	var userId = 0;
+	var username = "";
 	var socket = io();
 
 
@@ -173,11 +174,13 @@ $(function() {
 	//---end of dashboard buttons-----
 
 
-	socket.on("allowLogin",function(id){
+	socket.on("allowLogin",function(msg){
 		loginScreen.hide();
 		loginScreen.css("filter", "blur(5px)");
 		dashboard.show();
-		userId = id;
+		userId = msg['id'];
+		username = msg['username'];
+		$(".col, .loginHeader").text("Welcome "+username+"!");
 		//window.location="../chat.html";
 	});
 
@@ -191,7 +194,6 @@ $(function() {
 		createGroup.hide();
 		loadingScreen.show();
 		dashboard.show();
-	
 	});
 	socket.on('joinGroup', function(msg){
 		joinGroup.hide();
