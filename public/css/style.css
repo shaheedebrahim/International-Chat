@@ -53,7 +53,9 @@
 		padding: 5px 10px;
 	}
 
-
+	#messages li:nth-child(odd) {
+		background: #eee;
+	}
 
 	/* .btn {
 		flex: 1 1 auto;
@@ -67,7 +69,7 @@
 
 	.btn:hover {
 		background-position: right center; // change the direction of the change here
-	}
+	} 
 	*/
 
 	.nameIndicators{
@@ -162,7 +164,7 @@
 		-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
 		box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
 	}
-
+   
 	.main-center{
 		margin-top: 30px;
 		margin: 0 auto;
@@ -361,8 +363,8 @@
 	.omb_login .omb_loginForm  .help-block {
 		color: red;
 	}
-
-
+	
+	
 
 
 
@@ -371,51 +373,35 @@
 		border: 2px dashed red;
 	}*/
 
-
-
-
-
+	
+		
+	
+	
 	/* General Container Classes*/
 
 
 	.loginContainer{
-
+	
 		padding: 10px;
 		background-size: 200% auto;
 		background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
-
+	
 		position:absolute;
 		top: 40%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-
+		
 		width: 30%;
 		//transition: 0.5s;
 	}
-
-	.dashboardContainer{
-
-		padding: 10px;
-		background-size: 200% auto;
-		background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
-
-		position:absolute;
-		top: 40%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-
-		width: 30%;
-		height: 70%;
-		//transition: 0.5s;
-	}
-
+	
 	.buttonContainer{
-		color: white;
+		color: white;		
 		/* font-weight: bold; */
 		font-size: 2vmin;
 		background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
 		background-size: 200% auto;
-		width: 50%;
+		width: 50%; 
 		margin-left: 25%;
 		border-radius: 10px;
 		flex: 1 1 auto;
@@ -424,90 +410,78 @@
 		box-shadow: 0 0 5px #eee;
 		border-color: white;
 	}
-
+	
 	.buttonContainer:hover {
 		background-position: right center; /* change the direction of the change here */
 		color: black;
 	}
-
-
+	
+	
 	.loginHeader{
 		font-size: calc( 15px + (24 - 16) * (100vw - 400px) / (800 - 400) );
 		text-align: center;
 		font-weight: bold;
 		color: white;
 	}
-
+	
 	.panel-body {
 		margin-left:8%;
 		margin-right:8%;
 	}
-
+	
 	.responsiveFont{
 		font-size: 2.5vmin;
 	}
-
+	
 	.responsiveTransition{
 		transition: 0.75s;
 	}
+	
+	.responsiveImage{
+		width: 100%;
+		max-width: 200px;
+		border: 1px;
+		border-style: solid;
+		border-color: grey;
+		background-color: white;
+		border-radius: 50%;
+		height: auto;
+	}
+	
+	.hideBeginning{
+		display: none;
+	}
+	
+	.profileButtonChangeDisplay{
+		font-size:80% !important;
+		width: 40% !important;
+		position: center !important;	
+		margin-left: auto;
+		
+	}
+	
+	.profileButtonChangeImage{
+		margin-top: 15px;
+		font-size:80% !important;
+		/* width: 150% !important; */
+		margin-right: auto;
+	}
+	
+	.transparentButton{
+		background-color: Transparent;
+		background-repeat:no-repeat;
+		border: none;
+		cursor:pointer;
+		overflow: hidden;
+		outline:none;
+	}
+	
 
+	
 	/*.centerPosition{
 		position:relative;
 		top: 40%;
 		left: 40%;
 		transform: translate(-50%, -50%);
-
-	}*/
-
-	/* Dashboard Container*/
-	.dashboard_button{
-		background-color: #4286f4;
-		/* shadows and rounded borders */
-		-moz-border-radius: 20px;
-		-webkit-border-radius: 20px;
-		border-radius: 20px;
-		-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-
-	}
-	.dashboard_main-center{
-		background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
-		margin-top: 30px;
-		margin: 0 auto;
-		max-width: 700px;
-		padding: 10px 40px;		
-		color: #0;
-		text-shadow: none;
-		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-		-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-		box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-
-	}
-
-	/* Profile Container*/
-	#profile_box{
 		
-		font-size: 20px;
-		font-style: bold;
-		background-image: linear-gradient(to right, #bbf 0%, #99f 51%, #44f 100%);
-		margin-top: 30px;
-		margin: 0 auto;
-		max-width: 300px;
-		padding: 10px 40px;		
-		color: #0;
-		text-shadow: none;
-		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-		-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-		box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-	}
-	
-	.right_side_button{
-		margin-top: 70px;		
-	}
-	.profile_picture{
-		border: double;
-	}
-	.welcome_message{
-		font-size: 24px;
-	}
+	}*/
