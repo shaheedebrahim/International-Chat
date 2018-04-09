@@ -1,342 +1,233 @@
 	// ========= //
 	// Variables //
 	// ========= // ===========================================
-
-$(function() {
+	
 	// Screens / Containers
 	var initialLogin = $('#initialLogin');
 	var loginScreen = $('#loginScreen');
 	var createAccount_SignUp = $('#createAccount_SignUp');
 	var createAccount_Language = $('#createAccount_Language');
 	var createAccount_Profile = $('#createAccount_Profile');
+	var createAccount_PickImage = $('#createAccount_PickImage');
 	var pwRequirements = $('#pswd_info');
-	var dashboard = $('#dashboard');
-	var loadingScreen = $('#loadingScreen');
-	var createGroup = $('#createGroup');
-	var joinGroup = $('#joinGroup');
-	var selectLanguage = $('#selectLanguage');
-	var selectDefaultRoom = $('#selectDefaultRoom');
-
+	
 	// Buttons / Clickables
 	var gotIt_Button = $('#gotIt_Button');
 	var login_Button = $('#login_Button');
 	var createAccount_Button = $('#createAcc');
 	var close = $('.close');
-	var closeToDash = $('.closeToDash');
 	var next_SignUp = $('#next_SignUp');
 	var next_Language = $('#next_Language');
 	var back_Language = $('#back_Language');
 	var back_Profile = $('#back_Profile');
 	var finish_Profile = $('#finish_Profile');
-	var finishDefaultRoom = $('#finishDefaultRoom');
-
-	// Dashboard Buttons
-	var select_chatroom = $('#select_chatroom');
-	var create_group = $('#create_group');
-	var join_group = $('#join_group');
-	var match_language = $('#match_language');
-	var profile_settings = $('#profile_settings');
-	var known_languages = $('#known_languages');
-	var translation_language = $('#translation_language');
-	var finishCreateGroup = $('#finishCreateGroup');
-	var finishJoinGroup = $('#finishJoinGroup');
-	var finishMatchLanguage = $('#finishMatchLanguage');
-
+	var save_DisplayName = $('#save_DisplayName');
+	var change_ProfileImage = $('#change_ProfileImage');
+	var cancel_ImagePicker = $('#cancel_ImagePicker');
+	var done_ImagePicker = $('#done_ImagePicker');
+	
+	
 	// Others
 	var pw1 = $('#pw1');
 	var pw2= $('#pw2');
 	var pwReqs = [0, 0, 0, 0, 0];
 	var createAccount_Form = $('#createAccount_Form');
-	var userId = 0;
-	var socket = io();
+	
 
-
-	// ========================================================
-
-
-	// =========== //
-	// Initial Run //
-	// =========== // =========================================
-
-	$(function (){
-
-		// Hide all pages except home
-		hideAll();
-
-
-	});
-
+	// initial run
+	// $(function ()
+	
 	// ========= //
 	// Functions //
 	// ========= // ===========================================
-
+	
 	// Got it button-click
 	gotIt_Button.click(function(e){
 		e.preventDefault();
 		initialLogin.hide();
 		loginScreen.show();
-		//dashboard.show();
-	});
-
-	// Log in button-click
-	$('#login_Button').click(function(e){
-		e.preventDefault();
-		var usernameVal = $("#loginUsername").val();
-		var passwordVal = $("#loginPassword").val();
-		socket.emit("loginClicked", {username: usernameVal, password: passwordVal});
-	});
-
-	//------ dashboard buttons -------
-
-	//select chatroom
-	$('#select_chatroom').click(function(e){
-		dashboard.css("filter", "blur(5px)");
-		selectDefaultRoom.show();
-	});
-
-	//Finish default room selection
-	$('#finishDefaultRoom').click(function(e){
-		selectDefaultRoom.hide();
-		var selected = [];
 		
-		//https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
-		$('#roomCheckboxes input:checked').each(function() {
-			selected.push($(this).attr('data-id'));
-		});
-
-		socket.emit("requestDefaultRoom", selected);
-	});
-
-	socket.on('joinRoomSuccess', function(msg){
-		console.log(msg);
-		$('body').load('chat.html', null, function(){
-			$('#roomName').text(msg['roomName']);
-			$('#userNick').text(msg['username']);
-		});
-	});
-
-	//join group
-	$('#join_group').click(function(e){
-		dashboard.css("filter", "blur(5px)");
-		joinGroup.show();
-	});
-
-	//finish join group
-	$('#finishJoinGroup').click(function(e){
-		var groupCode = $('#groupCode_Input').val();	
-		socket.emit('joinGroup', {user:userId, groupCode:groupCode});
-
-	});
-
-	//create group
-	$('#create_group').click(function(e){
-		dashboard.css("filter", "blur(5px)");
-		createGroup.show();
-		//$('#finishCreateGroupError').hide();
-	});
-
-	//finish creating group
-	$('#finishCreateGroup').click(function(e){
-		var groupName = $('#groupName').val();
-		//console.log("groupname " + groupName);
-		socket.emit('createGroup',{chatRoomName:groupName, user:userId} );
-		createGroup.hide();
-		loadingScreen.show();
-		//dashboard.show();	
-			
+		// test purposes
+		// createAccount_Profile.show();
 	});
 	
-
-	//match language
-	$('#match_language').click(function(e){
-		dashboard.css("filter", "blur(5px)");
-		selectLanguage.show();
-	});
-
-	//finish join group
-	$('#finishMatchLanguage').click(function(e){
-		selectLanguage.hide();
-		loadingScreen.show();
-	});
-
-	// Exit button-click to Dashboard
-	closeToDash.click(function(e){
+	// Log in button-click
+	login_Button.click(function(e){
 		e.preventDefault();
-		$(this).data('clicked', true);
-		$('#dashboard').css("filter", "none");
-		createGroup.hide();
-		joinGroup.hide();
-		selectLanguage.hide();
-		loadingScreen.hide();
+		initialLogin.hide();
+		loginScreen.show();
 	});
-
-	//---end of dashboard buttons-----
-
-
-	socket.on("allowLogin",function(id){
-		loginScreen.hide();
-		loginScreen.css("filter", "blur(5px)");
-		dashboard.show();
-		userId = id;
-		//window.location="../chat.html";
-	});
-
-	socket.on("accountNotFound", function(){
-		$("#loginErrorField").text("Account Not Found! Check if caps lock is on");
-	});
-	socket.on('createGroup', function(msg){
-		if (msg!=1){	
-			$('#finishCreateGroupError').show();
-		}
-		createGroup.hide();
-		loadingScreen.show();
-		dashboard.show();
 	
-	});
-	socket.on('joinGroup', function(msg){
-		if (msg!=1){	
-			console.log("failToJoin");
-		}
-		joinGroup.hide();
-		loadingScreen.show();
-	
-	});
-
 	// Create account hypertext-click
 	createAccount_Button.click(function(e){
 		e.preventDefault();
-		loginScreen.css("filter", "blur(5px)");
+		loginScreen.css("filter", "blur(5px)");		
 		createAccount_SignUp.show();
 	});
-
+	
 	// Exit button-click
-	close.click(function(e){
+	close.click(function(e){ 
 		e.preventDefault();
 		$(this).data('clicked', true);
 		$('#loginScreen').css("filter", "none");
 		createAccount_SignUp.hide();
 		createAccount_Language.hide();
+		createAccount_Profile.hide();
 	});
-
+	
 	// Next_Signup CreateAccount button-click
 	next_SignUp.click(function(e){
-
+		
 		// check if all the forms are filled
 		var empty = $(this).parent().find("input").filter(function() {
             return this.value === "";
-		});
-
-
-
+        });
+		
 		// Check if all the pw req conditions are met
 		var pwReqCompleted = JSON.stringify(pwReqs) === '[1,1,1,1,1]';
-
+		
 		// continue to Next if it's a valid user info
-		if(!empty.length && pwReqCompleted) {
-
+		if(!empty.length && pwReqCompleted) {			
 			createAccount_SignUp.hide();
-			createAccount_Language.show();
+			createAccount_Language.show();		
 		}
-
 	});
-
-	// NO LONGER NEEDED
+	
+	// NO LONGER NEEDED 
 	///////////////////////////////////
 	/* function accountRequirementsComplete(){
-
+		
 		var empty = $(next_SignUp).parent().find("input").filter(function() {
             return next_SignUp.value === "";
         });
-
+		
 		var pwReqCompleted = JSON.stringify(pwReqs) === '[1,1,1,1,1]';
 		// var pwMatch = pw1.value === pw2.value;
-
+		
 		if(!empty.length && pwReqCompleted) {
-			return true;
+			return true;	
 		} else {
 			return false;
 		}
 	}	 */
 	///////////////////////////////////
-
-
-
-
-
+	
+	
+	
+	
+	
 	// Next_Language CreateAccount button-click
 	next_Language.click(function(e){
-
+		
 		if($('#languageCheckboxes input:checked').length > 0){
-
-
-			var selected = [];
-			//https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
-			$('#languageCheckboxes input:checked').each(function() {
-				selected.push($(this).attr('name'));
-			});
-
-			var username = $('#username').val();
-			socket.emit("selectedLanguages", {languages:selected, username:username});
-
-			console.log(selected);
+			//errorCheckbox.innerHTML = ("");
 			e.preventDefault();
-			createAccount_Language.hide();
+			createAccount_Language.hide();	
 			createAccount_Profile.show();
+		} else {
+			errorCheckbox.innerHTML = ("Please select at least 1!");
 		}
 	});
-
-
-
+	
+	$("#languageCheckboxes :input").change(function() {
+		if(this.checked) {
+			errorCheckbox.innerHTML = ("");
+		} else if(!this.checked && $('#languageCheckboxes input:checked').length == 0) {
+			errorCheckbox.innerHTML = ("Please select at least 1!");
+		}
+	});
+	
+	
 	// Back_Language CreateAccount button-click
 	back_Language.click(function(e){
 		e.preventDefault();
 		createAccount_SignUp.show();
-		createAccount_Language.hide();
+		createAccount_Language.hide();	
 	});
-
-
+	
+	
 	// Finish_Profile CreateAccount button-click
 	finish_Profile.click(function(e){
-
+	
 		if(true){
-
+	
 			e.preventDefault();
-			createAccount_Profile.hide();
+			createAccount_Profile.hide();	
 			$('#loginScreen').css("filter", "none");
 			alert("Account created");
 			// redirect
 			//createAccount_Profile.show();
 		}
 	});
-
-
-
+	
+	
+	
 	// Back_Profile CreateAccount button-click
 	back_Profile.click(function(e){
 		e.preventDefault();
 		createAccount_Profile.hide();
-		createAccount_Language.show();
+		createAccount_Language.show();		
+	});	
+	
+	// Change_ProfileImage CreateAccount button-click
+	change_ProfileImage.click(function(e){
+		e.preventDefault();
+		createAccount_Profile.hide();
+		createAccount_PickImage.show();		
+	});	
+	
+	// 0 for default
+	// shows the number of the picked profile image
+	var pickedImage = 0;
+	
+	$("#imagePicker :button").click(function() {
+		
+		/* if( */
+		var selectedImage = parseInt(this.id.toString().match(/\d+/)[0]);
+		
+		// indicate selected
+		if (pickedImage == 0){
+			$(this).find("img").css({"border": "4px solid green"});
+			pickedImage = selectedImage;
+			previousImage = $(this);
+			// remove if already selected
+		} else if (pickedImage == selectedImage) {
+			$(this).find("img").css({"border": "none"});
+			pickedImage = 0;
+			// change currently selected indication if different
+		} else if (pickedImage != selectedImage) {			
+			$("#imagePicker :button").find("img").css({"border": "none"});
+			$(this).find("img").css({"border": "4px solid green"});
+			pickedImage = selectedImage;
+		}
+			
 	});
+	
+	
+	// Change_ProfileImage CreateAccount button-click
+	cancel_ImagePicker.click(function(e){
+		e.preventDefault();
+		createAccount_PickImage.hide();		
+		createAccount_Profile.show();
+	});	
+	
+	// Change_ProfileImage CreateAccount button-click
+	done_ImagePicker.click(function(e){
+		e.preventDefault();
+		createAccount_PickImage.hide();		
+		createAccount_Profile.show();	
+		var changedImage = "profileImages/p" + pickedImage + ".png";
+		console.log(changedImage);
+		$("#defaultImage").attr("src",changedImage);	
+	});	
+	
+	
 
 	// ========================================================
 
-
-
-
-    // Bring out the home screen
-    function hideAll(){
-			loginScreen.hide();
-			createAccount_SignUp.hide();
-			createAccount_Language.hide();
-			createAccount_Profile.hide();
-			dashboard.hide();
-			createGroup.hide();
-			loadingScreen.hide();
-			joinGroup.hide();
-			selectLanguage.hide();
-			selectDefaultRoom.hide();
-	};
-
+	
+	
+	
 
 	/* PW Requirements */
 	// While typing and on focus (click)
@@ -350,27 +241,27 @@ $(function() {
 	}).blur(function() {
 		$('#pswd_info').hide();
 		if(close.data('clicked')) {
-			close.click(function(e){
+			close.click(function(e){ 
 				$(this).data('clicked', true);
 				$('#loginScreen').css("filter", "none");
 				createAccount_SignUp.hide();
 			});
 		}
-
+			
 	});
 
 
     // Get PW Reqs
 	function validatePassword(pwBox){
 		var pswd = $(pwBox).val();
-
+		
 		//validate the length
 		if ( pswd.length >= 8 ) {
 			pwReqs[0] = 1;
 			$('#length').removeClass('invalid').addClass('valid');
 		} else {
 			pwReqs[0] = 0;
-			$('#length').removeClass('valid').addClass('invalid');
+			$('#length').removeClass('valid').addClass('invalid');                
 		}
 
 		//validate letter
@@ -409,7 +300,7 @@ $(function() {
 			$('#space').removeClass('valid').addClass('invalid');
 		}
 	}
-
+	
     function placeReq() {
         var position = pw1.position();
         var position2 = pw2.position();
@@ -423,36 +314,27 @@ $(function() {
         pwRequirements.style.left = position.left + 300 + 'px';
         // pwRequirements.style.display = "inline";
         pwRequirements.show();
-	};
+    };
+	
 	// $.validator.setDefaults( {
 			// submitHandler: function () {
 				// if (accountRequirementsComplete() === true){
 					// createAccount_SignUp.hide();
-					// createAccount_Language.show();
+					// createAccount_Language.show();		
 				// }
 			// }
 	// });
-
-
+	
+	
 	// Just in case:
 	/* submitHandler: function(form) {
 			// def action
 		}, */
-socket.on("createAccountSuccess", function(){
-		createAccount_SignUp.hide();
-		createAccount_Language.show();
-	});
-
-	socket.on("usernameNotUnique", function(){
-		$("#username-error").text("Your username is not unique please try again");
-		$("#username-error").css('color', '#FF0000');
-	});
-
-	createAccount_Form.validate( {
+	
+	createAccount_Form.validate( {		
 		submitHandler: function(form) {
-			var usernameVal = $("#username").val();
-			var passwordVal = $("#pw1").val();
-			socket.emit('createAccount', {username: usernameVal, password: passwordVal});
+			createAccount_SignUp.hide();
+			createAccount_Language.show();
 		},
 		rules: {
 			email: {
@@ -481,7 +363,7 @@ socket.on("createAccountSuccess", function(){
 			},
 			pw1: {
 				required: "Please provide a password",
-				minlength: "Your password must be at least 8 characters long --Will add more rules --"
+				minlength: "Your password must be at least 8 characters long, including at least one Capital, one Number and one Special Character"
 			},
 			pw2: {
 				required: "Please provide a password",
@@ -499,7 +381,7 @@ socket.on("createAccountSuccess", function(){
 
 			// error.insertAfter( element.parent( "label" ) );
 			error.insertAfter( element.parent("div") );
-
+			
 
 			// Add the span element, if doesn't exists, and apply the icon classes to it.
 			if ( !element.next( "span" )[ 0 ] ) {
@@ -521,95 +403,3 @@ socket.on("createAccountSuccess", function(){
 			$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
 		}
 	});
-
-
-	//select Language check box --> only select one
-	$("input:checkbox").on('click', function() {
-	var $box = $(this);
-	if ($box.is(":checked")) {
-		var group = "input:checkbox[name='" + $box.attr("name") + "']";
-		$(group).prop("checked", false);
-		$box.prop("checked", true);
-	} else {
-		$box.prop("checked", false);
-	}
-	});
-
-	//loading screen --> rotate image
-
-	var loadImage = anime ({
-	targets: ['.loader'],
-	rotate: 180,
-	duration: 1600,
-	loop: true,
-	elasticity: 600,
-	easing: 'easeOutElastic',
-	delay: function(el, index) {
-		return index * 80;
-	},
-	});
-
-	/** Chat Functionality **/
-
-	var userNickSt=  $('#userNick').value;
-    var color= "";
-   
-    $('form').submit(function(){
-        var message = $('#m').val();
-        var mess_args = message.split(" ");
-        if (mess_args.length==2 && mess_args[0]=="/nick")
-        {
-            socket.emit('nick', mess_args[1]);
-        }
-        else if (mess_args.length==2 && mess_args[0]=="/nickcolor") {
-            console.log("nick color invoked");
-            socket.emit('nickcolor', mess_args[1]);
-            color = mess_args[1];
-        }
-        else{
-            socket.emit('chat',message );
-        }
-        $('#m').val('');
-    
-        return false;
-    });
-    socket.on('chat', function(msg){
-        doChat(msg);
-     });
-    
-    socket.on('wel', function(wel){
-        for ( var i=0; i< wel.length;i++)
-        {   doChat(wel[i]);   }
-    });
-    socket.on('userList', function(list){
-        $('#userList').empty();
-        for ( var i=0; i< list.length;i++)
-        {
-             $('#userList').prepend($('<li>')
-				.append($('<img>').attr("src", "img/bit.png").addClass("profile"))
-				.append($('<p>').text(list[i]))
-            );
-        }
-         
-    });
-    function doChat(msg){
-        var time = new Date(msg.time_id);
-        var body = msg.body;
-        var toPutIn = $('<li>');
-        var divMessage = document.createElement("div");
-           
-        
-         if (userNickSt==msg.clientId){
-            $(toPutIn).addClass("me");
-            $(toPutIn).append($('<img>').attr("src", "img/about.jpg"));
-            $(toPutIn).append($('<p>').text(msg.body));   
-          }
-          else{ 
-            $(toPutIn).addClass("you");
-           //   $('li div img').attr("src", "../img/bit.png");
-            }
-         $('#messages').prepend(toPutIn);
-        $('#messages').stop().animate({scrollTop:($('#messages')[0].scrollHeight)},500);
-    }
-
-});
