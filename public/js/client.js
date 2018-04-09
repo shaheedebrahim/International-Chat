@@ -194,12 +194,11 @@ $(function() {
 	
 	});
 	socket.on('joinGroup', function(msg){
-		if (msg!=1){	
-			console.log("failToJoin");
-		}
 		joinGroup.hide();
-		loadingScreen.show();
-	
+		$('body').load('chat.html', null, function(){
+			$('#roomName').text(msg['roomName']);
+			$('#userNick').text(msg['username']);
+		});
 	});
 
 	// Create account hypertext-click
@@ -556,20 +555,22 @@ socket.on("createAccountSuccess", function(){
    
     $('form').submit(function(){
         var message = $('#m').val();
-        var mess_args = message.split(" ");
-        if (mess_args.length==2 && mess_args[0]=="/nick")
-        {
-            socket.emit('nick', mess_args[1]);
+        if (message !== undefined){
+            var mess_args = message.split(" ");
+            if (mess_args.length==2 && mess_args[0]=="/nick")
+            {
+                socket.emit('nick', mess_args[1]);
+            }
+            else if (mess_args.length==2 && mess_args[0]=="/nickcolor") {
+                console.log("nick color invoked");
+                socket.emit('nickcolor', mess_args[1]);
+                color = mess_args[1];
+            }
+            else{
+                socket.emit('chat',message );
+            }
+            $('#m').val('');
         }
-        else if (mess_args.length==2 && mess_args[0]=="/nickcolor") {
-            console.log("nick color invoked");
-            socket.emit('nickcolor', mess_args[1]);
-            color = mess_args[1];
-        }
-        else{
-            socket.emit('chat',message );
-        }
-        $('#m').val('');
     
         return false;
     });
