@@ -472,11 +472,11 @@
 
 	}
 	.dashboard_main-center{
+		background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
 		margin-top: 30px;
 		margin: 0 auto;
 		max-width: 700px;
-		padding: 10px 40px;
-		background:#ccc;
+		padding: 10px 40px;		
 		color: #0;
 		text-shadow: none;
 		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
@@ -487,15 +487,27 @@
 
 	/* Profile Container*/
 	#profile_box{
-
+		
+		font-size: 20px;
+		font-style: bold;
+		background-image: linear-gradient(to right, #bbf 0%, #99f 51%, #44f 100%);
 		margin-top: 30px;
 		margin: 0 auto;
 		max-width: 300px;
-		padding: 10px 40px;
-		background:#0cf;
+		padding: 10px 40px;		
 		color: #0;
 		text-shadow: none;
 		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
 		-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
 		box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+	}
+	
+	.right_side_button{
+		margin-top: 70px;		
+	}
+	.profile_picture{
+		border: double;
+	}
+	.welcome_message{
+		font-size: 24px;
 	}
