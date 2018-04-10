@@ -451,12 +451,53 @@
 		transition: 0.75s;
 	}
 
+	.responsiveImage{
+		width: 100%;
+		max-width: 200px;
+		border: 1px;
+		border-style: solid;
+		border-color: grey;
+		background-color: white;
+		border-radius: 50%;
+		height: auto;
+	}
+	
+	.hideBeginning{
+		display: none;
+	}
+	
+	.profileButtonChangeDisplay{
+		font-size:80% !important;
+		width: 40% !important;
+		position: center !important;	
+		margin-left: auto;
+		
+	}
+	
+	.profileButtonChangeImage{
+		margin-top: 15px;
+		font-size:80% !important;
+		/* width: 150% !important; */
+		margin-right: auto;
+	}
+	
+	.transparentButton{
+		background-color: Transparent;
+		background-repeat:no-repeat;
+		border: none;
+		cursor:pointer;
+		overflow: hidden;
+		outline:none;
+	}
+	
+
+	
 	/*.centerPosition{
 		position:relative;
 		top: 40%;
 		left: 40%;
 		transform: translate(-50%, -50%);
-
+		
 	}*/
 
 	/* Dashboard Container*/
