@@ -2,9 +2,11 @@
 <html>
 <head>
     <title> International Chat </title>
-
-    <!-------------------- CSS Files -------------------->
-
+	
+	<!-- ------------------ --------- ------------------ -->
+    <!-- ------------------ CSS Files ------------------ -->
+	<!-- ------------------ --------- ------------------ -->
+	
 	<!-- Local CSS -->
    <link rel="stylesheet" href="css/style.css">
 	<!-- Font Awesome -->
@@ -16,613 +18,717 @@
 
 <body>
 
-<!--------------->
-<!-- Home Page ------------------------------------------------------------------------------------->
-<!--------------->
+	<!-- ------------------ --------- ------------------ -->
+	<!-- ------------------ Home Page ------------------ -->
+	<!-- ------------------ --------- ------------------ -->
+	
+	<!-- Container -->
+	<div class="container-fluid">
 
-<!-- Container -->
-<div class="container-fluid">
+		<!-- Initial + Sign In/Up Container -->
+		<div id="initialLogin" class="container loginContainer panel panel-default responsiveTransition">
 
-	<!-- BACKGROUND ELEMENTS HERE *EG: Chat Screen -->
-	<!--  -->
-	<!--  -->
-	<!--  -->
+			<div class="row">
 
-
-
-
-	<!-- Initial + Sign In/Up Container -->
-	<div id="initialLogin" class="container loginContainer panel panel-default responsiveTransition">
-
-		<div class="row">
-
-			<!-- Login Header -->
-			<div class="col loginHeader">
-				Welcome to the International Chat
-			</div>
-
-			<!-- Login Body -->
-			<div class="col responsiveFont">
-				<div class="col panel-body">
-					Purpose:
-					<br> . . .
-					<br>
-					<br>
-					<br>
+				<!-- Login Header -->
+				<div class="col loginHeader">
+					Welcome to the International Chat
 				</div>
 
-				<div class="col panel-body">
-					Type /help for useful commands.
+				<!-- Login Body -->
+				<div class="col responsiveFont">
+					<div class="col panel-body">
+						Purpose:
+						<br> . . .
+						<br>
+						<br>
+						<br>
+					</div>
+
+					<div class="col panel-body">
+						Type /help for useful commands.
+					</div>
 				</div>
+
+				<!-- Login Bottom/Button -->
+				<button id="gotIt_Button" class="buttonContainer" style="width: 20%; margin-left: 40%;">
+					<p style="margin: 2%;"> Got It! </p>
+				</button>
+
 			</div>
 
-			<!-- Login Bottom/Button -->
-			<button id="gotIt_Button" class="buttonContainer" style="width: 20%; margin-left: 40%;">
-				<p style="margin: 2%;"> Got It! </p>
-			</button>
-
+		<!-- Initial + Sign In/Up Container END-->
 		</div>
 
-	<!-- Initial + Sign In/Up Container END-->
-	</div>
 
+		<!-- Sign In Container #2-->
+		<div id="loginScreen" class="container loginContainer panel panel-default responsiveTransition hideBeginning">
 
-    <!-- Sign In Container #2-->
-	<div id="loginScreen" class="container loginContainer panel panel-default responsiveTransition">
+				<!-- Login Header -->
+				<div class="loginHeader">
+					Sign In
+				</div>
 
-            <!-- Login Header -->
-            <div class="loginHeader">
-                Sign In
-            </div>
+				<br>
 
-            <br>
+				<div class="omb_login">
 
-			<div class="omb_login">
-
-				<div class="row omb_row-sm-offset-3 omb_socialButtons">
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-						<a href="#" class="btn btn-lg btn-block omb_btn-facebook">
-                            <span class="hidden-xs hidden-sm">Facebook</span>
-							<i class="fa fa-facebook visible-xs visible-sm"></i>
-						</a>
+					<div class="row omb_row-sm-offset-3 omb_socialButtons">
+						<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+							<a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+								<span class="hidden-xs hidden-sm">Facebook</span>
+								<i class="fa fa-facebook visible-xs visible-sm"></i>
+							</a>
+						</div>
+						<!-- Twitter -->
+						<!--<div class="col-xs-4 col-sm-2">-->
+							<!--<a href="#" class="btn btn-lg btn-block omb_btn-twitter">-->
+								<!--<span class="hidden-xs hidden-sm">Twitter</span>-->
+								<!--<i class="fa fa-twitter visible-xs visible-sm"></i>-->
+							<!--</a>-->
+						<!--</div>-->
+						<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+							<a href="#" class="btn btn-lg btn-block omb_btn-google">
+								<span class="hidden-xs hidden-sm">Google</span>
+								<i class="fa fa-google visible-xs visible-sm"></i>
+							</a>
+						</div>
 					</div>
-					<!-- Twitter -->
-					<!--<div class="col-xs-4 col-sm-2">-->
-						<!--<a href="#" class="btn btn-lg btn-block omb_btn-twitter">-->
-                            <!--<span class="hidden-xs hidden-sm">Twitter</span>-->
-							<!--<i class="fa fa-twitter visible-xs visible-sm"></i>-->
-						<!--</a>-->
-					<!--</div>-->
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-						<a href="#" class="btn btn-lg btn-block omb_btn-google">
-                            <span class="hidden-xs hidden-sm">Google</span>
-							<i class="fa fa-google visible-xs visible-sm"></i>
-						</a>
+
+					<br>
+
+					<div class="row omb_row-sm-offset-3">
+						<div class="col-xs-12 col-sm-6">
+							<form class="omb_loginForm" action="" autocomplete="off" method="POST">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa-fw" style="font-size:24px;"></i></span>
+									<input id="loginUsername" required type="text" class="form-control" name="username" placeholder="Username">
+								</div>
+								<span class="help-block"></span>
+
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-fw" style="font-size:24px;"></i></span>
+									<input id="loginPassword" required type="password" class="form-control" name="password" placeholder="Password">
+								</div>
+
+								<div class="row">
+									<span id="loginErrorField" class="help-block col-xs-12 col-sm-7 col-md-8 col-lg-9">
+									</span>
+									<label class="checkbox col-xs-12 col-sm-5 col-md-4 col-lg-3" style="font-weight: normal; margin-top: 3px !important;">
+										<input type="checkbox" value="remember-me" style="margin-left: 100px !important;">
+											Remember Me
+									</label>
+								</div>
+
+								<button type="submit" id="login_Button" class="buttonContainer" >
+								   <p style="margin: 2%;"> Login </p>
+								</button>
+
+							</form>
+						</div>
+					</div>
+					<div class="row omb_row-sm-offset-3">
+						<div class="col-xs-3 col-sm-3 ">
+							<p class="omb_forgotPwd">
+								<a id="createAcc" style="width:auto;" href="#">Create Account</a>
+							</p>
+						</div>
+						<div class="col-xs-offset-4 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 col-xs-3 col-sm-3">
+							<p class="omb_forgotPwd">
+								<a href="#">Forgot password?</a>
+							</p>
+						</div>
 					</div>
 				</div>
 
-                <br>
 
-				<div class="row omb_row-sm-offset-3">
-					<div class="col-xs-12 col-sm-6">
-						<form class="omb_loginForm" action="" autocomplete="off" method="POST">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user fa-fw" style="font-size:24px;"></i></span>
-								<input id="loginUsername" required type="text" class="form-control" name="username" placeholder="Username">
-							</div>
-							<span class="help-block"></span>
-
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock fa-fw" style="font-size:24px;"></i></span>
-								<input id="loginPassword" required type="password" class="form-control" name="password" placeholder="Password">
-							</div>
-
-                            <div class="row">
-                                <span id="loginErrorField" class="help-block col-xs-12 col-sm-7 col-md-8 col-lg-9">
-                                </span>
-                                <label class="checkbox col-xs-12 col-sm-5 col-md-4 col-lg-3" style="font-weight: normal; margin-top: 3px !important;">
-                                    <input type="checkbox" value="remember-me" style="margin-left: 100px !important;">
-                                        Remember Me
-                                </label>
-                            </div>
+		<!-- Second + Sign In/Up Container END-->
+		</div>
 
 
-                            <button type="submit" id="login_Button" class="buttonContainer" >
-                               <p style="margin: 2%;"> Login </p>
 
-                            </button>
 
-						</form>
+		<!-- Create Account Container/Form -->
+
+		<div class="container responsiveTransition hideBeginning" id="createAccount_SignUp" style="position: relative">
+			<div class="row main">
+				<div class="main-login_Button main-center">
+					<div class="row">
+						<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+							<h5><strong>Sign up for an account! </strong> </h5>
+						</div>
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="close"  >&times;</a>
+						</div>
 					</div>
-				</div>
-				<div class="row omb_row-sm-offset-3">
-                    <div class="col-xs-3 col-sm-3 ">
-                        <p class="omb_forgotPwd">
-                            <a id="createAcc" style="width:auto;" href="#">Create Account</a>
-                        </p>
-                    </div>
-					<div class="col-xs-offset-4 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 col-xs-3 col-sm-3">
-						<p class="omb_forgotPwd">
-							<a href="#">Forgot password?</a>
-						</p>
-					</div>
+
+					<form class="" id="createAccount_Form" method="post" action="">
+
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Your Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
+									<input type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email" autocomplete="new-email"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Username</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" autocomplete="new-username"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group" id="pwTextbox1">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="pw1" id="pw1"  placeholder="Enter your Password" autocomplete="new-password"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="confirm" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Confirm Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group" id="pwTextbox2">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="pw2" id="pw2"  placeholder="Confirm your Password" autocomplete="new-password"/>
+								</div>
+							</div>
+						</div>
+
+							<button id="next_SignUp" class=" btn btn-primary btn-lg btn-block login_Button-button">Next</button>
+					
+					</form>
 				</div>
 			</div>
+		</div>
 
 
-	<!-- Second + Sign In/Up Container END-->
-	</div>
+		<!-- Select Language Container/Form -->
 
-
-
-
-    <!-- Create Account Container/Form -->
-
-    <div class="container responsiveTransition" id="createAccount_SignUp" style="position: relative">
-        <div class="row main">
-            <div class="main-login_Button main-center">
-                <div class="row">
-                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                        <h5><strong>Sign up for an account! </strong> </h5>
-                    </div>
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
-                        <a href="#" class="close"  >&times;</a>
-                    </div>
-                </div>
-
-                <form class="" id="createAccount_Form" method="post" action="">
-
-                    <div class="form-group">
-                        <label for="email" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Your Email</label>
-                        <div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-envelope fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-								<input type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email" autocomplete="new-email"/>
+		<div class="container responsiveTransition hideBeginning" id="createAccount_Language" style="position: relative">
+			<div class="row main">
+				<div class="main-login_Button main-center">
+					<div class="row">
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+							<i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
+						</div>
+						<div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+							<h5 style="text-align: center"> <strong> What languages do you know? </strong> <br> Please select at least 1!</h5>
+						</div>
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="close" style="font-size:24px;">&times;</a>
+						</div>
+					</div>
+					<div class="row">
+						<form name = "languageCheckboxes" id="languageCheckboxes">
+							<!-- Fix for the visual bug -->
+							<div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							</div>
-                        </div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_English" required type="checkbox" name="1"> English
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Spanish" required type="checkbox" name="2"> Español
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_French" required type="checkbox" name="3"> Français
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Chinese" required type="checkbox" name="4"> 中文
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Japanese" required type="checkbox" name="5"> 日本語
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Korean" required type="checkbox" name="6"> 한국어
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_German" required type="checkbox" name="7"> Deutsch
+							</div>
+							
+							<!-- Extra languages in case if needed -->
+							
+							<!-- <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Turkish" required type="checkbox"> Türkçe
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Philippines" required type="checkbox"> Pilipinas
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Afrikaans" required type="checkbox"> Afrikaans
+							</div> 						
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_German" required type="checkbox"> Deutsch
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Portuguese" required type="checkbox"> Português
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="checkbox_Arabic" required type="checkbox"> عربى
+							</div> -->
+
+							
+						</form>
+					</div>
+					
+					<!-- Error feedback for not selecting at least 1 -->
+					<h5 style="color: red" id="errorCheckbox"> </h5>
+
+					<div class="row">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<button type="submit" id="back_Language" class=" btn btn-primary btn-lg btn-block login_Button-button">Back</button>
+						</div>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							 <button type="submit" id="next_Language" class=" btn btn-primary btn-lg btn-block login_Button-button"> Next </button>
+						</div>
 					</div>
 
-					<div class="form-group">
-                        <label for="username" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Username</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-users fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" autocomplete="new-username"/>
-                            </div>
-                        </div>
-                    </div>
 
-					<div class="form-group">
-                        <label for="password" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Password</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group" id="pwTextbox1">
-                                <span class="input-group-addon"><i class="fa fa-lock fa-lg fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-                                <input type="password" class="form-control" name="pw1" id="pw1"  placeholder="Enter your Password" autocomplete="new-password"/>
-                            </div>
-                        </div>
+				</div>
+			</div>
+		</div>
+
+		
+		<!-- Upload Picture Container/Form -->
+
+		<div class="container responsiveTransition hideBeginning" id="createAccount_Profile" style="position: relative">
+			<div class="row main">
+				<div class="main-login_Button main-center" style="max-width: 60%">
+					<div class="row">
+						
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="close" style="font-size:24px;">&times;</a>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<img id="defaultImage" src="profileImages/p1.png" alt="Default Profile Image" class="responsiveImage">
+							
+								<button id="change_ProfileImage" class="profileButtonChangeImage btn btn-primary btn-lg btn-block login_Button-button" >
+									Change Image
+								</button>
+						</div>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							
+						
+							<div class="form-group">
+								<label for="username" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">
+									Display Name
+								</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-users fa fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
+										<input type="text" class="form-control" name="displayName" id="displayName"  placeholder="Enter your Display Name" autocomplete="dont-complete-lol"/>
+									</div>
+								</div>
+								<button id="save_DisplayName" class="profileButtonChangeDisplay btn btn-primary btn-lg btn-block login_Button-button" >
+									Save
+								</button>
+							</div>
+						</div>	
+										
+					</div>
+					
+					
+					<br>
+					<br>
+		
+		
+					<div class="row">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<button type="submit" id="back_Profile" class=" btn btn-primary btn-lg btn-block login_Button-button">Back</button>
+						</div>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							 <button type="submit" id="finish_Profile" class=" btn btn-primary btn-lg btn-block login_Button-button">Finish</button>
+						</div>
+					</div>
+					
+					
+				   
+					 
+
+				</div>
+			</div>
+			
+		<!-- Upload Picture Container/Form END -->
+		</div>	
+
+		<!-- Pick a Picture Container/Form -->
+		
+		<div class="container responsiveTransition hideBeginning" id="createAccount_PickImage" style="position: relative">
+			<div class="row main">
+				<div class="main-login_Button main-center" style="max-width: 60%">
+					<div class="row">
+						<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+							<h5 style="text-align: center"> <strong> Pick a profile image </strong> </h5>						
+						</div>
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="close" style="font-size:24px;">&times;</a>
+						</div>
+					</div>
+					
+					<div class="row" id="imagePicker">
+						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+							<button id="profileImage1" class="transparentButton">
+								<img src="profileImages/p1.png" alt="Default Profile Image" class="responsiveImage">
+							</button>
+							<h1> </h1>
+							<button id="profileImage5" class="transparentButton">
+								<img src="profileImages/p5.png" alt="Default Profile Image" class="responsiveImage">
+							</button>						
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+							<button id="profileImage2" class="transparentButton">
+								<img src="profileImages/p2.png" alt="Default Profile Image" class="responsiveImage">
+							</button>
+							<h1> </h1>
+							<button id="profileImage6" class="transparentButton">
+								<img src="profileImages/p6.png" alt="Default Profile Image" class="responsiveImage">
+							</button>						
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+							<button id="profileImage3" class="transparentButton">
+								<img src="profileImages/p3.png" alt="Default Profile Image" class="responsiveImage">
+							</button>
+							<h1> </h1>
+							<button id="profileImage7" class="transparentButton">
+								<img src="profileImages/p7.png" alt="Default Profile Image" class="responsiveImage">
+							</button>						
+						</div>
+						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+							<button id="profileImage4" class="transparentButton">
+								<img src="profileImages/p4.png" alt="Default Profile Image" class="responsiveImage">
+							</button>
+							<h1> </h1>
+							<button id="profileImage8" class="transparentButton">
+								<img src="profileImages/p8.png" alt="Default Profile Image" class="responsiveImage">
+							</button>						
+						</div>						
+					</div>					
+					<br>
+					<br>					
+					<div class="row">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<button type="submit" id="cancel_ImagePicker" class=" btn btn-primary btn-lg btn-block login_Button-button">Cancel</button>
+						</div>
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+							 <button type="submit" id="done_ImagePicker" class=" btn btn-primary btn-lg btn-block login_Button-button">Done</button>
+						</div>
+					</div>					
+				</div>
+			</div>
+			
+		<!-- Pick a Picture Container/Form END -->
+		</div>		
+
+		
+		
+		
+		<!-- Password Requirements -->
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 responsiveTransition hideBeginning">
+			<div class="aro-pswd_info">
+				<div id="pswd_info">
+					<h4>Password must be requirements</h4>
+					<ul>
+						<li id="length" class="invalid">At least <strong>8 characters</strong></li>
+						<li id="letter" class="invalid">At least <strong>one letter</strong></li>
+						<li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
+						<li id="number" class="invalid">At least <strong>one number</strong></li>
+						<li id="space" class="invalid">At least <strong> one of [~, !, @, #, $, %, ^, &, *, -, =, ., ;, ']</strong></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		
+		
+		
+
+		<!-- Dashboard Container -->
+
+		<div id="dashboard" class="container dashboardContainer panel panel-default responsiveTransition hideBeginning">
+
+			<div class="row">
+
+				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-6">
+
+					<div class="container" id="profile_box" style="position: relative; left: 10px;">
+						<img class="profile" src="img/bit.png">
+						<br>
+						<br>
+						<button id="profile_setting" class=" btn btn-primary btn-lg btn-block login_Button-button">Profile settings</button>
+						<br>
+						<button id="known_languages" class=" btn btn-primary btn-lg btn-block login_Button-button">Languages you know</button>
+						<br>
+						<button id="translation_language" class=" btn btn-primary btn-lg btn-block login_Button-button">Translation language</button>
 					</div>
 
-                    <div class="form-group">
-                        <label for="confirm" class="cols-sm-2 control-label" style="font-size: 12px; font-weight: normal !important;">Confirm Password</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group" id="pwTextbox2">
-                                <span class="input-group-addon"><i class="fa fa-lock fa-lg fa-fw" style="font-size:24px;" aria-hidden="true"></i></span>
-                                <input type="password" class="form-control" name="pw2" id="pw2"  placeholder="Confirm your Password" autocomplete="new-password"/>
-                            </div>
-                        </div>
+				</div>
+
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-6">
+					<div class="row">
+						<!-- Dashbard Header -->
+						<div class="col loginHeader">
+							Welcome!
+						</div>
 					</div>
+					<br>
+					<button id="select_chatroom" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Select chatroom</button>
+					<button id="create_group" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Create group</button>
+					<button id="join_group" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Join group</button>
+					<button id="match_language" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Match language</button>
 
-						<button id="next_SignUp" class=" btn btn-primary btn-lg btn-block login_Button-button">Next</button>
+				</div>
 
+			</div>
+		</div>
 
-                    <!-- </div> -->
-                </form>
-            </div>
-        </div>
-    </div>
+		
+		<!-- Language Select Form for friend matching -->
 
-
-    <!-- Select Language Container/Form -->
-
-    <div class="container responsiveTransition" id="createAccount_Language" style="position: relative">
-        <div class="row main">
-            <div class="main-login_Button main-center">
-                <div class="row">
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
-                    </div>
-                    <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-                        <h5 style="text-align: center"> <strong> What languages do you know? </strong> <br> Please select at least 1!</h5>
-                    </div>
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
-                        <a href="#" class="close" style="font-size:24px;">&times;</a>
-                    </div>
-                </div>
-                <div class="row">
-					<form name = "languageCheckboxes" id="languageCheckboxes">
-						<!-- Fix the visual bug -->
+		<div class="container responsiveTransition hideBeginning" id="selectLanguage" style="position: relative">
+			<div class="row main">
+				<div class="main-login main-center">
+					<div class="row">
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+							<i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
+						</div>
+						<div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+							<h5 style="text-align: center"> <strong> Select a language to match with: </strong> </h5>
+						</div>
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
+						</div>
 						<div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_English" required type="checkbox" name="1"> English
+							<input id="checkbox_English" required type="checkbox" name="lang[1][]"> English
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_Spanish" required type="checkbox" name="2"> Español
+							<input id="checkbox_Spanish" required type="checkbox" name="lang[1][]"> Español
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_French" required type="checkbox" name="3"> Français
+							<input id="checkbox_French" required type="checkbox" name="lang[1][]"> Français
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_Chinese" required type="checkbox" name="4"> 中文
+							<input id="checkbox_Chinese" required type="checkbox" name="lang[1][]"> 中文
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_Japanese" required type="checkbox" name="5"> 日本語
+							<input id="checkbox_Japanese" required type="checkbox" name="lang[1][]"> 日本語
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_Korean" required type="checkbox" name="6"> 한국어
+							<input id="checkbox_Korean" required type="checkbox" name="lang[1][]"> 한국어
 						</div>
 						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_German" required type="checkbox" name="7"> Deutsch
+							<input id="checkbox_German" required type="checkbox" name="lang[1][]"> Deutsch
 						</div>
-						<!-- <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
+					</div>
+
+					<button type="submit" id="finishMatchLanguage" class=" btn btn-primary btn-lg btn-block login-button">Request Friend</button>
+
+				</div>
+			</div>
+		</div>
+
+		
+		<!-- Language Select Form for default room selection -->
+
+		<div class="container responsiveTransition hideBeginning" id="selectDefaultRoom" style="position: relative">
+			<div class="row main">
+				<div class="main-login main-center">
+					<div class="row">
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+							<i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
 						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
+						<div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+							<h5 style="text-align: center"> <strong> Select a chat room to join: </strong> </h5>
 						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
 						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
+						<div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_" required type="checkbox"> English
-						</div>
-
-						</div>-->
-					</form>
-                </div>
-
-				<div class="row">
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <button type="submit" id="back_Language" class=" btn btn-primary btn-lg btn-block login_Button-button">Back</button>
-                    </div>
-                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                         <button type="submit" id="next_Language" class=" btn btn-primary btn-lg btn-block login_Button-button"> Next </button>
-                    </div>
-                </div>
-
-
-
-
-
-            </div>
-        </div>
-    </div>
-
-	<!-- Upload Picture Container/Form -->
-
-    <div class="container responsiveTransition" id="createAccount_Profile" style="position: relative">
-        <div class="row main">
-            <div class="main-login_Button main-center">
-                <div class="row">
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
-                    </div>
-                    <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-                        <h5 style="text-align: center"> <strong> Upload a picture </strong> </h5>
-                    </div>
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
-                        <a href="#" class="close" style="font-size:24px;">&times;</a>
-                    </div>
-                </div>
-                    <br>
-
-
-				<div class="row">
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <button type="submit" id="back_Profile" class=" btn btn-primary btn-lg btn-block login_Button-button">Back</button>
-                    </div>
-                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                         <button type="submit" id="finish_Profile" class=" btn btn-primary btn-lg btn-block login_Button-button">Next</button>
-                    </div>
-                </div>
-
-
-
-
-
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Password Requirements -->
-    <div class="col-md-4 responsiveTransition">
-        <div class="aro-pswd_info">
-            <div id="pswd_info">
-                <h4>Password must be requirements</h4>
-                <ul>
-                    <li id="length" class="invalid">At least <strong>8 characters</strong></li>
-                    <li id="letter" class="invalid">At least <strong>one letter</strong></li>
-                    <li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
-                    <li id="number" class="invalid">At least <strong>one number</strong></li>
-                    <li id="space" class="invalid">At least <strong> one of [~, !, @, #, $, %, ^, &, *, -, =, ., ;, ']</strong></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Dashboard Container -->
-
-    <div id="dashboard" class="container dashboardContainer panel panel-default responsiveTransition" >
-
-                <div class="row">
-
-						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-6">
-
-							<div class="container" id="profile_box" style="position: relative; left: 10px;">
-								<img class="profile" src = "img/bit.png">
-                <br>
-                <br>
-								<button id="profile_setting" class=" btn btn-primary btn-lg btn-block login_Button-button">Profile settings</button>
-                <br>
-                <button id="known_languages" class=" btn btn-primary btn-lg btn-block login_Button-button">Languages you know</button>
-                <br>
-  							<button id="translation_language" class=" btn btn-primary btn-lg btn-block login_Button-button">Translation language</button>
+						<form name="roomCheckboxes" id="roomCheckboxes">
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="englishRoom" required type="checkbox" name="lang[1][]" data-id="1"> English
 							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="spanishRoom" required type="checkbox" name="lang[1][]" data-id="2"> Español
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="frenchRoom" required type="checkbox" name="lang[1][]" data-id="3"> Français
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="chineseRoom" required type="checkbox" name="lang[1][]" data-id="4"> 中文
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="japaneseRoom" required type="checkbox" name="lang[1][]" data-id="5"> 日本語
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="koreanRoom" required type="checkbox" name="lang[1][]" data-id="6"> 한국어
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="germanRoom" required type="checkbox" name="lang[1][]" data-id="7"> Deutsch
+							</div>
+						</form>
+					</div>
+					<button type="submit" id="finishDefaultRoom" class=" btn btn-primary btn-lg btn-block login-button">Join Room!</button>
 
+				</div>
+			</div>
+		</div>
+
+		
+		<!-- Load Screen -->
+
+		<div class="container hideBeginning" id="loadingScreen" style="position: relative">
+			<div class="row main">
+				<div class="main-login main-center">
+					<div class="row">
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+							<i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
 						</div>
-
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-6">
-              <div class="row">
-                <!-- Dashbard Header -->
-                  <div class="col loginHeader">
-                    Welcome!
-                  </div>
-              </div>
-              <br>
-							<button id="select_chatroom" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Select chatroom</button>
-							<button id="create_group" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Create group</button>
-							<button id="join_group" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Join group</button>
-							<button id="match_language" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Match language</button>
-
+						<div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+							<h5 style="text-align: center"> <strong> Looking for user that speaks language: </strong> </h5>
 						</div>
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
+						</div>
+					</div>
+					<br>
+					<div class="row loader">
+						<img class="loadImage" src="img/worldwide.png" />
+					</div>
 
-				  </div>
-        </div>
+				</div>
+			</div>
+		</div>
 
-        <!-- Language Select Form for friend matching -->
+		
+		<!-- Create Group Form-->
 
-     <div class="container responsiveTransition" id="selectLanguage" style="position: relative">
-       <div class="row main">
-         <div class="main-login main-center">
-           <div class="row">
-             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-               <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
-             </div>
-             <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-               <h5 style="text-align: center"> <strong> Select a language to match with: </strong> </h5>
-             </div>
-             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
-               <a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
-             </div>
-             <div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
-             </div>
-             <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-               <input id="checkbox_English" required type="checkbox" name="lang[1][]"> English
-             </div>
-             <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-               <input id="checkbox_Spanish" required type="checkbox" name="lang[1][]"> Español
-             </div>
-             <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-               <input id="checkbox_French" required type="checkbox" name="lang[1][]"> Français
-             </div>
-             <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-               <input id="checkbox_Chinese" required type="checkbox" name="lang[1][]"> 中文
-             </div>
-             <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-               <input id="checkbox_Japanese" required type="checkbox" name="lang[1][]"> 日本語
-             </div>
-             <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-               <input id="checkbox_Korean" required type="checkbox" name="lang[1][]"> 한국어
-             </div>
-             <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-               <input id="checkbox_German" required type="checkbox" name="lang[1][]"> Deutsch
-             </div>
-           </div>
+		<div class="container hideBeginning" id="createGroup" style="position: relative">
+			<div class="row main">
+				<div class="main-login main-center">
+					<div class="row">
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+							<i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
+						</div>
+						<div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+							<h5 style="text-align: center"> <strong> Create Group: </strong> </h5>
+						</div>
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
+						</div>
+					</div>
+					<br>
+					<form class="" id="createGroup_Form" method="post" action="">
+						<div class="row">
+							<div class="form-group col-sm-5">
+								<label for="groupName" class="control-label" style="font-size: 16px; font-weight: normal !important;">Group Name: </label>
+							</div>
+							<div class="input-group col-sm-7">
+								<input type="groupName" class="form-control" name="groupName" id="groupName" placeholder="Enter a group name" autocomplete="new-groupName" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-5">
+								<label for="groupCode" class="cols-sm-2 control-label" style="font-size: 16px; font-weight: normal !important;">Group Code: </label>
+							</div>
+							<div class="input-group  col-sm-7">
+								<input type="text" class="form-control" id="groupCode_Disp" placeholder="ABC1234" readonly/>
+							</div>
+						</div>
+						<span id="finishCreateGroupError" class="error">Sorry please try again</span>
 
-           <button type="submit" id="finishMatchLanguage" class=" btn btn-primary btn-lg btn-block login-button">Request Friend</button>
+						<div class="row">
+							<br>
+							<button type="submit" id="finishCreateGroup" class=" btn btn-primary btn-lg btn-block login-button">Enter</button>
+						</div>
+				</div>
+			</div>
+		</div>
 
-         </div>
-       </div>
-     </div>
+		
+		<!-- Join Group -->
 
-     
-        <!-- Language Select Form for default room selection -->
+		<div class="container hideBeginning" id="joinGroup" style="position: relative">
+			<div class="row main">
+				<div class="main-login main-center">
+					<div class="row">
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+							<i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
+						</div>
+						<div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+							<h5 style="text-align: center"> <strong> Join Group: </strong> </h5>
+						</div>
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+							<a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
+						</div>
+					</div>
+					<br>
+					<form class="" id="joinGroup_Form" method="post" action="">
+						<div class="row">
+							<label for="groupCode" class="cols-sm-2 control-label" style="font-size: 16px; font-weight: normal !important;">Recently Joined: </label>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4">
+								<button id="group1_Button" class="buttonContainer g1" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #5edb7f 0%, #61ccb3 51%, #5edb7f 100%); ">
+									<p style="margin: 1%;">My French Pals</p>
+								</button>
+							</div>
+							<div class="col-sm-4">
+								<button id="group2_Button" class="buttonContainer g2" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #ffadad 0%, #ffcfad 51%, #ffadad 100%); ">
+									<p style="margin: 1%;">Group 11</p>
+								</button>
+							</div>
+							<div class="col-sm-4">
+								<button id="group3_Button" class="buttonContainer g3" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%); ">
+									<p style="margin: 1%;">Klingon Buddies</p>
+								</button>
+							</div>
+						</div>
+						<br>
+						<br>
+						<div class="row">
+							<label for="groupCode" class="control-label" style="font-size: 16px; font-weight: normal !important;">Group Code: </label>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-8">
+								<input type="text" class="form-control" name="groupCode" id="groupCode_Input" placeholder=" Enter group code " />
+							</div>
+							<div class="col-sm-4">
+								<button type="submit" id="finishJoinGroup" class=" btn btn-primary btn-block ">Join</button>
+							</div>
+						</div>
+						<br>
+					</form>
+				</div>
+			</div>
+		</div>
 
-    <div class="container responsiveTransition" id="selectDefaultRoom" style="position: relative">
-        <div class="row main">
-            <div class="main-login main-center">
-            <div class="row">
-                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
-                </div>
-                <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-                <h5 style="text-align: center"> <strong> Select a chat room to join: </strong> </h5>
-                </div>
-                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
-                <a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
-                </div>
-                <div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                </div>
-                <form name="roomCheckboxes" id="roomCheckboxes">
-                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <input id="englishRoom" required type="checkbox" name="lang[1][]" data-id="1"> English
-                    </div>
-                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <input id="spanishRoom" required type="checkbox" name="lang[1][]" data-id="2"> Español
-                    </div>
-                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <input id="frenchRoom" required type="checkbox" name="lang[1][]" data-id="3"> Français
-                    </div>
-                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <input id="chineseRoom" required type="checkbox" name="lang[1][]" data-id="4"> 中文
-                    </div>
-                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <input id="japaneseRoom" required type="checkbox" name="lang[1][]" data-id="5"> 日本語
-                    </div>
-                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <input id="koreanRoom" required type="checkbox" name="lang[1][]" data-id="6"> 한국어
-                    </div>
-                    <div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <input id="germanRoom" required type="checkbox" name="lang[1][]" data-id="7"> Deutsch
-                    </div>
-                </form>
-            </div>
-            <button type="submit" id="finishDefaultRoom" class=" btn btn-primary btn-lg btn-block login-button">Join Room!</button>
-    
-            </div>
-        </div>
-        </div>
+	<!-- Container End -->
+	</div>
 
-     <!-- Load Screen -->
-
-     <div class="container" id="loadingScreen" style="position: relative">
-       <div class="row main">
-         <div class="main-login main-center">
-           <div class="row">
-             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-               <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
-             </div>
-             <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-               <h5 style="text-align: center"> <strong> Looking for user that speaks language: </strong> </h5>
-             </div>
-             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
-               <a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
-             </div>
-           </div>
-           <br>
-           <div class="row loader">
-             <img class="loadImage" src="img/worldwide.png"/>
-           </div>
-
-         </div>
-       </div>
-     </div>
-
-     <!-- Create Group Form-->
-
-
-     <div class="container" id="createGroup" style="position: relative">
-       <div class="row main">
-         <div class="main-login main-center">
-           <div class="row">
-             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-               <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
-             </div>
-             <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-               <h5 style="text-align: center"> <strong> Create Group: </strong> </h5>
-             </div>
-             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
-               <a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
-             </div>
-           </div>
-           <br>
-           <form class="" id="createGroup_Form" method="post" action="">
-             <div class="row">
-               <div class="form-group col-sm-5">
-                 <label for="groupName" class="control-label" style="font-size: 16px; font-weight: normal !important;">Group Name: </label>
-               </div>
-                 <div class="input-group col-sm-7">
-                   <input type="groupName" class="form-control" name="groupName" id="groupName"  placeholder="Enter a group name" autocomplete="new-groupName"/>
-                 </div>
-             </div>
-             <div class="row">
-               <div class="form-group col-sm-5">
-                 <label for="groupCode" class="cols-sm-2 control-label" style="font-size: 16px; font-weight: normal !important;">Group Code: </label>
-               </div>
-               <div class="input-group  col-sm-7">
-                 <input type="text" class="form-control" id="groupCode_Disp"  placeholder="ABC1234" readonly/>
-               </div>
-             </div>
-             <span id = "finishCreateGroupError" class="error" >Sorry please try again</span>
-
-           <div class="row">
-             <br>
-             <button type="submit" id="finishCreateGroup" class=" btn btn-primary btn-lg btn-block login-button">Enter</button>
-           </div>
-         </div>
-       </div>
-     </div>
-
-     <!-- Join Group -->
-
-
-     <div class="container" id="joinGroup" style="position: relative">
-       <div class="row main">
-         <div class="main-login main-center">
-           <div class="row">
-             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-               <i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
-             </div>
-             <div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
-               <h5 style="text-align: center"> <strong> Join Group: </strong> </h5>
-             </div>
-             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
-               <a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
-             </div>
-           </div>
-           <br>
-           <form class="" id="joinGroup_Form" method="post" action="">
-             <div class="row">
-               <label for="groupCode" class="cols-sm-2 control-label" style="font-size: 16px; font-weight: normal !important;">Recently Joined: </label>
-             </div>
-             <br>
-             <div class="row">
-               <div class="col-sm-4">
-                 <button id="group1_Button" class="buttonContainer g1" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #5edb7f 0%, #61ccb3 51%, #5edb7f 100%); ">
-                   <p style="margin: 1%;">My French Pals</p>
-                 </button>
-               </div>
-               <div class="col-sm-4">
-                 <button id="group2_Button" class="buttonContainer g2" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #ffadad 0%, #ffcfad 51%, #ffadad 100%); ">
-                   <p style="margin: 1%;">Group 11</p>
-                 </button>
-               </div>
-               <div class="col-sm-4">
-                 <button id="group3_Button" class="buttonContainer g3" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%); ">
-                   <p style="margin: 1%;">Klingon Buddies</p>
-                 </button>
-               </div>
-             </div>
-             <br>
-             <br>
-             <div class="row">
-               <label for="groupCode" class="control-label" style="font-size: 16px; font-weight: normal !important;">Group Code: </label>
-             </div>
-             <br>
-             <div class="row">
-               <div class="col-sm-8">
-                 <input type="text" class="form-control" name="groupCode" id="groupCode_Input"  placeholder=" Enter group code " />
-               </div>
-               <div class="col-sm-4">
-                 <button type="submit" id="finishJoinGroup" class=" btn btn-primary btn-block ">Join</button>
-               </div>
-             </div>
-             <br>
-           </form>
-         </div>
-       </div>
-     </div>
-
-<!-- Container End -->
-</div>
+	<!-- ------------------ -------- ------------------- -->
+    <!-- ------------------ JS Files ------------------- -->
+	<!-- ------------------ -------- ------------------- -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/client.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
