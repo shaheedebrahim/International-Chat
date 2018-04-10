@@ -1,14 +1,16 @@
-	// ========= //
-	// Variables //
-	// ========= // ===========================================
-
 $(function() {
+	
+	/* ======= *\
+	| VARIABLES | ==============================================
+	\* ======= */
+	
 	// Screens / Containers
 	var initialLogin = $('#initialLogin');
 	var loginScreen = $('#loginScreen');
 	var createAccount_SignUp = $('#createAccount_SignUp');
 	var createAccount_Language = $('#createAccount_Language');
 	var createAccount_Profile = $('#createAccount_Profile');
+	var createAccount_PickImage = $('#createAccount_PickImage');
 	var pwRequirements = $('#pswd_info');
 	var dashboard = $('#dashboard');
 	var loadingScreen = $('#loadingScreen');
@@ -24,10 +26,14 @@ $(function() {
 	var close = $('.close');
 	var closeToDash = $('.closeToDash');
 	var next_SignUp = $('#next_SignUp');
-	var next_Language = $('#next_Language');
 	var back_Language = $('#back_Language');
+	var next_Language = $('#next_Language');
 	var back_Profile = $('#back_Profile');
 	var finish_Profile = $('#finish_Profile');
+	var change_ProfileImage = $('#change_ProfileImage');
+	var save_DisplayName = $('#save_DisplayName');
+	var cancel_ImagePicker = $('#cancel_ImagePicker');
+	var done_ImagePicker = $('#done_ImagePicker');
 	var finishDefaultRoom = $('#finishDefaultRoom');
 
 	// Dashboard Buttons
@@ -44,39 +50,32 @@ $(function() {
 
 	// Others
 	var pw1 = $('#pw1');
-	var pw2= $('#pw2');
-	var pwReqs = [0, 0, 0, 0, 0];
+	var pw2 = $('#pw2');
 	var createAccount_Form = $('#createAccount_Form');
+		// each index refers to one of the pw requirements 
+		// -> [1: T, 0: F]
+		var pwReqs = [0, 0, 0, 0, 0];
+		// Picked profile image #, 0: default
+		var pickedImage = 0;
 	var userId = 0;
 	var username = "";
 	var socket = io();
 
 
-	// ========================================================
+	// =========================================================
 
-
-	// =========== //
-	// Initial Run //
-	// =========== // =========================================
-
-	$(function (){
-
-		// Hide all pages except home
-		hideAll();
-
-
-	});
-
-	// ========= //
-	// Functions //
-	// ========= // ===========================================
+	
+	
+	
+	/* ======= *\
+	| FUNCTIONS | 
+	\* ======= */
 
 	// Got it button-click
 	gotIt_Button.click(function(e){
 		e.preventDefault();
 		initialLogin.hide();
 		loginScreen.show();
-		//dashboard.show();
 	});
 
 	// Log in button-click
@@ -87,20 +86,25 @@ $(function() {
 		socket.emit("loginClicked", {username: usernameVal, password: passwordVal});
 	});
 
-	//------ dashboard buttons -------
-
-	//select chatroom
+	
+	
+	
+	// -------------------------------- //
+	// ------ Dashboard BUTTONs ------- //
+	// -------------------------------- //
+	
+	// Select chatroom
 	$('#select_chatroom').click(function(e){
 		dashboard.css("filter", "blur(5px)");
 		selectDefaultRoom.show();
 	});
 
-	//Finish default room selection
+	// Finish default room selection
 	$('#finishDefaultRoom').click(function(e){
 		selectDefaultRoom.hide();
 		var selected = [];
 		
-		//https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
+		// https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
 		$('#roomCheckboxes input:checked').each(function() {
 			selected.push($(this).attr('data-id'));
 		});
@@ -116,27 +120,26 @@ $(function() {
 		});
 	});
 
-	//join group
+	// Join group
 	$('#join_group').click(function(e){
 		dashboard.css("filter", "blur(5px)");
 		joinGroup.show();
 	});
 
-	//finish join group
+	// Finish join group
 	$('#finishJoinGroup').click(function(e){
 		var groupCode = $('#groupCode_Input').val();	
 		socket.emit('joinGroup', {user:userId, groupCode:groupCode});
-
 	});
 
-	//create group
+	// Create group
 	$('#create_group').click(function(e){
 		dashboard.css("filter", "blur(5px)");
 		createGroup.show();
 		//$('#finishCreateGroupError').hide();
 	});
 
-	//finish creating group
+	// Finish creating group
 	$('#finishCreateGroup').click(function(e){
 		var groupName = $('#groupName').val();
 		//console.log("groupname " + groupName);
@@ -146,15 +149,14 @@ $(function() {
 		//dashboard.show();	
 			
 	});
-	
 
-	//match language
+	// Match language
 	$('#match_language').click(function(e){
 		dashboard.css("filter", "blur(5px)");
 		selectLanguage.show();
 	});
 
-	//finish join group
+	// Finish join group
 	$('#finishMatchLanguage').click(function(e){
 		selectLanguage.hide();
 		loadingScreen.show();
@@ -171,9 +173,13 @@ $(function() {
 		loadingScreen.hide();
 	});
 
-	//---end of dashboard buttons-----
-
-
+	
+	
+	
+	// ------------------------------- //
+	// ------ Socket FUNCTIONs ------- //
+	// ------------------------------- //
+	
 	socket.on("allowLogin",function(msg){
 		loginScreen.hide();
 		loginScreen.css("filter", "blur(5px)");
@@ -203,6 +209,12 @@ $(function() {
 		});
 	});
 
+
+	
+	// ------------------------------------- //
+	// ------ Create Account BUTTONs ------- //
+	// ------------------------------------- //
+	
 	// Create account hypertext-click
 	createAccount_Button.click(function(e){
 		e.preventDefault();
@@ -217,61 +229,47 @@ $(function() {
 		$('#loginScreen').css("filter", "none");
 		createAccount_SignUp.hide();
 		createAccount_Language.hide();
+		createAccount_Profile.hide();
+		createAccount_PickImage.hide();
 	});
 
 	// Next_Signup CreateAccount button-click
 	next_SignUp.click(function(e){
 
-		// check if all the forms are filled
+		// Check if all the forms are filled
 		var empty = $(this).parent().find("input").filter(function() {
             return this.value === "";
 		});
-
-
 
 		// Check if all the pw req conditions are met
 		var pwReqCompleted = JSON.stringify(pwReqs) === '[1,1,1,1,1]';
 
 		// continue to Next if it's a valid user info
+		// Note: this condition must exist both in the button click
+		// and when checking the user-input to avoid refreshes 
+		// -> don't want to be using e.preventDefault() due to js validate
 		if(!empty.length && pwReqCompleted) {
-
 			createAccount_SignUp.hide();
 			createAccount_Language.show();
 		}
-
 	});
 
-	// NO LONGER NEEDED
-	///////////////////////////////////
-	/* function accountRequirementsComplete(){
-
-		var empty = $(next_SignUp).parent().find("input").filter(function() {
-            return next_SignUp.value === "";
-        });
-
-		var pwReqCompleted = JSON.stringify(pwReqs) === '[1,1,1,1,1]';
-		// var pwMatch = pw1.value === pw2.value;
-
-		if(!empty.length && pwReqCompleted) {
-			return true;
-		} else {
-			return false;
-		}
-	}	 */
-	///////////////////////////////////
-
-
-
-
-
+	// Back_Language CreateAccount button-click
+	back_Language.click(function(e){
+		e.preventDefault();
+		createAccount_SignUp.show();
+		createAccount_Language.hide();
+	});
+	
 	// Next_Language CreateAccount button-click
 	next_Language.click(function(e){
 
+		/* IN CASE COPY
 		if($('#languageCheckboxes input:checked').length > 0){
 
-
+			
 			var selected = [];
-			//https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
+			// https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
 			$('#languageCheckboxes input:checked').each(function() {
 				selected.push($(this).attr('name'));
 			});
@@ -282,35 +280,45 @@ $(function() {
 			console.log(selected);
 			e.preventDefault();
 			createAccount_Language.hide();
-			createAccount_Profile.show();
-		}
-	});
-
-
-
-	// Back_Language CreateAccount button-click
-	back_Language.click(function(e){
-		e.preventDefault();
-		createAccount_SignUp.show();
-		createAccount_Language.hide();
-	});
-
-
-	// Finish_Profile CreateAccount button-click
-	finish_Profile.click(function(e){
-
-		if(true){
-
+			createAccount_Profile.show(); 
+		*/
+			
+	
+			
+		if($('#languageCheckboxes input:checked').length > 0){			
+			
+			// Get the selected languages and push them into selected
+			var selected = [];
+			//https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
+			$('#languageCheckboxes input:checked').each(function() {
+				selected.push($(this).attr('name'));
+			});
+			
+			// Let the server know about what languages user selected
+			var username = $('#username').val();
+			socket.emit("selectedLanguages", {languages:selected, username:username});
+			
+			// Move to the next page
 			e.preventDefault();
-			createAccount_Profile.hide();
-			$('#loginScreen').css("filter", "none");
-			alert("Account created");
-			// redirect
-			//createAccount_Profile.show();
+			createAccount_Language.hide();	
+			createAccount_Profile.show();
+		} else {
+			// Initial click error
+			errorCheckbox.innerHTML = ("Please select at least 1!");
+		}
+
+	});
+	
+	// Error message check for language selected validation 
+	// -> Through checkboxes
+	$("#languageCheckboxes :input").change(function() {
+		if(this.checked) {
+			errorCheckbox.innerHTML = ("");
+		} else if(!this.checked && $('#languageCheckboxes input:checked').length == 0) {
+			// Checkbox clear error, not same as the one above
+			errorCheckbox.innerHTML = ("Please select at least 1!");
 		}
 	});
-
-
 
 	// Back_Profile CreateAccount button-click
 	back_Profile.click(function(e){
@@ -318,30 +326,90 @@ $(function() {
 		createAccount_Profile.hide();
 		createAccount_Language.show();
 	});
+	
+	// Change_ProfileImage CreateAccount button-click
+	change_ProfileImage.click(function(e){
+		e.preventDefault();
+		createAccount_Profile.hide();
+		createAccount_PickImage.show();		
+	});	
+	
+	// Save_DisplayName CreateAccount button-click
+	save_DisplayName.click(function(e){
+		e.preventDefault();
+		
+		// Save user display name, let the server know
+		
+		// --->>>>
+		
+		
+	});	
+
+	// Finish_Profile CreateAccount button-click
+	finish_Profile.click(function(e){
+		e.preventDefault();
+		createAccount_Profile.hide();
+		$('#loginScreen').css("filter", "none");
+		alert("Account created");
+			
+		// Redirect user ??
+		
+		
+	});
+
+	// Cancel_ProfileImage CreateAccount button-click
+	cancel_ImagePicker.click(function(e){
+		e.preventDefault();
+		createAccount_PickImage.hide();		
+		createAccount_Profile.show();
+	});	
+	
+	
+	// Done_ProfileImage CreateAccount button-click
+	done_ImagePicker.click(function(e){
+		e.preventDefault();
+		createAccount_PickImage.hide();		
+		createAccount_Profile.show();	
+		// Retrieve the image using the picked image number
+		var changedImage = "profileImages/p" + pickedImage + ".png";
+		// Set the user profile image to the selected one
+		$("#defaultImage").attr("src",changedImage);	
+	});	
+
+	// Functionality behind the feedback on profile image click(pick)/hover
+	$("#imagePicker :button").click(function() {
+		
+		// Get the number of the selected image using the ID
+		var selectedImage = parseInt(this.id.toString().match(/\d+/)[0]);
+		
+		// Indicate selected image if nothing else is selected
+		if (pickedImage == 0){
+			$(this).find("img").css({"border": "4px solid green"});
+			pickedImage = selectedImage;
+		// Remove indication if de-selected (same image clicked again)
+		} else if (pickedImage == selectedImage) {
+			$(this).find("img").css({"border": "none"});
+			pickedImage = 0;
+		// Remove previous indication if another image is selected
+		} else if (pickedImage != selectedImage) {			
+			$("#imagePicker :button").find("img").css({"border": "none"});
+			$(this).find("img").css({"border": "4px solid green"});
+			pickedImage = selectedImage;
+		}			
+	});
+	
 
 	// ========================================================
 
 
 
 
-    // Bring out the home screen
-    function hideAll(){
-			loginScreen.hide();
-			createAccount_SignUp.hide();
-			createAccount_Language.hide();
-			createAccount_Profile.hide();
-			dashboard.hide();
-			createGroup.hide();
-			loadingScreen.hide();
-			joinGroup.hide();
-			selectLanguage.hide();
-			selectDefaultRoom.hide();
-	};
-
-
 	/* PW Requirements */
 	// While typing and on focus (click)
-	// Avoids wrong solely on click as well
+	// Avoids wrong req info for pw1 and pw2
+	// -> Eg: if the confirmation pw area is selected
+	// -> it shows the pw req for that box based on click
+	// -> and not only keyup function (typing)
 	$('#pw1, #pw2').keyup(function(){
 		validatePassword(this);
 	}).focus(function() {
@@ -411,6 +479,7 @@ $(function() {
 		}
 	}
 
+	// Place the pw req screen on the right coordinates
     function placeReq() {
         var position = pw1.position();
         var position2 = pw2.position();
@@ -425,21 +494,10 @@ $(function() {
         // pwRequirements.style.display = "inline";
         pwRequirements.show();
 	};
-	// $.validator.setDefaults( {
-			// submitHandler: function () {
-				// if (accountRequirementsComplete() === true){
-					// createAccount_SignUp.hide();
-					// createAccount_Language.show();
-				// }
-			// }
-	// });
 
 
-	// Just in case:
-	/* submitHandler: function(form) {
-			// def action
-		}, */
-socket.on("createAccountSuccess", function(){
+
+	socket.on("createAccountSuccess", function(){
 		createAccount_SignUp.hide();
 		createAccount_Language.show();
 	});
@@ -449,6 +507,8 @@ socket.on("createAccountSuccess", function(){
 		$("#username-error").css('color', '#FF0000');
 	});
 
+	// Validation rules for creating an account 
+	// JS Validate framework
 	createAccount_Form.validate( {
 		submitHandler: function(form) {
 			var usernameVal = $("#username").val();
@@ -524,7 +584,7 @@ socket.on("createAccountSuccess", function(){
 	});
 
 
-	//select Language check box --> only select one
+	// Select Language check box --> only select one
 	$("input:checkbox").on('click', function() {
 	var $box = $(this);
 	if ($box.is(":checked")) {
@@ -536,7 +596,7 @@ socket.on("createAccountSuccess", function(){
 	}
 	});
 
-	//loading screen --> rotate image
+	// Loading screen --> rotate image
 
 	var loadImage = anime ({
 	targets: ['.loader'],
@@ -550,7 +610,7 @@ socket.on("createAccountSuccess", function(){
 	},
 	});
 
-	/** Chat Functionality **/
+	/* Chat Functionality */
 
 	var userNickSt=  $('#userNick').value;
     var color= "";
