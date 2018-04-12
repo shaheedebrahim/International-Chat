@@ -152,11 +152,11 @@ io.on('connection', function(socket){
             else{
                 chatRoomCode = room[0];
                 socket.join("room"+chatRoomCode);
-               socket.emit("joinRoomSuccess", {username:username, chatHistory:result[0]['chatHistory'], roomName:result[0]['Name']});
+                socket.emit("joinRoomSuccess", {username:username, chatHistory:result[0]['chatHistory'], roomName:result[0]['Name']});
                 //socket.emit("joinRoomSuccess", {username:username, chatHistory:"hello", roomName:"English"});
            
                 // Need a timeout so that we can wait for the page to load
-                if (result[0]['Users'].length !== 0){
+                if (result[0]['Users'] === null || result[0]['Users'].length !== 0){
                     setTimeout(function(){
                         var sqlUsers = "SELECT * FROM Account WHERE id IN ("+result[0]['Users']+")";
                         con.query(sqlUsers, function(err2, result2){
