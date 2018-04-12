@@ -191,7 +191,7 @@ $(function() {
 
 	socket.on("profilePic", function(msg){
 		var profilePicNum = msg;
-		$(".profile").attr("src", "profileImages/p"+profilePicNum+".png");;
+		$(".profile").attr("src", msg);
 		$(".col, .loginHeader").text("Welcome "+username+"!");
 		dashboard.show();
 	});
@@ -354,13 +354,12 @@ $(function() {
 	// Finish_Profile CreateAccount button-click
 	finish_Profile.click(function(e){
 		e.preventDefault();
+		socket.emit("setProfileImage", {path:$("#defaultImage").attr("src"), username});
+	});
+
+	socket.on("profilePicChanged", function(){
 		createAccount_Profile.hide();
 		$('#loginScreen').css("filter", "none");
-		alert("Account created");
-			
-		// Redirect user ??
-		
-		
 	});
 
 	// Cancel_ProfileImage CreateAccount button-click
@@ -503,7 +502,8 @@ $(function() {
 
 
 
-	socket.on("createAccountSuccess", function(){
+	socket.on("createAccountSuccess", function(name){
+		username = name;
 		createAccount_SignUp.hide();
 		createAccount_Language.show();
 	});

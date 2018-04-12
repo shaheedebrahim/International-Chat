@@ -133,7 +133,7 @@ io.on('connection', function(socket){
                     con.query(sql, function (err, result) {
                         if (err) throw err;
                         console.log("1 record inserted, createaccount");
-                        socket.emit("createAccountSuccess");
+                        socket.emit("createAccountSuccess", msg['username']);
                     });
                 }else {
                     socket.emit("usernameNotUnique");
@@ -248,8 +248,16 @@ io.on('connection', function(socket){
         console.log(sql)
         con.query(sql, function(err, result){
             if (err) throw err;
-            console.log(result[0].Picture);
+
             socket.emit("profilePic", result[0].Picture);
+        });
+    });
+
+    socket.on("setProfileImage", function(msg){
+        var sql = "UPDATE Account SET Picture='"+msg.path+"' WHERE Username='"+msg.username+"'";
+        con.query(sql, function(err, result){
+            if (err) throw err;
+            socket.emit("profilePicChanged");
         });
     });
     
