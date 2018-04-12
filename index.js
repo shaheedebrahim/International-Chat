@@ -242,6 +242,16 @@ io.on('connection', function(socket){
             }      
         }); 
     });
+
+    socket.on("getProfilePic", function(msg){
+        var sql = "SELECT * FROM ACCOUNT WHERE Username='"+msg+"'";
+        console.log(sql)
+        con.query(sql, function(err, result){
+            if (err) throw err;
+            console.log(result[0].Picture);
+            socket.emit("profilePic", result[0].Picture);
+        });
+    });
     
 
   

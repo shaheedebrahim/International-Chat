@@ -183,11 +183,17 @@ $(function() {
 	socket.on("allowLogin",function(msg){
 		loginScreen.hide();
 		loginScreen.css("filter", "blur(5px)");
-		dashboard.show();
 		userId = msg['id'];
 		username = msg['username'];
-		$(".col, .loginHeader").text("Welcome "+username+"!");
+		socket.emit("getProfilePic", username);
 		//window.location="../chat.html";
+	});
+
+	socket.on("profilePic", function(msg){
+		var profilePicNum = msg;
+		$(".profile").attr("src", "profileImages/p"+profilePicNum+".png");;
+		$(".col, .loginHeader").text("Welcome "+username+"!");
+		dashboard.show();
 	});
 
 	socket.on("accountNotFound", function(){
@@ -198,8 +204,8 @@ $(function() {
 			$('#finishCreateGroupError').show();
 		}
 		createGroup.hide();
-		loadingScreen.show();
-		dashboard.show();
+		//loadingScreen.show();
+		//dashboard.show();
 	});
 	socket.on('joinGroup', function(msg){
 		joinGroup.hide();
