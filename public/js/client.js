@@ -654,10 +654,10 @@ $(function() {
         $('#userList').empty();
         for ( var i=0; i< list.length;i++)
         {
+			console.log("here", list);
              $('#userList').prepend($('<li>')
-				.append($('<img>').attr("src", "img/bit.png").addClass("profile"))
-				.append($('<p>').text(list[i]))
-            );
+				.append($('<img>').attr("src", list[i]['profile']).addClass("profile"))
+				.append($('<p>').text(list[i]['username'])));
         }
          
     });

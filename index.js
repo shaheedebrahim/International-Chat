@@ -31,12 +31,12 @@ http.listen( port, function () {
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function(socket){
-    reSendActiveList(io);
 
     var username = "empty";
     var chatRoomCode = "";
+    let userID = 0;
 
-    socket.on('init', function(){
+    /**socket.on('init', function(){
         io.to(socket.id).emit('wel',msgStore);
         var nick = "User"+clientCount++;
         if (socket.id in mapping){
@@ -44,8 +44,8 @@ io.on('connection', function(socket){
             mapping[socket.id] = nick;
             io.to(socket.id).emit('nick', nick);
         }
-        reSendActiveList(io);
-    });
+        //reSendActiveList(io);
+    });**/
 
     socket.on('chat', function( msg){
         msgCount++;
@@ -60,7 +60,7 @@ io.on('connection', function(socket){
         }
     });
 
-    socket.on('nick', function(nick){
+    /**socket.on('nick', function(nick){
         if (Object.values(mapping).includes(nick))
         {
             io.to(socket.id).emit('nick', -1);
@@ -99,7 +99,7 @@ io.on('connection', function(socket){
         for (n in c)
         { activeClients.push(mapping[n]);}
         io.emit('userList', activeClients);
-    }
+    }**/
 
     socket.on('selectedLanguages', function(msg){
         var languages = "";
@@ -145,27 +145,41 @@ io.on('connection', function(socket){
 
     socket.on('requestDefaultRoom', function(room){
        var sql = "SELECT * FROM ChatRooms WHERE id='"+room[0]+"'";
-       // var sql = "SELECT * FROM ChatRooms WHERE id=12";
-        console.log(room[0]);
         con.query(sql, function(err, result){
             if (err) throw err;
             else{
+                let allUsers = result[0].Users + userID;
+                var sqlInsertUser = "UPDATE ChatRooms SET Users = '"+allUsers+",' where id="+result[0].id;
+                con.query(sqlInsertUser, function(err2, result2){
+                    if (err2) throw err2;
+                });
                 chatRoomCode = room[0];
-                socket.join("room"+chatRoomCode);
+                socket.join('room'+chatRoomCode);
                 socket.emit("joinRoomSuccess", {username:username, chatHistory:result[0]['chatHistory'], roomName:result[0]['Name']});
-                //socket.emit("joinRoomSuccess", {username:username, chatHistory:"hello", roomName:"English"});
-           
                 // Need a timeout so that we can wait for the page to load
-                if (result[0]['Users'] === null || result[0]['Users'].length !== 0){
+                if (result[0]['Users'] !== null && result[0]['Users'].length !== 0){
                     setTimeout(function(){
-                        var sqlUsers = "SELECT * FROM Account WHERE id IN ("+result[0]['Users']+")";
-                        con.query(sqlUsers, function(err2, result2){
+                        var sqlUsers = "SELECT * FROM Account WHERE id IN ("+allUsers+")";
+                        con.query(sqlUsers, function(err3, result3){
+                            if (err3) throw err3;
                             listOfUsers = [];
-                            for (user of result2){
-                                listOfUsers.push(user['Username']);
+                            for (user of result3){
+                                listOfUsers.push({username: user['Username'], profile: user['Picture']});
                             }
-                            socket.emit("userList", listOfUsers);
+                            console.log(listOfUsers);
                             io.to('room'+chatRoomCode).emit("userList", listOfUsers)
+                        });
+                    }, 500);
+                }else{
+                    setTimeout(function(){
+                        let sqlPic = "SELECT * FROM ACCOUNT WHERE Username='"+username+"'";
+                        con.query(sqlPic, function(err3, result3){
+                            if (err3) throw err3;
+                            let totalUsers = result[0].Users + result3[0].id;
+                            var sqlInsertUser = "UPDATE ChatRooms SET Users = '"+totalUsers+",' where id="+result[0].id;
+                            con.query(sqlInsertUser, function(err4, result4){
+                                io.to('room'+chatRoomCode).emit("userList", [{username: result3[0].Username, profile: result3[0].Picture}]);
+                            });
                         });
                     }, 500);
                 }
@@ -183,6 +197,7 @@ io.on('connection', function(socket){
                     socket.emit("accountNotFound");
                 }else{
                     console.log("ACCOUNT WAS FOUND");
+                    userID = result[0].id;
                     username = result[0]['Username'];
                     socket.emit("allowLogin", {id:result[0].id, username:username});
                 }
