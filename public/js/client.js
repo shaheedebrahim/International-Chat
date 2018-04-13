@@ -18,6 +18,7 @@ $(function() {
 	var joinGroup = $('#joinGroup');
 	var selectLanguage = $('#selectLanguage');
 	var selectDefaultRoom = $('#selectDefaultRoom');
+	var chatScreen = $('#chat');
 
 	// Buttons / Clickables
 	var gotIt_Button = $('#gotIt_Button');
@@ -114,10 +115,11 @@ $(function() {
 
 	socket.on('joinRoomSuccess', function(msg){
 		console.log(msg);
-		$('body').load('chat.html', null, function(){
+		$('#chat').show();
+		/**$('body').load('chat.html', null, function(){
 			$('#roomName').text(msg['roomName']);
 			$('#userNick').text(msg['username']);
-		});
+		});**/
 	});
 
 	// Join group
@@ -656,7 +658,7 @@ $(function() {
         {
 			console.log("here", list);
              $('#userList').prepend($('<li>')
-				.append($('<img>').attr("src", list[i]['profile']).addClass("profile"))
+				.append($('<img>').attr("src", list[i]['profile']).addClass("chatProfile"))
 				.append($('<p>').text(list[i]['username'])));
         }
          

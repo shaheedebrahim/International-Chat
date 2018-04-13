@@ -53,7 +53,6 @@ io.on('connection', function(socket){
         var chatUsr = mapping[socket.id];
         var msgObj = {time_id:time, body:msg,clientId:chatUsr,color:colors[socket.id]};
         io.to('room'+chatRoomCode).emit('chat', msgObj);
-        io.emit('chat',msgObj );
         msgStore.push(msgObj);
         if (msgCount>=201){
             msgStore.shift();

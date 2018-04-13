@@ -1,21 +1,18 @@
-* { margin: 0; padding: 0; box-sizing: border-box;
-   
-     }
-body {
+.chatContainer {
    
     font: 15px 'Didact Gothic',Garamond, Helvetica, Arial; 
     background: #2C3E50;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #4CA1AF, #2C3E50);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-h2{
+#roomName{
     text-decoration-color: white;
     text-decoration: underline;
 }
-header{margin: 20px;
+header{
+    margin: 20px;
     text-align: center;
     color:whitesmoke;
-
 }
 
 .headerInfo{
@@ -29,7 +26,7 @@ header{margin: 20px;
     flex-flow: column;
 }
 
-.profile{
+.chatProfile{
     width: 45px;
     border-radius: 50%;
     border: 2px solid black;
@@ -72,6 +69,7 @@ li.me p {
     border-radius: 20px;
     max-width: 50%;
     line-height: 130%;
+    word-wrap: break-word;
   }
 /*******chat bubble code ends here***********/
 .aligner-item--bottom {
@@ -80,7 +78,12 @@ li.me p {
     flex-direction: column-reverse;
     overflow-y: scroll;
  
-  }     
+  }
+
+#userList {
+    list-style-type: none;
+}
+
 #userList >li {
     padding-left: 10px;
   }
@@ -91,7 +94,6 @@ li.me p {
     font-weight:bold;
 }
 .chat-box{
-    margin-top:10px;
     margin-bottom:10px;
     background-color: darkgray;
     padding: 5px;
@@ -104,23 +106,19 @@ li.me p {
     border-radius: 15px 5px 15px 5px;
 
 }
-li{
-    width:100%;
-    display:block;
-    word-wrap:break-word;
-}
+
 #userNick{
     display:inline;
 }
-form 
+#chatForm 
 { 
     width: 90%; 
     border-radius: 15px;
     display: inline;
 }
 
-form input { border-radius: 15px; padding:10px; padding-right:100px;border-width: 2px ;width:90%;border-color:black;} 
-form button { width:10%;align-self: center;} 
+#chatForm input { border-radius: 15px; padding:10px; padding-right:100px;border-width: 2px ;border-color:black;} 
+#chatForm button { width:10%;align-self: center;} 
 
 
 #messages { list-style-type: none; margin: 0; padding: 0; }
