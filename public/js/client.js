@@ -116,10 +116,8 @@ $(function() {
 	socket.on('joinRoomSuccess', function(msg){
 		console.log(msg);
 		$('#chat').show();
-		/**$('body').load('chat.html', null, function(){
-			$('#roomName').text(msg['roomName']);
-			$('#userNick').text(msg['username']);
-		});**/
+		$('#roomName').text(msg['roomName']);
+		$('#userNick').text(msg['username']);
 	});
 
 	// Join group

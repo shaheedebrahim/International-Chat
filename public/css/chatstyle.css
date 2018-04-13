@@ -117,8 +117,18 @@ li.me p {
     display: inline;
 }
 
-#chatForm input { border-radius: 15px; padding:10px; padding-right:100px;border-width: 2px ;border-color:black;} 
-#chatForm button { width:10%;align-self: center;} 
+#chatForm input { 
+    border-radius: 15px; 
+    padding:10px; 
+    padding-right:100px;
+    border-width: 2px;
+    border-color:black;
+} 
+
+#chatForm button { 
+    width:10%;
+    align-self: center;
+} 
 
 
 #messages { list-style-type: none; margin: 0; padding: 0; }
