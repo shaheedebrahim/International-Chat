@@ -6,8 +6,9 @@ var clientCount = 0;
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: 'internationalchat.cxusurzid2yd.us-east-2.rds.amazonaws.com',
+    user: 'chatAdmin',
+    password: 'internationaladmin',
     database: 'internationalChat'
 
 });
@@ -212,7 +213,7 @@ io.on('connection', function(socket){
                     }, 500);
                 }else{
                     setTimeout(function(){
-                        let sqlPic = "SELECT * FROM ACCOUNT WHERE Username='"+username+"'";
+                        let sqlPic = "SELECT * FROM Account WHERE Username='"+username+"'";
                         con.query(sqlPic, function(err3, result3){
                             if (err3) throw err3;
                             let totalUsers = result[0].Users + result3[0].id;
@@ -301,7 +302,7 @@ io.on('connection', function(socket){
     });
 
     socket.on("getProfilePic", function(msg){
-        var sql = "SELECT * FROM ACCOUNT WHERE Username='"+msg+"'";
+        var sql = "SELECT * FROM Account WHERE Username='"+msg+"'";
         console.log(sql)
         con.query(sql, function(err, result){
             if (err) throw err;
