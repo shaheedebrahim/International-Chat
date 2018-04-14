@@ -114,7 +114,6 @@ $(function() {
 	});
 
 	socket.on('joinRoomSuccess', function(msg){
-		console.log(msg);
 		$('#chat').show();
 		$('#roomName').text(msg['roomName']);
 		$('#userNick').text(msg['username']);
@@ -498,10 +497,6 @@ $(function() {
         var position = pw1.position();
         var position2 = pw2.position();
 
-        console.log(position.left);
-        console.log(position.top);
-        console.log(position);
-
         pwRequirements.style.position = "absolute";
         pwRequirements.style.top = position.top + 370 + 'px';
         pwRequirements.style.left = position.left + 300 + 'px';
@@ -639,7 +634,6 @@ $(function() {
                 socket.emit('nick', mess_args[1]);
             }
             else if (mess_args.length==2 && mess_args[0]=="/nickcolor") {
-                console.log("nick color invoked");
                 socket.emit('nickcolor', mess_args[1]);
                 color = mess_args[1];
             }
@@ -664,7 +658,6 @@ $(function() {
         $('#userList').empty();
         for ( var i=0; i< list.length;i++)
         {
-			console.log("here", list);
              $('#userList').prepend($('<li>')
 				.append($('<img>').attr("src", list[i]['profile']).addClass("chatProfile"))
 				.append($('<p>').text(list[i]['username'])));
@@ -676,7 +669,6 @@ $(function() {
         var body = msg.body;
         var toPutIn = $('<li>');
 		var divMessage = document.createElement("div");
-		console.log(msg);
         
         if (username === msg.username){
             $(toPutIn).addClass("me");

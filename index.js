@@ -78,21 +78,17 @@ io.on('connection', function(socket){
                 userList = userList.replace(regex, "");
 
                 var updateRoomSql = "UPDATE ChatRooms SET Users='"+userList+"' WHERE id='"+chatRoomCode+"'";
-                console.log(updateRoomSql);
                 con.query(updateRoomSql, function(err2, result2){
-                    console.log(result2);
                     if (err2) throw err2;
                     userList = userList.slice(0,-1);
                     if (userList !== ""){
                         var sqlUsers = "SELECT * FROM Account WHERE id IN ("+userList+")";
-                        console.log("sqlUsers", sqlUsers);
                             con.query(sqlUsers, function(err3, result3){
                                 if (err3) throw err3;
                                 listOfUsers = [];
                                 for (user of result3){
                                     listOfUsers.push({username: user['Username'], profile: user['Picture']});
                                 }
-                                console.log(listOfUsers);
                                 io.to('room'+chatRoomCode).emit("userList", listOfUsers)
                             });
     
@@ -145,23 +141,19 @@ io.on('connection', function(socket){
         for (language of msg['languages']){
             languages = languages + language +",";
         }
-        console.log(languages);
         var sql = "UPDATE Account SET LanguagesKnown='"+languages+"' WHERE Username='"+msg['username']+"'";
         con.query(sql, function(err, result){
             if (result === undefined || result.length == 0){
                 if (err) throw err;
                 else{
-                    console.log(result);
                 }
             }
         });
-        console.log(sql);
     });
 
     socket.on('createAccount', function(msg){
         // First check whether the username is unique
         var sql = "SELECT * FROM Account WHERE Username='"+msg['username']+"'";
-        console.log(msg['username']);
 
         con.query(sql, function(err,result){
             if (err) throw err;
@@ -171,12 +163,10 @@ io.on('connection', function(socket){
                     var sql = "INSERT INTO Account (Username, Password) VALUES ('"+msg['username']+"', '"+msg['password']+"')";
                     con.query(sql, function (err, result) {
                         if (err) throw err;
-                        console.log("1 record inserted, createaccount");
                         socket.emit("createAccountSuccess", msg['username']);
                     });
                 }else {
                     socket.emit("usernameNotUnique");
-                    console.log("Username not unique");
                 };
             }
         });
@@ -205,9 +195,7 @@ io.on('connection', function(socket){
                             for (user of result3){
                                 listOfUsers.push({username: user['Username'], profile: user['Picture']});
                             }
-                            console.log(listOfUsers);
                             io.to('room'+chatRoomCode).emit("userList", listOfUsers)
-                            console.log("firstSE", chatHistory);
                             io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
                         });
                     }, 500);
@@ -220,7 +208,6 @@ io.on('connection', function(socket){
                             var sqlInsertUser = "UPDATE ChatRooms SET Users = '"+totalUsers+",' where id="+result[0].id;
                             con.query(sqlInsertUser, function(err4, result4){
                                 io.to('room'+chatRoomCode).emit("userList", [{username: result3[0].Username, profile: result3[0].Picture}]);
-                                console.log("secondSE", chatHistory);
                                 io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
                             });
                         });
@@ -236,10 +223,8 @@ io.on('connection', function(socket){
             if (err) throw err;
             else{
                 if (result === undefined || result.length == 0){
-                    console.log("ACCOUNT WAS NOT FOUND");
                     socket.emit("accountNotFound");
                 }else{
-                    console.log("ACCOUNT WAS FOUND");
                     userID = result[0].id;
                     username = result[0]['Username'];
                     socket.emit("allowLogin", {id:result[0].id, username:username});
@@ -254,7 +239,6 @@ io.on('connection', function(socket){
             if (err) throw err;
             else{
                 for (var i in rows) {
-                    console.log(rows[i].id, rows[i].Username);
                     langPeopleArray.push({id:rows[i].id, username: rows[i].Username});
                 }
                
@@ -265,7 +249,6 @@ io.on('connection', function(socket){
      
         var sqlcreateGroup = "INSERT INTO ChatRooms (Name, Users)  VALUES ('"+ msg.chatRoomName+ "','"+msg.user+"')";
         con.query(sqlcreateGroup, function(err, result){
-            console.log("SCOPE IDENTITY", result);
             if (err) {throw err; console.log(err);}
             else{
                 socket.emit('createGroup', 1);
@@ -276,7 +259,6 @@ io.on('connection', function(socket){
                     // Wait till page loads!
                     socket.emit("joinRoomSuccess", {username:result2[0].Username, chatHistory:[], roomName:msg.chatRoomName+" Group Code:"+chatRoomCode});
                     setTimeout(function(){
-                        console.log("HERE", result2);;
                         io.to('room'+chatRoomCode).emit("userList", [{username:result2[0].Username, profile:result2[0].Picture}]);
                     },500);
                 });
@@ -289,7 +271,6 @@ io.on('connection', function(socket){
         var sqlGetGroups = "SELECT * from ChatRooms where id='"+msg.groupCode+"'";
         con.query(sqlGetGroups, function(err, result){
             if (err) throw err;
-            console.log("WAKA FLAKA", result);
             if (result.length !== 0){
                 let allUsers = result[0].Users + msg.user;
                 chatRoomCode = msg.groupCode;
@@ -309,7 +290,6 @@ io.on('connection', function(socket){
                             for (user of result3){
                                 listOfUsers.push({username: user['Username'], profile: user['Picture']});
                             }
-                            console.log(listOfUsers);
                             io.to('room'+chatRoomCode).emit("userList", listOfUsers)
                             io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
                         });
@@ -325,7 +305,6 @@ io.on('connection', function(socket){
 
     socket.on("getProfilePic", function(msg){
         var sql = "SELECT * FROM Account WHERE Username='"+msg+"'";
-        console.log(sql)
         con.query(sql, function(err, result){
             if (err) throw err;
             profilePicPath = result[0].Picture;
