@@ -24,6 +24,8 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 var generateName = require('sillyname');
 
+let chatHistory = {};
+
 http.listen( port, function () {
     console.log('listening on port', port);
 });
@@ -53,6 +55,11 @@ io.on('connection', function(socket){
         var time = new Date();
         var chatUsr = mapping[socket.id];
         var msgObj = {time_id:time, body:msg, username:username, color:colors[socket.id], pic:profilePicPath};
+        if (chatHistory[chatRoomCode]){
+            chatHistory[chatRoomCode].push(msgObj);
+        }else{
+            chatHistory[chatRoomCode] = [msgObj];
+        }
         io.to('room'+chatRoomCode).emit('chat', msgObj);
         msgStore.push(msgObj);
         if (msgCount>=201){
@@ -199,6 +206,8 @@ io.on('connection', function(socket){
                             }
                             console.log(listOfUsers);
                             io.to('room'+chatRoomCode).emit("userList", listOfUsers)
+                            console.log("firstSE", chatHistory);
+                            io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
                         });
                     }, 500);
                 }else{
@@ -210,6 +219,8 @@ io.on('connection', function(socket){
                             var sqlInsertUser = "UPDATE ChatRooms SET Users = '"+totalUsers+",' where id="+result[0].id;
                             con.query(sqlInsertUser, function(err4, result4){
                                 io.to('room'+chatRoomCode).emit("userList", [{username: result3[0].Username, profile: result3[0].Picture}]);
+                                console.log("secondSE", chatHistory);
+                                io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
                             });
                         });
                     }, 500);

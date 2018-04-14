@@ -647,8 +647,9 @@ $(function() {
      });
     
     socket.on('wel', function(wel){
-        for ( var i=0; i< wel.length;i++)
-        {   doChat(wel[i]);   }
+		if (wel){
+			for ( var i=0; i< wel.length;i++){doChat(wel[i]);}
+		}
     });
     socket.on('userList', function(list){
         $('#userList').empty();
