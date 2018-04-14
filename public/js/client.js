@@ -665,19 +665,21 @@ $(function() {
         var time = new Date(msg.time_id);
         var body = msg.body;
         var toPutIn = $('<li>');
-        var divMessage = document.createElement("div");
-           
+		var divMessage = document.createElement("div");
+		console.log(msg);
         
-         if (userNickSt==msg.clientId){
+        if (username === msg.username){
             $(toPutIn).addClass("me");
-            $(toPutIn).append($('<img>').attr("src", "img/about.jpg"));
+            $(toPutIn).append($('<img>').attr("src", msg.pic));
             $(toPutIn).append($('<p>').text(msg.body));   
-          }
-          else{ 
-            $(toPutIn).addClass("you");
-           //   $('li div img').attr("src", "../img/bit.png");
-            }
-         $('#messages').prepend(toPutIn);
+        }
+        else{ 
+			$(toPutIn).addClass("you");
+			$(toPutIn).append($('<img>').attr("src", msg.pic));
+			let html = "<p> <span>"+msg.username+"</span><br>"+msg.body+"</p>";
+			$(toPutIn).append(html);   
+        }
+        $('#messages').prepend(toPutIn);
         $('#messages').stop().animate({scrollTop:($('#messages')[0].scrollHeight)},500);
     }
 

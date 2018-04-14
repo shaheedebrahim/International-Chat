@@ -35,6 +35,7 @@ io.on('connection', function(socket){
     var username = "empty";
     var chatRoomCode = "";
     let userID = 0;
+    let profilePicPath = "";
 
     /**socket.on('init', function(){
         io.to(socket.id).emit('wel',msgStore);
@@ -51,7 +52,7 @@ io.on('connection', function(socket){
         msgCount++;
         var time = new Date();
         var chatUsr = mapping[socket.id];
-        var msgObj = {time_id:time, body:msg,clientId:chatUsr,color:colors[socket.id]};
+        var msgObj = {time_id:time, body:msg, username:username, color:colors[socket.id], pic:profilePicPath};
         io.to('room'+chatRoomCode).emit('chat', msgObj);
         msgStore.push(msgObj);
         if (msgCount>=201){
@@ -293,7 +294,7 @@ io.on('connection', function(socket){
         console.log(sql)
         con.query(sql, function(err, result){
             if (err) throw err;
-
+            profilePicPath = result[0].Picture;
             socket.emit("profilePic", result[0].Picture);
         });
     });
