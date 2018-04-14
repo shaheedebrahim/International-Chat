@@ -247,7 +247,7 @@ io.on('connection', function(socket){
     });
     socket.on('createGroup', function(msg){
      
-        var sqlcreateGroup = "INSERT INTO ChatRooms (Name, Users)  VALUES ('"+ msg.chatRoomName+ "','"+msg.user+"')";
+        var sqlcreateGroup = "INSERT INTO ChatRooms (Name, Users)  VALUES ('"+ msg.chatRoomName+ "','"+msg.user+",')";
         con.query(sqlcreateGroup, function(err, result){
             if (err) {throw err; console.log(err);}
             else{
@@ -277,6 +277,7 @@ io.on('connection', function(socket){
                 socket.join('room'+chatRoomCode);
                 
                 let sqlInsertUser = "UPDATE ChatRooms SET Users = '"+allUsers+",' where id="+msg.groupCode;
+                console.log(sqlInsertUser);
                 con.query(sqlInsertUser, function(err2, result2){
                 
                     socket.emit("joinRoomSuccess", {username:msg.username, roomName:result[0].Name+" Group Code:"+chatRoomCode});
