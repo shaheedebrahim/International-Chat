@@ -120,6 +120,10 @@ $(function() {
 		$('#userNick').text(msg['username']);
 	});
 
+	socket.on('groupNotFound', function(){
+		$('#wrongGroupText').text("Group not found!")
+	});
+
 	// Join group
 	$('#join_group').click(function(e){
 		dashboard.css("filter", "blur(5px)");

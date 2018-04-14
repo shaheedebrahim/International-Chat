@@ -289,7 +289,8 @@ io.on('connection', function(socket){
         var sqlGetGroups = "SELECT * from ChatRooms where id='"+msg.groupCode+"'";
         con.query(sqlGetGroups, function(err, result){
             if (err) throw err;
-            if (result){
+            console.log("WAKA FLAKA", result);
+            if (result.length !== 0){
                 let allUsers = result[0].Users + msg.user;
                 chatRoomCode = msg.groupCode;
                 socket.join('room'+chatRoomCode);
@@ -316,6 +317,7 @@ io.on('connection', function(socket){
                 });
             }else{
                 // That group code was not found / does not exist
+                socket.emit("groupNotFound");
 
             }
         });

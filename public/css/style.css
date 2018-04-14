@@ -554,3 +554,7 @@
 	.welcome_message{
 		font-size: 24px;
 	}
+
+	#wrongGroupText{
+		color: red;
+	}
