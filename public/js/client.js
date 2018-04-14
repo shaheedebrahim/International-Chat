@@ -35,7 +35,6 @@ $(function() {
 	var save_DisplayName = $('#save_DisplayName');
 	var cancel_ImagePicker = $('#cancel_ImagePicker');
 	var done_ImagePicker = $('#done_ImagePicker');
-	var finishDefaultRoom = $('#finishDefaultRoom');
 
 	// Dashboard Buttons
 	var select_chatroom = $('#select_chatroom');
@@ -48,6 +47,7 @@ $(function() {
 	var finishCreateGroup = $('#finishCreateGroup');
 	var finishJoinGroup = $('#finishJoinGroup');
 	var finishMatchLanguage = $('#finishMatchLanguage');
+	var finishDefaultRoom = $('#finishDefaultRoom');
 
 	// Others
 	var pw1 = $('#pw1');
@@ -171,6 +171,7 @@ $(function() {
 		joinGroup.hide();
 		selectLanguage.hide();
 		loadingScreen.hide();
+		selectDefaultRoom.hide();
 	});
 
 	
