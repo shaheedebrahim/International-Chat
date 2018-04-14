@@ -263,11 +263,23 @@ io.on('connection', function(socket){
     });
     socket.on('createGroup', function(msg){
      
-        var sqlcreateGroup = "INSERT INTO chatrooms (Name, Users)  VALUES ('"+ msg.chatRoomName+ "','"+msg.user+"');";
-        con.query(sqlcreateGroup, function(err){
+        var sqlcreateGroup = "INSERT INTO ChatRooms (Name, Users)  VALUES ('"+ msg.chatRoomName+ "','"+msg.user+"')";
+        con.query(sqlcreateGroup, function(err, result){
+            console.log("SCOPE IDENTITY", result);
             if (err) {throw err; console.log(err);}
             else{
                 socket.emit('createGroup', 1);
+                chatRoomCode = result.insertId;
+                socket.join('room'+chatRoomCode);
+                var sqlFindInfo = "SELECT * FROM Account WHERE id='"+msg.user+"';";
+                con.query(sqlFindInfo, function(err2, result2){
+                    // Wait till page loads!
+                    socket.emit("joinRoomSuccess", {username:result2[0].Username, chatHistory:[], roomName:msg.chatRoomName+" Group Code:"+chatRoomCode});
+                    setTimeout(function(){
+                        console.log("HERE", result2);;
+                        io.to('room'+chatRoomCode).emit("userList", [{username:result2[0].Username, profile:result2[0].Picture}]);
+                    },500);
+                });
             }
         }); 
 
@@ -318,8 +330,4 @@ io.on('connection', function(socket){
             socket.emit("profilePicChanged");
         });
     });
-    
-
-  
-   
 });

@@ -136,7 +136,6 @@ $(function() {
 	$('#create_group').click(function(e){
 		dashboard.css("filter", "blur(5px)");
 		createGroup.show();
-		//$('#finishCreateGroupError').hide();
 	});
 
 	// Finish creating group
@@ -145,7 +144,6 @@ $(function() {
 		//console.log("groupname " + groupName);
 		socket.emit('createGroup',{chatRoomName:groupName, user:userId} );
 		createGroup.hide();
-		loadingScreen.show();
 		//dashboard.show();	
 			
 	});
@@ -172,6 +170,12 @@ $(function() {
 		selectLanguage.hide();
 		loadingScreen.hide();
 		selectDefaultRoom.hide();
+	});
+
+	$('#profile_setting').click(function(e){
+		e.preventDefault();
+		dashboard.css("filter", "blur(5px)");
+		//createAccount_Profile.show();
 	});
 
 	
