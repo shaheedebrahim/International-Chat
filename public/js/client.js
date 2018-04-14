@@ -129,7 +129,7 @@ $(function() {
 	// Finish join group
 	$('#finishJoinGroup').click(function(e){
 		var groupCode = $('#groupCode_Input').val();	
-		socket.emit('joinGroup', {user:userId, groupCode:groupCode});
+		socket.emit('joinGroup', {user:userId, groupCode:groupCode, username:username});
 	});
 
 	// Create group

@@ -285,32 +285,40 @@ io.on('connection', function(socket){
 
     });
 
-    
-    socket.on('joinGroup', function(msg){
-      
-        var result = "";
-        console.log("groupCode ",msg.groupCode,msg.user);
-        var sqljoinUpdate = "";
-        var sqljoinGrp = "SELECT  * from chatrooms where id="+msg.groupCode;
-        con.query(sqljoinGrp, function(err, rows){
-           console.log("rows",rows);
+    socket.on("joinGroup", function(msg){
+        var sqlGetGroups = "SELECT * from ChatRooms where id='"+msg.groupCode+"'";
+        con.query(sqlGetGroups, function(err, result){
             if (err) throw err;
-            else{
-                if (rows.length !== 0){
-                    result = rows[0].Users;
-                   if (result==null){result="";}
-                    sqlJoinUpdate = "UPDATE chatrooms SET Users = '"+result+msg.user+",' where id="+msg.groupCode+";";
-                    con.query(sqlJoinUpdate, function(err,rows2){ if (err) throw err;
-                    socket.emit('joinGroup',{roomName:rows[0].Name, username:username});
-                });
-                    console.log(sqlJoinUpdate);
-                }
-                else{
-                    console.log("doesnt exist");
-                }
+            if (result){
+                let allUsers = result[0].Users + msg.user;
+                chatRoomCode = msg.groupCode;
+                socket.join('room'+chatRoomCode);
                 
-            }      
-        }); 
+                let sqlInsertUser = "UPDATE ChatRooms SET Users = '"+allUsers+",' where id="+msg.groupCode;
+                con.query(sqlInsertUser, function(err2, result2){
+                
+                    socket.emit("joinRoomSuccess", {username:msg.username, roomName:result[0].Name+" Group Code:"+chatRoomCode});
+                    
+                    setTimeout(function(){
+                        var sqlUsers = "SELECT * FROM Account WHERE id IN ("+allUsers+")";
+
+                        con.query(sqlUsers, function(err3, result3){
+                            if (err3) throw err3;
+                            listOfUsers = [];
+                            for (user of result3){
+                                listOfUsers.push({username: user['Username'], profile: user['Picture']});
+                            }
+                            console.log(listOfUsers);
+                            io.to('room'+chatRoomCode).emit("userList", listOfUsers)
+                            io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
+                        });
+                    },500);
+                });
+            }else{
+                // That group code was not found / does not exist
+
+            }
+        });
     });
 
     socket.on("getProfilePic", function(msg){
