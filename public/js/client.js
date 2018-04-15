@@ -114,9 +114,28 @@ $(function() {
 	});
 
 	socket.on('joinRoomSuccess', function(msg){
-		$('#chat').show();
-		$('#roomName').text(msg['roomName']);
-		$('#userNick').text(msg['username']);
+		$('#chat').show(0, function(){
+			$(function() {
+				// Initializes and creates emoji set from sprite sheet
+				$('[data-toggle="tooltip"]').tooltip(); 
+				window.emojiPicker = new EmojiPicker({
+				  emojiable_selector: '[data-emojiable=true]',
+				  assetsPath: 'img/',
+				  popupButtonClasses: 'fa fa-smile-o'
+				});
+				window.emojiPicker.discover();
+
+				$("#messageSendArea").keypress(function(event) {
+					if (event.which == 13) {
+						event.preventDefault();
+						var message = $('#messageSendArea').text();
+						socket.emit('chat',message );
+					}
+				});
+			});
+			$('#roomName').text(msg['roomName']);
+			$('#userNick').text(msg['username']);
+		});
 	});
 
 	socket.on('groupNotFound', function(){
@@ -650,11 +669,14 @@ $(function() {
             else{
                 socket.emit('chat',message );
             }
-            $('#m').val('');
+			$('#m').val('');
+			$('#messageSendArea').text('');
         }
     
         return false;
-    });
+	});
+
+
     socket.on('chat', function(msg){
         doChat(msg);
      });
