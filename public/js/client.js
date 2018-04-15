@@ -169,11 +169,12 @@ $(function() {
 	// Finish creating group
 	$('#finishCreateGroup').click(function(e){
 		var groupName = $('#groupName').val();
-		//console.log("groupname " + groupName);
-		socket.emit('createGroup',{chatRoomName:groupName, user:userId} );
-		createGroup.hide();
-		//dashboard.show();	
-			
+		if (groupName === ""){
+			$('#finishCreateGroupError').text("Please enter a group name");
+		}else{
+			socket.emit('createGroup',{chatRoomName:groupName, user:userId} );
+			createGroup.hide();
+		}
 	});
 
 	// Match language
