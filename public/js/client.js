@@ -134,6 +134,7 @@ $(function() {
 					if (event.which == 13) {
 						event.preventDefault();
 						var message = $('#messageSendArea').text();
+						$('#messageSendArea').text('');
 						socket.emit('chat',message );
 					}
 				});
