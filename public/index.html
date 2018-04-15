@@ -513,29 +513,31 @@
 						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
 							<a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
 						</div>
-						<div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_English" required type="checkbox" name="lang[1][]"> English
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_Spanish" required type="checkbox" name="lang[1][]"> Español
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_French" required type="checkbox" name="lang[1][]"> Français
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_Chinese" required type="checkbox" name="lang[1][]"> 中文
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_Japanese" required type="checkbox" name="lang[1][]"> 日本語
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_Korean" required type="checkbox" name="lang[1][]"> 한국어
-						</div>
-						<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<input id="checkbox_German" required type="checkbox" name="lang[1][]"> Deutsch
-						</div>
+						<form name="matchCheckboxes" id="matchCheckboxes">
+							<div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="match_English" required type="checkbox" name="lang[1][]" data-id="1"> English
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="match_Spanish" required type="checkbox" name="lang[1][]" data-id="2"> Español
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="match_French" required type="checkbox" name="lang[1][]" data-id="3"> Français
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="match_Chinese" required type="checkbox" name="lang[1][]" data-id="4"> 中文
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="match_Japanese" required type="checkbox" name="lang[1][]" data-id="5"> 日本語
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="match_Korean" required type="checkbox" name="lang[1][]" data-id="6"> 한국어
+							</div>
+							<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<input id="match_German" required type="checkbox" name="lang[1][]" data-id="7"> Deutsch
+							</div>
+						</form>
 					</div>
 
 					<button type="submit" id="finishMatchLanguage" class=" btn btn-primary btn-lg btn-block login-button">Request Friend</button>

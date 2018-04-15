@@ -160,6 +160,16 @@ $(function() {
 	// Finish join group
 	$('#finishMatchLanguage').click(function(e){
 		selectLanguage.hide();
+
+		var selected = [];
+		
+		// https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
+		$('#matchCheckboxes input:checked').each(function() {
+			selected.push($(this).attr('data-id'));
+		});
+
+		socket.emit("enterMatchLobby", {find:selected, username:username, userID:userId});
+
 		loadingScreen.show();
 	});
 
@@ -683,6 +693,10 @@ $(function() {
         }
         $('#messages').prepend(toPutIn);
         $('#messages').stop().animate({scrollTop:($('#messages')[0].scrollHeight)},500);
-    }
+	}
+	
+	socket.on("changeRoomCode", function(msg){
+		socket.emit("roomCode", msg);
+	});
 
 });

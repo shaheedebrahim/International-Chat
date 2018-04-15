@@ -267,6 +267,26 @@ io.on('connection', function(socket){
 
     });
 
+    function createGroup(msg){
+        var sqlcreateGroup = "INSERT INTO ChatRooms (Name, Users)  VALUES ('"+ msg.chatRoomName+ "','"+msg.user+",')";
+        con.query(sqlcreateGroup, function(err, result){
+            if (err) {throw err; console.log(err);}
+            else{
+                socket.emit('createGroup', 1);
+                chatRoomCode = result.insertId;
+                socket.join('room'+chatRoomCode);
+                var sqlFindInfo = "SELECT * FROM Account WHERE id='"+msg.user+"';";
+                con.query(sqlFindInfo, function(err2, result2){
+                    // Wait till page loads!
+                    socket.emit("joinRoomSuccess", {username:result2[0].Username, chatHistory:[], roomName:msg.chatRoomName+" Group Code:"+chatRoomCode});
+                    setTimeout(function(){
+                        io.to('room'+chatRoomCode).emit("userList", [{username:result2[0].Username, profile:result2[0].Picture}]);
+                    },500);
+                });
+            }
+        });
+    }
+
     socket.on("joinGroup", function(msg){
         var sqlGetGroups = "SELECT * from ChatRooms where id='"+msg.groupCode+"'";
         con.query(sqlGetGroups, function(err, result){
@@ -304,6 +324,46 @@ io.on('connection', function(socket){
         });
     });
 
+    function joinGroup(msg, otherSocket){
+        let actualSocket = socket;
+        if (otherSocket){
+            actualSocket = otherSocket;
+        }
+        var sqlGetGroups = "SELECT * from ChatRooms where id='"+msg.groupCode+"'";
+        con.query(sqlGetGroups, function(err, result){
+            if (err) throw err;
+            if (result.length !== 0){
+                let allUsers = result[0].Users + msg.user;
+                chatRoomCode = msg.groupCode;
+                actualSocket.join('room'+chatRoomCode);
+                
+                let sqlInsertUser = "UPDATE ChatRooms SET Users = '"+allUsers+",' where id="+msg.groupCode;
+                console.log(sqlInsertUser);
+                con.query(sqlInsertUser, function(err2, result2){
+                
+                    actualSocket.emit("joinRoomSuccess", {username:msg.username, roomName:result[0].Name+" Group Code:"+chatRoomCode});
+                    
+                    setTimeout(function(){
+                        var sqlUsers = "SELECT * FROM Account WHERE id IN ("+allUsers+")";
+
+                        con.query(sqlUsers, function(err3, result3){
+                            if (err3) throw err3;
+                            listOfUsers = [];
+                            for (user of result3){
+                                listOfUsers.push({username: user['Username'], profile: user['Picture']});
+                            }
+                            io.to('room'+chatRoomCode).emit("userList", listOfUsers)
+                            io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
+                        });
+                    },500);
+                });
+            }else{
+                // That group code was not found / does not exist
+                actualSocket.emit("groupNotFound");
+            }
+        });
+    }
+
     socket.on("getProfilePic", function(msg){
         var sql = "SELECT * FROM Account WHERE Username='"+msg+"'";
         con.query(sql, function(err, result){
@@ -319,5 +379,39 @@ io.on('connection', function(socket){
             if (err) throw err;
             socket.emit("profilePicChanged");
         });
+    });
+
+    socket.on("enterMatchLobby", function(msg){
+        socket.username = msg.username;
+        socket.find = msg.find[0];
+        socket.userID = msg.userID;
+
+        //https://stackoverflow.com/questions/18093638/socket-io-rooms-get-list-of-clients-in-specific-room
+        if (io.sockets.adapter.rooms['matchLobby']){
+            var clients = io.sockets.adapter.rooms['matchLobby'].sockets;   
+            for (var clientId in clients ) {
+                
+                var clientSocket = io.sockets.connected[clientId];
+
+                if (clientSocket.find === socket.find){
+                    clientSocket.leave('matchLobby');
+                    
+                    // First create a group and send the last person to initiate a request in there
+                    createGroup({chatRoomName:"Match Friend Room!", user:msg.userID});
+                    // Ensure that there has been enough time for everything else to finish
+                    setTimeout(function(){
+                        clientSocket.emit("changeRoomCode", chatRoomCode);
+                        joinGroup({user:clientSocket.userID, groupCode:chatRoomCode, username:clientSocket.username}, clientSocket);
+                    }, 1000);
+                    break;
+                }else{
+                    socket.join('matchLobby');
+                }
+            }
+        }else {socket.join('matchLobby');}
+    });
+
+    socket.on("roomCode", function(msg){
+        chatRoomCode = msg;
     });
 });
