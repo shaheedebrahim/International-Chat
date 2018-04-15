@@ -102,7 +102,6 @@ $(function() {
 
 	// Finish default room selection
 	$('#finishDefaultRoom').click(function(e){
-		selectDefaultRoom.hide();
 		var selected = [];
 		
 		// https://stackoverflow.com/questions/2155622/get-a-list-of-checked-checkboxes-in-a-div-using-jquery
@@ -110,7 +109,13 @@ $(function() {
 			selected.push($(this).attr('data-id'));
 		});
 
-		socket.emit("requestDefaultRoom", selected);
+		if (selected.length !== 0){			
+			socket.emit("requestDefaultRoom", selected);
+			selectDefaultRoom.hide();
+		}else{
+			$('#defaultRoomErrorMsg').text("Error please select a language");
+		}
+		
 	});
 
 	socket.on('joinRoomSuccess', function(msg){

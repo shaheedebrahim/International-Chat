@@ -558,3 +558,7 @@
 	#wrongGroupText{
 		color: red;
 	}
+
+	#defaultRoomErrorMsg{
+		color: red;
+	}
