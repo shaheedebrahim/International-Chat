@@ -123,6 +123,9 @@ $(function() {
 	});
 
 	socket.on('joinRoomSuccess', function(msg){
+		loadingScreen.hide();
+		createGroup.hide();
+		joinGroup.hide();
 		$('#chat').show(0, function(){
 			$(function() {
 				$("#messages").empty();
