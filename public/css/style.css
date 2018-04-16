@@ -412,6 +412,8 @@
 		height: 70%;
 	}
 
+
+
 	.buttonContainer{
 		color: white;
 		/* font-weight: bold; */
@@ -428,17 +430,34 @@
 		border-color: white;
 	}
 
+
+
+
+
 	.buttonContainer:hover {
 		background-position: right center; /* change the direction of the change here */
 		color: black;
 	}
 
 
+
+
+	.loginBox{
+		height: 50px;
+  		line-height: 50px;
+  		text-align: center;
+	}
+
+
 	.loginHeader{
+		/*display: table-cell; */
 		font-size: calc( 15px + (24 - 16) * (100vw - 400px) / (800 - 400) );
-		text-align: center;
 		font-weight: bold;
 		color: white;
+		text-align: center;
+		display: inline-block;
+  		vertical-align: middle;
+  		line-height: normal;
 	}
 
 	.panel-body {
@@ -505,16 +524,31 @@
 
 	/* Dashboard Container*/
 	.dashboard_button{
-		background-color: #4286f4;
-		/* shadows and rounded borders */
-		-moz-border-radius: 20px;
-		-webkit-border-radius: 20px;
+		color: white;
+		font-weight: bold;
+		font-size: 2vmin;
+		background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+		background-size: 200% auto;
+		width: 80%;
+		margin-left: 10%;
+		margin-top: 20px;
+		height: 70px;
 		border-radius: 20px;
-		-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		flex: 1 1 auto;
+		transition: 0.5s;
+		text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+		box-shadow: 0 0 5px #eee;
+		border-color: white;
 
+		
 	}
+
+	.dashboard_button:hover {
+		background-position: right center; /* change the direction of the change here */
+		color: black;
+	}
+
+
 	.dashboard_main-center{
 		background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
 		margin-top: 30px;
@@ -534,16 +568,21 @@
 		
 		font-size: 20px;
 		font-style: bold;
-		background-image: linear-gradient(to right, #bbf 0%, #99f 51%, #44f 100%);
+		background-image: linear-gradient(to right, rgb(236, 187, 113) 0%, rgb(236, 187, 113) 100%);
+		border-radius: 20px;
 		margin-top: 30px;
 		margin: 0 auto;
 		max-width: 300px;
+		height: 100%;
 		padding: 10px 40px;		
-		color: #0;
+		/*color: #0;
 		text-shadow: none;
 		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
 		-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
-		box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+		box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);*/
+		border-color: white;
+		border-style: solid;
+		border-width: 5px;
 	}
 	
 	.right_side_button{

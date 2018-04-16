@@ -16,6 +16,8 @@ $(function() {
 	var loadingScreen = $('#loadingScreen');
 	var createGroup = $('#createGroup');
 	var joinGroup = $('#joinGroup');
+	var translationLanguage = $('#translationLanguage');
+	var knownLanguage = $('#knownLanguage');
 	var selectLanguage = $('#selectLanguage');
 	var selectDefaultRoom = $('#selectDefaultRoom');
 	var chatScreen = $('#chat');
@@ -203,6 +205,18 @@ $(function() {
 		loadingScreen.show();
 	});
 
+	// Translation Language
+	$('#translation_language').click(function(e){
+		dashboard.css("filter", "blur(5px)");
+		translationLanguage.show();
+	});
+
+	// Known languages 
+	$('#known_languages').click(function(e){
+		dashboard.css("filter", "blur(5px)");
+		knownLanguage.show();
+	});
+
 	// Exit button-click to Dashboard
 	closeToDash.click(function(e){
 		e.preventDefault();
@@ -213,6 +227,8 @@ $(function() {
 		selectLanguage.hide();
 		loadingScreen.hide();
 		selectDefaultRoom.hide();
+		translationLanguage.hide();
+		knownLanguage.hide();
 	});
 
 	profile_settings.click(function(e){
@@ -242,7 +258,7 @@ $(function() {
 	socket.on("profilePic", function(msg){
 		var profilePicNum = msg;
 		$(".profile").attr("src", msg);
-		$(".col, .loginHeader").text("Welcome "+username+"!");
+		$(" .loginHeader").text("Welcome "+username+"!");
 		dashboard.show();
 	});
 

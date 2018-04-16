@@ -457,34 +457,41 @@
 
 			<div class="row">
 
-				<div class="col-xs-7 col-sm-7 col-md-7 col-lg-6">
 
-					<div class="container" id="profile_box" style="left: 10px;">
-						<img id="dashboardImage" class="profile" src="img/bit.png">
+					<div class="col-xs-7 col-sm-7 col-md-7 col-lg-6 container" id="profile_box" style="position: relative; left: 5%;">
+						<img id="dashboardImage" class="profile responsiveImage" src="img/bit.png">
 						<br>
 						<br>
 						<button id="profile_settings" class=" btn btn-primary btn-lg btn-block login_Button-button">Profile settings</button>
-						<br>
 						<button id="known_languages" class=" btn btn-primary btn-lg btn-block login_Button-button">Languages you know</button>
-						<br>
 						<button id="translation_language" class=" btn btn-primary btn-lg btn-block login_Button-button">Translation language</button>
+						<br>
 					</div>
 
-				</div>
 
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-6">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-6" style="position: relative; float: right; right: 50px;" >
 					<div class="row">
 						<!-- Dashbard Header -->
-						<div class="col loginHeader">
-							Welcome!
+						<div class="col loginBox">
+							<span class="loginHeader">
+								Welcome!
+							</span>
+						</div>
+						<div class="col">
+							<button id="select_chatroom" class="dashboard_button" style="background-image: linear-gradient(to right, #5edb7f 0%, #61ccb3 51%, #5edb7f 100%);">
+								Select chatroom
+							</button>
+							<button id="create_group" class="dashboard_button" style="background-image: linear-gradient(to right, #ee9ca7 0%, #ffdde1 51%, #ee9ca7 100%);">
+								Create group
+							</button>
+							<button id="join_group" class="dashboard_button" style="background-image: linear-gradient(to right, #3d72b4 0%, #525252 51%, #3d72b4 100%);">
+								Join group
+							</button>
+							<button id="match_language" class="dashboard_button" > 
+								Match language
+							</button>
 						</div>
 					</div>
-					<br>
-					<button id="select_chatroom" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Select chatroom</button>
-					<button id="create_group" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Create group</button>
-					<button id="join_group" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Join group</button>
-					<button id="match_language" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Match language</button>
-
 				</div>
 
 			</div>
@@ -641,14 +648,6 @@
 								<input type="groupName" class="form-control" name="groupName" id="groupName" placeholder="Enter a group name" autocomplete="new-groupName" />
 							</div>
 						</div>
-						<div class="row">
-							<div class="form-group col-sm-5">
-								<label for="groupCode" class="cols-sm-2 control-label" style="font-size: 16px; font-weight: normal !important;">Group Code: </label>
-							</div>
-							<div class="input-group  col-sm-7">
-								<input type="text" class="form-control" id="groupCode_Disp" placeholder="ABC1234" readonly/>
-							</div>
-						</div>
 						<span id="finishCreateGroupError" class="error"></span>
 
 						<div class="row">
@@ -684,17 +683,17 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-4">
-								<button id="group1_Button" class="buttonContainer g1" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #5edb7f 0%, #61ccb3 51%, #5edb7f 100%); ">
+								<button id="group1_Button" class=" buttonContainer" style="width: 100%; min-height: 100px; background-image: linear-gradient(to right, #5edb7f 0%, #61ccb3 51%, #5edb7f 100%);">
 									<p style="margin: 1%;">My French Pals</p>
 								</button>
 							</div>
 							<div class="col-sm-4">
-								<button id="group2_Button" class="buttonContainer g2" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #ffadad 0%, #ffcfad 51%, #ffadad 100%); ">
+								<button id="group2_Button" class="buttonContainer g2" style="width: 100%; min-height: 100px; background-image: linear-gradient(to right, #ffadad 0%, #ffcfad 51%, #ffadad 100%); ">
 									<p style="margin: 1%;">Group 11</p>
 								</button>
 							</div>
 							<div class="col-sm-4">
-								<button id="group3_Button" class="buttonContainer g3" style="width: 100%; min-height: 60px; background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%); ">
+								<button id="group3_Button" class="buttonContainer g3" style="width: 100%; min-height: 100px; background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%); ">
 									<p style="margin: 1%;">Klingon Buddies</p>
 								</button>
 							</div>
@@ -703,6 +702,7 @@
 						<br>
 						<div class="row">
 							<label for="groupCode" class="control-label" style="font-size: 16px; font-weight: normal !important;">Group Code: </label>
+							<h6>Please enter the code found in the title of the chat. (Example: 52)</h6>
 						</div>
 						<br>
 						<div class="row">
@@ -777,6 +777,104 @@
 				</div>
 		</div>
 
+		<!-- Select Translation Language -->
+
+		<div class="container responsiveTransition hideBeginning" id="translationLanguage" style="position: relative">
+				<div class="row main">
+					<div class="main-login main-center">
+						<div class="row">
+							<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+								<i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
+							</div>
+							<div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+								<h5 style="text-align: center"> <strong> Select your default translation language: </strong> </h5>
+							</div>
+							<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+								<a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
+							</div>
+								<div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="translate_English" required type="checkbox" name="lang[1][]" data-id="1"> English
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="translate_Spanish" required type="checkbox" name="lang[1][]" data-id="2"> Español
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="translate_French" required type="checkbox" name="lang[1][]" data-id="3"> Français
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="translate_Chinese" required type="checkbox" name="lang[1][]" data-id="4"> 中文
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="translate_Japanese" required type="checkbox" name="lang[1][]" data-id="5"> 日本語
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="translate_Korean" required type="checkbox" name="lang[1][]" data-id="6"> 한국어
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="translate_German" required type="checkbox" name="lang[1][]" data-id="7"> Deutsch
+								</div>
+						</div>
+	
+						<button type="submit" id="finishTranslateLanguage" class="closeToDash btn btn-primary btn-lg btn-block login-button">Set Language</button>
+	
+					</div>
+				</div>
+			</div>
+			
+			<!-- Dashboard - Select Languages you know  -->
+
+		<div class="container responsiveTransition hideBeginning" id="knownLanguage" style="position: relative">
+				<div class="row main">
+					<div class="main-login main-center">
+						<div class="row">
+							<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+								<i class="fa fa-language fa-fw" style="font-size:24px; margin-top: 5px"></i>
+							</div>
+							<div class="col-xs-9 col-sm-89 col-md-9 col-lg-9">
+								<h5 style="text-align: center"> <strong> What languages do you know? </strong> <br> Please select at least 1!</h5>
+							</div>
+							<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="margin-top: 5px; margin-left: 15px">
+								<a href="#" class="closeToDash" style="font-size:24px;">&times;</a>
+							</div>
+						</div>
+						<div class="row">
+								<!-- Fix for the visual bug -->
+								<div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="known_English" required type="checkbox" name="1"> English
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="known_Spanish" required type="checkbox" name="2"> Español
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="known_French" required type="checkbox" name="3"> Français
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="known_Chinese" required type="checkbox" name="4"> 中文
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="known_Japanese" required type="checkbox" name="5"> 日本語
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="known_Korean" required type="checkbox" name="6"> 한국어
+								</div>
+								<div class="checkbox col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<input id="known_German" required type="checkbox" name="7"> Deutsch
+								</div>
+								
+						</div>
+	
+						<div class="row">
+								 <button type="submit" class="closeToDash btn btn-primary btn-lg btn-block login-button"> Set Language(s) </button>
+						</div>
+	
+	
+					</div>
+				</div>
+			</div>
 
 	<!-- Container End -->
 	</div>
