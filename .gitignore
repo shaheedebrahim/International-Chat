@@ -60,3 +60,5 @@ typings/
 #Mac generated File
 .DS_STORE
 
+#Temp files
+.*~
