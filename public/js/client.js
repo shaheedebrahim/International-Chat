@@ -123,6 +123,8 @@ $(function() {
 	socket.on('joinRoomSuccess', function(msg){
 		$('#chat').show(0, function(){
 			$(function() {
+				$("#messages").empty();
+				$("#messageSendArea").off("keypress");
 				// Initializes and creates emoji set from sprite sheet
 				$('[data-toggle="tooltip"]').tooltip(); 
 				window.emojiPicker = new EmojiPicker({

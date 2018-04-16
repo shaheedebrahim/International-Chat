@@ -87,7 +87,6 @@ io.on('connection', function(socket){
 
     socket.on("leaveChatRoom", function(msg){
         if (chatRoomCode !== ""){
-            console.log("reached1");
             var sql = "SELECT * FROM ChatRooms WHERE id='"+chatRoomCode+"'";
             con.query(sql, function(err, result){
                 if (err) throw err;
@@ -108,12 +107,14 @@ io.on('connection', function(socket){
                                 listOfUsers.push({username: user['Username'], profile: user['Picture']});
                             }
                             io.to('room'+chatRoomCode).emit("userList", listOfUsers)
-                            socket.emit("moveBackToDashboard");
+                            socket.leave('room'+chatRoomCode);
                             chatRoomCode = "";
+                            socket.emit("moveBackToDashboard");
                         });
                     }else{
-                        socket.emit("moveBackToDashboard");
-                        chatRoomCode = "";                    
+                        socket.leave("room"+chatRoomCode);
+                        chatRoomCode = "";   
+                        socket.emit("moveBackToDashboard");                 
                     }
                 });
             });
