@@ -203,7 +203,9 @@ $(function() {
 			selected.push($(this).attr('data-id'));
 		});
 
-		socket.emit("enterMatchLobby", {find:selected, username:username, userID:userId});
+		if (selected.length !== 0){
+			socket.emit("enterMatchLobby", {find:selected, username:username, userID:userId});
+		}
 
 		loadingScreen.show();
 	});
