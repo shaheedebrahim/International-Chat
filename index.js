@@ -181,7 +181,7 @@ io.on('connection', function(socket){
                                 listOfUsers.push({username: user['Username'], profile: user['Picture']});
                             }
                             io.to('room'+chatRoomCode).emit("userList", listOfUsers)
-                            io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
+                            socket.emit("wel", chatHistory[chatRoomCode]);
                         });
                     }, 500);
                 }else{
@@ -193,7 +193,7 @@ io.on('connection', function(socket){
                             var sqlInsertUser = "UPDATE ChatRooms SET Users = '"+totalUsers+",' where id="+result[0].id;
                             con.query(sqlInsertUser, function(err4, result4){
                                 io.to('room'+chatRoomCode).emit("userList", [{username: result3[0].Username, profile: result3[0].Picture}]);
-                                io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
+                                socket.emit("wel", chatHistory[chatRoomCode]);
                             });
                         });
                     }, 500);
@@ -362,6 +362,7 @@ io.on('connection', function(socket){
         var sql = "UPDATE Account SET Picture='"+msg.path+"' WHERE Username='"+msg.username+"'";
         con.query(sql, function(err, result){
             if (err) throw err;
+            profilePicPath = msg.path;
             socket.emit("profilePicChanged", msg.path);
         });
     });
