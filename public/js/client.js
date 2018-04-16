@@ -624,7 +624,7 @@ $(function() {
 			},
 			pw1: {
 				required: "Please provide a password",
-				minlength: "Your password must be at least 8 characters long --Will add more rules --"
+				minlength: "Your password must be at least 8 characters long"
 			},
 			pw2: {
 				required: "Please provide a password",
