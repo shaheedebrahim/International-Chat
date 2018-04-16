@@ -743,4 +743,14 @@ $(function() {
 		socket.emit("roomCode", msg);
 	});
 
+	$('#backButton_Chat').click(function(msg){
+		socket.emit("leaveChatRoom", {userID:userId, username:username});
+	});
+
+	socket.on("moveBackToDashboard", function(msg){
+		chatScreen.hide();
+		dashboard.css("filter", "blur(0px)");
+		dashboard.show();
+	})
+
 });

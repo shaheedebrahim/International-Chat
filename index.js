@@ -71,16 +71,49 @@ io.on('connection', function(socket){
                     userList = userList.slice(0,-1);
                     if (userList !== ""){
                         var sqlUsers = "SELECT * FROM Account WHERE id IN ("+userList+")";
-                            con.query(sqlUsers, function(err3, result3){
-                                if (err3) throw err3;
-                                listOfUsers = [];
-                                for (user of result3){
-                                    listOfUsers.push({username: user['Username'], profile: user['Picture']});
-                                }
-                                io.to('room'+chatRoomCode).emit("userList", listOfUsers)
-                            });
-    
-                        io.to('room'+chatRoomCode).emit("userList", );
+                        con.query(sqlUsers, function(err3, result3){
+                            if (err3) throw err3;
+                            listOfUsers = [];
+                            for (user of result3){
+                                listOfUsers.push({username: user['Username'], profile: user['Picture']});
+                            }
+                            io.to('room'+chatRoomCode).emit("userList", listOfUsers)
+                        });
+                    }
+                });
+            });
+        }
+    });
+
+    socket.on("leaveChatRoom", function(msg){
+        if (chatRoomCode !== ""){
+            console.log("reached1");
+            var sql = "SELECT * FROM ChatRooms WHERE id='"+chatRoomCode+"'";
+            con.query(sql, function(err, result){
+                if (err) throw err;
+                let userList = result[0].Users;
+                let regex = new RegExp(userID+",", "g");
+                userList = userList.replace(regex, "");
+
+                var updateRoomSql = "UPDATE ChatRooms SET Users='"+userList+"' WHERE id='"+chatRoomCode+"'";
+                con.query(updateRoomSql, function(err2, result2){
+                    if (err2) throw err2;
+                    userList = userList.slice(0,-1);
+                    if (userList !== ""){
+                        var sqlUsers = "SELECT * FROM Account WHERE id IN ("+userList+")";
+                        con.query(sqlUsers, function(err3, result3){
+                            if (err3) throw err3;
+                            listOfUsers = [];
+                            for (user of result3){
+                                listOfUsers.push({username: user['Username'], profile: user['Picture']});
+                            }
+                            io.to('room'+chatRoomCode).emit("userList", listOfUsers)
+                            socket.emit("moveBackToDashboard");
+                            chatRoomCode = "";
+                        });
+                    }else{
+                        socket.emit("moveBackToDashboard");
+                        chatRoomCode = "";                    
                     }
                 });
             });
