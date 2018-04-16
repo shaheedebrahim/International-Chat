@@ -195,10 +195,10 @@
 
 
 
-
-
+  /* https://bootsnipp.com/snippets/featured/advance-password-validation */
 	/* PW Requirements*/
 	/* Not used anymore.. */
+	/* Did not delete to avoid any possible bugs*/
 
 	/* Base CSS */
 	.alignleft {
@@ -301,6 +301,9 @@
 
 
 	/* Login Screen + Social Media */
+	/* https://bootsnipp.com/snippets/featured/responsive-login-with-social-buttons
+	 	 input-group-addon -> used in create account as well from here*/
+
 
 	@media (min-width: 768px) {
 		.omb_row-sm-offset-3 div:first-child[class*="col-"] {
@@ -451,13 +454,13 @@
 
 	.loginHeader{
 		/*display: table-cell; */
+		/* https://www.smashingmagazine.com/2016/05/fluid-typography/ - responsive font, used in responsiveFont as well */
 		font-size: calc( 15px + (24 - 16) * (100vw - 400px) / (800 - 400) );
 		font-weight: bold;
 		color: white;
 		text-align: center;
-		display: inline-block;
-  		vertical-align: middle;
-  		line-height: normal;
+		vertical-align: middle;
+  	line-height: normal;
 	}
 
 	.panel-body {
@@ -483,26 +486,26 @@
 		border-radius: 50%;
 		height: auto;
 	}
-	
+
 	.hideBeginning{
 		display: none;
 	}
-	
+
 	.profileButtonChangeDisplay{
 		font-size:80% !important;
 		width: 40% !important;
-		position: center !important;	
+		position: center !important;
 		margin-left: auto;
-		
+
 	}
-	
+
 	.profileButtonChangeImage{
 		margin-top: 15px;
 		font-size:80% !important;
 		/* width: 150% !important; */
 		margin-right: auto;
 	}
-	
+
 	.transparentButton{
 		background-color: Transparent;
 		background-repeat:no-repeat;
@@ -511,15 +514,15 @@
 		overflow: hidden;
 		outline:none;
 	}
-	
 
-	
+
+
 	/*.centerPosition{
 		position:relative;
 		top: 40%;
 		left: 40%;
 		transform: translate(-50%, -50%);
-		
+
 	}*/
 
 	/* Dashboard Container*/
@@ -540,7 +543,7 @@
 		box-shadow: 0 0 5px #eee;
 		border-color: white;
 
-		
+
 	}
 
 	.dashboard_button:hover {
@@ -554,7 +557,7 @@
 		margin-top: 30px;
 		margin: 0 auto;
 		max-width: 700px;
-		padding: 10px 40px;		
+		padding: 10px 40px;
 		color: #0;
 		text-shadow: none;
 		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
@@ -565,7 +568,7 @@
 
 	/* Profile Container*/
 	#profile_box{
-		
+
 		font-size: 20px;
 		font-style: bold;
 		background-image: linear-gradient(to right, rgb(236, 187, 113) 0%, rgb(236, 187, 113) 100%);
@@ -574,7 +577,7 @@
 		margin: 0 auto;
 		max-width: 300px;
 		height: 100%;
-		padding: 10px 40px;		
+		padding: 10px 40px;
 		/*color: #0;
 		text-shadow: none;
 		-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
@@ -584,9 +587,9 @@
 		border-style: solid;
 		border-width: 5px;
 	}
-	
+
 	.right_side_button{
-		margin-top: 70px;		
+		margin-top: 70px;
 	}
 	.profile_picture{
 		border: double;
