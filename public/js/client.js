@@ -62,6 +62,8 @@ $(function() {
 	var username = "";
 	var socket = io();
 
+	// dashboard profile image
+	var dashboardImage = $('#dashboardImage');
 
 	// =========================================================
 
@@ -81,7 +83,7 @@ $(function() {
 
 	// Log in button-click
 	$('#login_Button').click(function(e){
-		e.preventDefault();
+		e.preventDefault();		
 		var usernameVal = $("#loginUsername").val();
 		var passwordVal = $("#loginPassword").val();
 		socket.emit("loginClicked", {username: usernameVal, password: passwordVal});
@@ -211,10 +213,12 @@ $(function() {
 		selectDefaultRoom.hide();
 	});
 
-	$('#profile_setting').click(function(e){
+	profile_settings.click(function(e){
+		console.log("this is happening");
 		e.preventDefault();
 		dashboard.css("filter", "blur(5px)");
-		//createAccount_Profile.show();
+		createAccount_Profile.show();
+		createAccount_Profile.parent().append(createAccount_Profile);
 	});
 
 	
@@ -276,7 +280,8 @@ $(function() {
 	close.click(function(e){
 		e.preventDefault();
 		$(this).data('clicked', true);
-		$('#loginScreen').css("filter", "none");
+		loginScreen.css("filter", "none");
+		dashboard.css("filter", "none");
 		createAccount_SignUp.hide();
 		createAccount_Language.hide();
 		createAccount_Profile.hide();
@@ -301,6 +306,7 @@ $(function() {
 		if(!empty.length && pwReqCompleted) {
 			createAccount_SignUp.hide();
 			createAccount_Language.show();
+			createAccount_Language.parent().append(createAccount_Language);
 		}
 	});
 
@@ -308,6 +314,7 @@ $(function() {
 	back_Language.click(function(e){
 		e.preventDefault();
 		createAccount_SignUp.show();
+		createAccount_SignUp.parent().append(createAccount_SignUp);
 		createAccount_Language.hide();
 	});
 	
@@ -352,6 +359,7 @@ $(function() {
 			e.preventDefault();
 			createAccount_Language.hide();	
 			createAccount_Profile.show();
+			createAccount_Profile.parent().append(createAccount_Profile);
 		} else {
 			// Initial click error
 			errorCheckbox.innerHTML = ("Please select at least 1!");
@@ -375,6 +383,7 @@ $(function() {
 		e.preventDefault();
 		createAccount_Profile.hide();
 		createAccount_Language.show();
+		createAccount_Language.parent().append(createAccount_Language);
 	});
 	
 	// Change_ProfileImage CreateAccount button-click
@@ -382,6 +391,7 @@ $(function() {
 		e.preventDefault();
 		createAccount_Profile.hide();
 		createAccount_PickImage.show();		
+		createAccount_PickImage.parent().append(createAccount_PickImage);
 	});	
 	
 	// Save_DisplayName CreateAccount button-click
@@ -398,11 +408,14 @@ $(function() {
 	// Finish_Profile CreateAccount button-click
 	finish_Profile.click(function(e){
 		e.preventDefault();
+		loginScreen.css("filter", "none");
+		dashboard.css("filter", "none");		
 		socket.emit("setProfileImage", {path:$("#defaultImage").attr("src"), username});
 	});
 
-	socket.on("profilePicChanged", function(){
+	socket.on("profilePicChanged", function(path){
 		createAccount_Profile.hide();
+		dashboardImage.attr('src', path);
 		$('#loginScreen').css("filter", "none");
 	});
 
@@ -411,6 +424,7 @@ $(function() {
 		e.preventDefault();
 		createAccount_PickImage.hide();		
 		createAccount_Profile.show();
+		createAccount_Profile.parent().append(createAccount_Profile);
 	});	
 	
 	
@@ -419,6 +433,7 @@ $(function() {
 		e.preventDefault();
 		createAccount_PickImage.hide();		
 		createAccount_Profile.show();	
+		createAccount_Profile.parent().append(createAccount_Profile);
 		// Retrieve the image using the picked image number
 		var changedImage = "profileImages/p" + pickedImage + ".png";
 		// Set the user profile image to the selected one

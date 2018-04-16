@@ -328,7 +328,7 @@ io.on('connection', function(socket){
         var sql = "UPDATE Account SET Picture='"+msg.path+"' WHERE Username='"+msg.username+"'";
         con.query(sql, function(err, result){
             if (err) throw err;
-            socket.emit("profilePicChanged");
+            socket.emit("profilePicChanged", msg.path);
         });
     });
 

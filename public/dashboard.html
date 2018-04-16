@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<!-------------------- CSS Files -------------------->
+	<title> Dashboard </title>
+	<!-- Local CSS -->
+    <link rel="stylesheet" href="css/style.css">
+	<!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container responsiveTransition" id="dashboard" style="position: relative">
+        <div class="row main">
+            <div class="dashboard_button dashboard_main-center">
+                
+                <div class="row">
+                    
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+							
+                            <div class="container responsiveTransition" id="profile_box" style="position: relative">
+								<div id="profile_name">
+									Username
+								</div>
+                                <img class="profile_picture" src = "img/bit.png">
+                                <button id="profile_setting" class=" btn btn-primary btn-lg btn-block login_Button-button">Profile settings</button>
+                                <button id="known_languages" class=" btn btn-primary btn-lg btn-block login_Button-button">Languages you know</button>
+                                <button id="translation_language" class=" btn btn-primary btn-lg btn-block login_Button-button">Translation language</button>
+                            </div>
+                        
+                        </div>
+                        
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+							
+							<div class="welcome_message">
+								Welcome to International Chat!
+							</div>
+							
+                            <button id="select_chatroom" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Select chatroom</button>	
+                            <button id="create_group" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Create group</button>
+                            <button id="join_group" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Join group</button>
+                            <button id="match_language" class="right_side_button btn btn-primary btn-lg btn-block login_Button-button">Match language</button>
+                            
+                        </div>
+                        
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>	
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/client.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+</body>
+
+</html>
+
