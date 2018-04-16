@@ -297,7 +297,7 @@ io.on('connection', function(socket){
                                 listOfUsers.push({username: user['Username'], profile: user['Picture']});
                             }
                             io.to('room'+chatRoomCode).emit("userList", listOfUsers)
-                            io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
+                            socket.emit("wel", chatHistory[chatRoomCode]);
                         });
                     },500);
                 });
@@ -338,7 +338,7 @@ io.on('connection', function(socket){
                                 listOfUsers.push({username: user['Username'], profile: user['Picture']});
                             }
                             io.to('room'+chatRoomCode).emit("userList", listOfUsers)
-                            io.to('room'+chatRoomCode).emit("wel", chatHistory[chatRoomCode]);
+                            socket.emit("wel", chatHistory[chatRoomCode]);
                         });
                     },500);
                 });
