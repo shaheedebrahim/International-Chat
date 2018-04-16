@@ -1,6 +1,6 @@
 .chatContainer {
-   
-    font: 15px 'Didact Gothic',Garamond, Helvetica, Arial; 
+
+    font: 15px 'Didact Gothic',Garamond, Helvetica, Arial;
     background: #2C3E50;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #4CA1AF, #2C3E50);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -57,10 +57,10 @@ li.me p {
     width: 45px;
     border-radius: 50%;
     border: 2px solid black;
-   
+
   }
 #messages li p span {
-  
+
     opacity:0.7;
   }
 #messages li p {
@@ -77,7 +77,7 @@ li.me p {
     display: flex;
     flex-direction: column-reverse;
     overflow-y: scroll;
- 
+
   }
 
 #userList {
@@ -97,7 +97,7 @@ li.me p {
     margin-bottom:10px;
     background-color: darkgray;
     padding: 5px;
-   
+
     height:50vh;
     align-items: bottom;
     border-style: solid;
@@ -110,25 +110,25 @@ li.me p {
 #userNick{
     display:inline;
 }
-#chatForm 
-{ 
-    width: 90%; 
+#chatForm
+{
+    width: 90%;
     border-radius: 15px;
     display: inline;
 }
 
-#chatForm input { 
-    border-radius: 15px; 
-    padding:10px; 
+#chatForm input {
+    border-radius: 15px;
+    padding:10px;
     padding-right:100px;
     border-width: 2px;
     border-color:black;
-} 
+}
 
-#chatForm button { 
+#chatForm button {
     width:10%;
     align-self: center;
-} 
+}
 
 
 #messages { list-style-type: none; margin: 0; padding: 0; }
@@ -139,7 +139,7 @@ li.me p {
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
-    .chat-box{ 
+    .chat-box{
         height:30vh;
     }
 }
